@@ -1,0 +1,35 @@
+.card {
+    background-color: rgba(55, 51, 39, 0.5);
+    border-radius: 20px;
+    border: none;
+
+    .name-level,
+    .race-class {
+        color: white;
+    }
+
+    .name-level {}
+
+    .card-top {}
+
+    .foto-holder {
+        background-color: white;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 20px 0 0 0;
+    }
+
+}
+
+.card:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+
+    .foto-holder {
+        background-color: #373327;
+    }
+
+    .name-level,
+    .race-class {
+        color: #373327;
+    }
+}
