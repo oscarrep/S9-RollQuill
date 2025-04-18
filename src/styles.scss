@@ -61,11 +61,45 @@
     --font-family-zain: 'Zain', sans-serif;
 }
 
-.logo{
+.logo {
     background-image: url('assets/rollquill-white.png');
     height: 50px;
     width: 50px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+body {
+    background-color: #FAEABD !important;
+}
+
+h2,
+.add-button {
+    font-family: zain;
+}
+
+h2 {
+    font-size: xx-large !important;
+}
+
+.flex-space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button {
+    background-color: #373327;
+    border-radius: 50px;
+    padding: 5px 15px 2px;
+    color: #FAEABD;
+    font-family: zain;
+    font-size: larger
 }
