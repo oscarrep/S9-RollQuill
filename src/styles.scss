@@ -60,3 +60,12 @@
     --font-family-pacifico: 'Pacifico', sans-serif;
     --font-family-zain: 'Zain', sans-serif;
 }
+
+.logo{
+    background-image: url('assets/rollquill-white.png');
+    height: 50px;
+    width: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
