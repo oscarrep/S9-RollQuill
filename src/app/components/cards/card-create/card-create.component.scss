@@ -1,0 +1,47 @@
+.card, .square{
+    border-radius: 20px;
+    background-color: rgba(55, 51, 39, 0.5);
+}
+
+.card {
+    border: none;
+    height: 130px;
+    width: 380px;
+
+    .square {
+        height: 90px;
+        width: 110px;
+    }
+
+    .plus,
+    .plus-90 {
+        background-color: white;
+        position: absolute;
+        border-radius: 5px 0 0 0;
+    }
+
+    .plus {
+        width: 0.3rem;
+        height: 3rem;
+    }
+
+    .plus-90 {
+        width: 3rem;
+        height: 0.3rem;
+    }
+
+}
+
+.card:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor:pointer;
+
+    .square {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .plus,
+    .plus-90 {
+        background-color: #373327;
+    }
+}
