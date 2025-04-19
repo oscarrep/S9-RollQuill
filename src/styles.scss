@@ -75,8 +75,13 @@ body {
 }
 
 h2,
+p,
 .add-button {
     font-family: zain;
+}
+
+p, .add-button {
+    font-size: larger;
 }
 
 h2 {
@@ -89,10 +94,15 @@ h2 {
     justify-content: space-between;
 }
 
-.flex-center {
+.flex-center,
+.column-center {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.column-center {
+    flex-direction: column;
 }
 
 .add-button {
@@ -100,6 +110,4 @@ h2 {
     border-radius: 50px;
     padding: 5px 15px 2px;
     color: #FAEABD;
-    font-family: zain;
-    font-size: larger
 }

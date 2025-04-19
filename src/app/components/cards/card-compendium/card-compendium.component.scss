@@ -1,0 +1,31 @@
+.card {
+    background-color: rgba(55, 51, 39, 0.5);
+    border-radius: 20px;
+    border: none;
+    height: 90px;
+    width: 90px;
+
+    .foto-holder {
+        background-color: white;
+        height: 40px;
+        width: 40px;
+    }
+
+    .title {
+        color: white;
+    }
+
+}
+
+.card:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+
+    .foto-holder {
+        background-color: #373327;
+    }
+
+    .title {
+        color: #373327;
+    }
+}
