@@ -6,6 +6,7 @@ export interface Character {
     class: string,
     subclass: string,
     level: number,
+    speed: number,
     stats: number[],
     skills: string[],
     expertise: string[],
