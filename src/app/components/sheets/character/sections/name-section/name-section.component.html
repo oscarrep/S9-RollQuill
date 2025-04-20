@@ -1,14 +1,21 @@
-<div class="row">
-    <app-button [text]="'Rest'"/>
-    <div class="info">
-        {{charName()}}
+<div class="d-flex mt-3">
+    <div class="ms-2">
+        <app-button [text]="'Rest'" />
+    </div>
+    <div class="ms-auto column-center">
+        <h2><b>{{charName()}}</b></h2>
+
         {{charRace()}}
         {{charSubRace()}}
-        {{charClass()}}
+
         {{charSubclass()}}
+        {{charClass()}}
+
         {{charLevel()}}
     </div>
-    <app-button [text]="'Level Up'"/>
+    <div class="ms-auto me-2">
+        <app-button [text]="'Level Up'" />
+    </div>
 </div>
 
 <p>
