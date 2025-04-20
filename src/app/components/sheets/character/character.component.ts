@@ -17,7 +17,7 @@ export class CharacterComponent implements OnInit {
   private _characterService = inject(CharacterService);
   character?: Character;
   characterList: Character[] = [];
-  statModifiers?: number[] = [];
+  statModifiers: any;
   @Input() id!: string;
 
   ngOnInit(): void {
@@ -37,18 +37,30 @@ export class CharacterComponent implements OnInit {
       this.character = data;
       console.log(this.character);
 
-      this.getStatModifiers(this.character.stats);
+      this.statModifiers = this.getStatModifiers(this.character.stats);
+      console.log(this.statModifiers)
+
     })
   }
 
-  getStatModifiers(stats?: { 
-    strength: number; dexterity: number;constitution: number;
-    intelligence: number; wisdom: number; charisma: number;}) {
+  getStatModifiers(stats?: {
+    strength: number;
+    dexterity: number;
+    constitution: number;
+    intelligence: number;
+    wisdom: number;
+    charisma: number;
+  }): { [key: string]: number } | undefined {
     if (!stats) return;
-
-    Object.values(stats).forEach(stat => { this.calculateStatModifier(stat); });
-
-    console.log(stats);
+  
+    const modifiers: { [key: string]: number } = {};
+  
+    for (const stat in stats) {
+      const key = stat as keyof typeof stats;
+      modifiers[key] = this.calculateStatModifier(stats[key]);
+    }
+  
+    return modifiers;
   }
 
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
