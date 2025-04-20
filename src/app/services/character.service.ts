@@ -22,7 +22,7 @@ export class CharacterService {
   }
 
   deleteCharacter(id: string | undefined): Observable<void> {
-    return this.http.delete<void>(`${this.appUrl}${this.apiUrl}${id}`)
+    return this.http.delete<void>(`${this.appUrl}${this.apiUrl}/${id}`)
   }
 
   saveCharacter(character: Character): Observable<void> {
@@ -30,10 +30,10 @@ export class CharacterService {
   }
 
   getCharacter(id: string | undefined): Observable<Character> {
-    return this.http.get<Character>(`${this.appUrl}${this.apiUrl}${id}`)
+    return this.http.get<Character>(`${this.appUrl}${this.apiUrl}/${id}`)
   }
 
   updateCharacter(id: string | undefined, character: Character): Observable<void> {
-    return this.http.put<void>(`${this.appUrl}${this.apiUrl}${id}`, character)
+    return this.http.put<void>(`${this.appUrl}${this.apiUrl}/${id}`, character)
   }
 }

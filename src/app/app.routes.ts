@@ -5,5 +5,5 @@ import { CharacterComponent } from './components/sheets/character/character.comp
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'character', component: CharacterComponent },
+    { path: 'character/:id', component: CharacterComponent },
 ];

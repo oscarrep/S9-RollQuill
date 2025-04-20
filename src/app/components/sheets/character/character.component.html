@@ -1,14 +1,4 @@
-@for(character of characterList; track character){
-<p>
-    {{character.name}}<br>
-    {{character.race}}<br>
-    {{character.subrace}}<br>
-    {{character.class}}<br>
-    {{character.subclass}}<br>
-    {{character.level}}<br>
-    {{character.stats.join(' - ')}}<br>
-    {{character.skills.join(' - ')}}<br>
-    {{character.expertise.join(' - ')}}<br>
-    {{character._id}}
-</p>
-}
+<div class="container">
+    <app-name-section [charName]="character?.name" [charRace]="character?.race" [charSubRace]="character?.subrace"
+        [charClass]="character?.subclass" [charLevel]="character?.level" />
+</div>
