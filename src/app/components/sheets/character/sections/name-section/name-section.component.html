@@ -4,14 +4,15 @@
     </div>
     <div class="ms-auto column-center">
         <h2><b>{{charName()}}</b></h2>
+        <div class="info">
+            {{charRace()}}
+            {{charSubRace()}}
 
-        {{charRace()}}
-        {{charSubRace()}}
+            {{charSubClass()}}
+            {{charClass()}}
 
-        {{charSubClass()}}
-        {{charClass()}}
-
-        {{charLevel()}}
+            {{charLevel()}}
+        </div>
     </div>
     <div class="ms-auto me-2">
         <app-button [text]="'Level Up'" />

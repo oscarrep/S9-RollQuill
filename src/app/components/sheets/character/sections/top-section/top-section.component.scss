@@ -1,6 +1,15 @@
 .foto-holder {
-    background-color: white;
-    width:150px;
-    border-radius: 15px;
     border: 3px solid #373327;
+    background-color: white;
+    border-radius: 15px;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 160px;
+    object-fit: contain;
+    align-self: flex-start;
+}
+
+.boxes{
+    flex-direction: row;
 }
