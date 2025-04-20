@@ -13,6 +13,6 @@ export class NameSectionComponent {
   charRace = input<string>()
   charSubRace = input<string>()
   charClass = input<string>()
-  charSubclass = input<string>()
+  charSubClass = input<string>()
   charLevel = input<number>()
 }
