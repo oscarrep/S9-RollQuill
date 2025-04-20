@@ -3,10 +3,12 @@ import { CharacterService } from '../../../services/character.service';
 import { Character } from '../../../interfaces/character';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NameSectionComponent } from "./sections/name-section/name-section.component";
+import { TopSectionComponent } from "./sections/top-section/top-section.component";
+import { StatsSectionComponent } from "./sections/stats-section/stats-section.component";
 
 @Component({
   selector: 'app-character',
-  imports: [NameSectionComponent],
+  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'
 })
