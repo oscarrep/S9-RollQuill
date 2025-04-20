@@ -21,7 +21,7 @@ export class CharacterService {
     return this.http.get<Character[]>(`${this.appUrl}${this.apiUrl}`);
   }
 
-  deleteCharacter(id: number | undefined): Observable<void> {
+  deleteCharacter(id: string | undefined): Observable<void> {
     return this.http.delete<void>(`${this.appUrl}${this.apiUrl}${id}`)
   }
 
@@ -29,11 +29,11 @@ export class CharacterService {
     return this.http.post<void>(`${this.appUrl}${this.apiUrl}`, character)
   }
 
-  getCharacter(id: number | undefined): Observable<Character> {
+  getCharacter(id: string | undefined): Observable<Character> {
     return this.http.get<Character>(`${this.appUrl}${this.apiUrl}${id}`)
   }
 
-  updateCharacter(id: number | undefined, character: Character): Observable<void> {
+  updateCharacter(id: string | undefined, character: Character): Observable<void> {
     return this.http.put<void>(`${this.appUrl}${this.apiUrl}${id}`, character)
   }
 }

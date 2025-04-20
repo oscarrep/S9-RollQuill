@@ -1,5 +1,5 @@
 export interface Character {
-    createdBy: string ,
+    createdBy: string,
     name: string,
     race: string,
     subrace: string,
@@ -9,4 +9,5 @@ export interface Character {
     stats: number[],
     skills: string[],
     expertise: string[],
+    _id:string,
 }
