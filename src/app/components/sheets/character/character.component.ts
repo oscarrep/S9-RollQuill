@@ -18,6 +18,7 @@ export class CharacterComponent implements OnInit {
   character?: Character;
   characterList: Character[] = [];
   statModifiers: any;
+  armorClass: number = 0;
   @Input() id!: string;
 
   ngOnInit(): void {
@@ -39,6 +40,8 @@ export class CharacterComponent implements OnInit {
 
       this.statModifiers = this.getStatModifiers(this.character.stats);
       console.log(this.statModifiers)
+      this.calculateArmorClass(this.statModifiers.dexterity);
+      console.log(this.armorClass)
 
     })
   }
@@ -52,18 +55,19 @@ export class CharacterComponent implements OnInit {
     charisma: number;
   }): { [key: string]: number } | undefined {
     if (!stats) return;
-  
+
     const modifiers: { [key: string]: number } = {};
-  
+
     for (const stat in stats) {
       const key = stat as keyof typeof stats;
       modifiers[key] = this.calculateStatModifier(stats[key]);
     }
-  
+
     return modifiers;
   }
 
-  calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
+  calculateStatModifier(stat: number) { return this.statModifiers = Math.floor((stat - 10) / 2); }
+  calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
 }
 
 
