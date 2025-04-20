@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NameSectionComponent } from "./sections/name-section/name-section.component";
 import { TopSectionComponent } from "./sections/top-section/top-section.component";
 import { StatsSectionComponent } from "./sections/stats-section/stats-section.component";
+import { DndApiService } from '../../../services/dnd-api.service';
 
 @Component({
   selector: 'app-character',
@@ -15,7 +16,10 @@ import { StatsSectionComponent } from "./sections/stats-section/stats-section.co
 export class CharacterComponent implements OnInit {
   router = inject(Router);
   private _characterService = inject(CharacterService);
+  private _dndApiServce = inject(DndApiService);
   character?: Character;
+  race?: any;
+  class?: any;
   characterList: Character[] = [];
   statModifiers: any;
   armorClass: number = 0;
@@ -37,12 +41,25 @@ export class CharacterComponent implements OnInit {
     this._characterService.getCharacter(this.id).subscribe((data: Character) => {
       this.character = data;
       console.log(this.character);
-
+      
       this.statModifiers = this.getStatModifiers(this.character.stats);
-      console.log(this.statModifiers)
       this.calculateArmorClass(this.statModifiers.dexterity);
-      console.log(this.armorClass)
+      this.getRaceInfo();
+      this.getClassInfo();
+    })
+  }
 
+  getRaceInfo(): void {
+    this._dndApiServce.getRaceInfo(this.character?.race).subscribe((data: any) => {
+      this.race = data;
+      console.log(data)
+    })
+  }
+
+  getClassInfo(): void {
+    this._dndApiServce.getClassInfo(this.character?.class).subscribe((data: any) => {
+      this.class = data;
+      console.log(data)
     })
   }
 

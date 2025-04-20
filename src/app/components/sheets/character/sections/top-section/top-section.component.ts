@@ -9,4 +9,6 @@ import { BoxComponent } from "../box/box.component";
 })
 export class TopSectionComponent {
   armorClass = input<number>()
+  initiative = input<number>()
+  speed = input<number>()
 }
