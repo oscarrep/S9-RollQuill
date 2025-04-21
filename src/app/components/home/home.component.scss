@@ -1,0 +1,13 @@
+h1{
+    font-family: Pacifico;
+    font-size: 80px;
+}
+
+.home-logo{
+    width: auto;
+    height: auto;
+    //max-height: 100%;
+    max-width: 200px;
+    object-fit: contain;
+    aspect-ratio: 1;
+}
