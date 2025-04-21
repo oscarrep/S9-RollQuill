@@ -3,8 +3,6 @@ export const environment = {
   host: '',
   apiCharacters: '',
 
-
-
   dndHost: '',
   dndRaces: '',
   dndSubraces: '',
@@ -12,5 +10,14 @@ export const environment = {
   dndSubclasses: '',
   dndFeatures: '',
   dndLevels: '',
+
+  firebaseConfig: {
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
+  }
 }
 
