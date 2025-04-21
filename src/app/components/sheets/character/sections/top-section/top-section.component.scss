@@ -1,0 +1,31 @@
+.foto-holder {
+    border: 3px solid #373327;
+    background-color: white;
+    border-radius: 15px;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 160px;
+    object-fit: contain;
+    align-self: flex-start;
+}
+
+.boxes{
+    flex-direction: row;
+}
+
+@media screen and (max-width: 425px) {
+    .d-flex {
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .foto-holder {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .boxes {
+        gap: 0.5rem;
+    }
+}
