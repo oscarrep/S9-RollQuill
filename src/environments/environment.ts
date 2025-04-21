@@ -11,5 +11,6 @@ export const environment = {
   dndClasses: '',
   dndSubclasses: '',
   dndFeatures: '',
+  dndLevels: '',
 }
 
