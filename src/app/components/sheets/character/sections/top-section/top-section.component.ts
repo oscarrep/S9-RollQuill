@@ -13,4 +13,5 @@ export class TopSectionComponent {
   speed = input<number>()
   hp = input<number>()
   currentHp = input<number>()
+  proficiencyBonus = input<number>()
 }

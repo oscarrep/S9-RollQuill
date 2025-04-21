@@ -21,6 +21,7 @@ export class CharacterComponent implements OnInit {
   character?: Character;
   race?: any;
   class?: any;
+  levelInfo?: any;
   characterList: Character[] = [];
   statModifiers: any;
   armorClass: number = 0;
@@ -31,7 +32,6 @@ export class CharacterComponent implements OnInit {
   ngOnInit(): void {
     this.getCharData();
   }
-
 
   getCharList(): void {
     this._characterService.getCharacterList().subscribe((data: Character[]) => {
@@ -49,31 +49,20 @@ export class CharacterComponent implements OnInit {
 
       forkJoin({
         race: this._dndApiServce.getRaceInfo(this.character.race),
-        class: this._dndApiServce.getClassInfo(this.character.class)
-      }).subscribe(({ race, class: classData }) => {
-        this.race = race;
+        class: this._dndApiServce.getClassInfo(this.character.class),
+        levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class, this.character.level)
+      }).subscribe(({ race:raceData, class: classData, levelInfo:levelData }) => {
+        this.race = raceData;
         this.class = classData;
+        this.levelInfo = levelData;
+        console.log(this.race)
+        console.log(this.class)
+        console.log(this.levelInfo)
 
-        this.calculateMaxHitPoints(this.character!.level);
+        this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
         this.calculateArmorClass(this.statModifiers.dexterity);
       });
     });
-  }
-
-  getRaceInfo(): void {
-    this._dndApiServce.getRaceInfo(this.character?.race).subscribe((data: any) => {
-      this.race = data;
-      console.log(data)
-      if (this.character && this.statModifiers && this.class) this.calculateMaxHitPoints(this.character.level);
-      console.log(this.hitPoints);
-    })
-  }
-
-  getClassInfo(): void {
-    this._dndApiServce.getClassInfo(this.character?.class).subscribe((data: any) => {
-      this.class = data;
-      console.log(data)
-    })
   }
 
   getStatModifiers(stats?: {
@@ -98,9 +87,9 @@ export class CharacterComponent implements OnInit {
 
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
   calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
-  calculateMaxHitPoints(level: number) {
-    const lvlOneFormula = this.class?.hit_die + this.statModifiers.constitution;
-    const average = 1 + (this.class?.hit_die / 2);
+  calculateMaxHitPoints(hitDie: number, level: number) {
+    const lvlOneFormula = hitDie + this.statModifiers.constitution;
+    const average = 1 + (hitDie / 2);
     const levelsAfterOne = level - 1;
     if (level === 1) return this.hitPoints = lvlOneFormula;
     else if (level > 1) return this.hitPoints = lvlOneFormula + ((average + this.statModifiers.constitution) * levelsAfterOne);
