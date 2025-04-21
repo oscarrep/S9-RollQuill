@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-card-character',
@@ -8,4 +10,5 @@ import { Component } from '@angular/core';
 })
 export class CardCharacterComponent {
 
+  app = inject(AppComponent);
 }
