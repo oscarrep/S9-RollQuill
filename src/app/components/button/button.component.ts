@@ -8,4 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class ButtonComponent {
   text = input<string>()
+  home = input<boolean>()
 }
