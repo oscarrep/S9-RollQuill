@@ -11,6 +11,7 @@ import { StatRowComponent } from "./stat-row/stat-row.component";
 export class StatsSectionComponent {
   abilityScores = input<{ [key: string]: number }>();
   abilityModifiers = input<{ [key: string]: number }>();
+  proficiencyBonus = input<number>()
 
   modifierList = this.mapEntries(this.abilityModifiers);
   scoreList = this.mapEntries(this.abilityScores);

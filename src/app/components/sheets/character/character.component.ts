@@ -23,6 +23,7 @@ export class CharacterComponent implements OnInit {
   class?: any;
   levelInfo?: any;
   characterList: Character[] = [];
+  savingThrowProficiencies: string[] = [];
   skillProficiencies: string[] = [];
   abilityModifiers: any;
   armorClass: number = 0;
@@ -47,7 +48,8 @@ export class CharacterComponent implements OnInit {
       console.log(this.character);
 
       this.abilityModifiers = this.getabilityModifiers(this.character.stats);
-      this.skillProficiencies=this.getSkillProficiencies();
+      this.skillProficiencies=this.character?.skills;
+      this.savingThrowProficiencies=this.character?.savingThrows;
 
       forkJoin({
         race: this._dndApiServce.getRaceInfo(this.character.race),
@@ -62,7 +64,7 @@ export class CharacterComponent implements OnInit {
         console.log(this.levelInfo)
         console.log(this.abilityModifiers)
         console.log(this.skillProficiencies)
-        console.log(this.character?.savingThrows)
+        console.log(this.savingThrowProficiencies)
 
         this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
         this.calculateArmorClass(this.abilityModifiers.Dexterity);
@@ -89,7 +91,6 @@ export class CharacterComponent implements OnInit {
 
     return modifiers;
   }
-
 
   getSkillProficiencies() { return this.character!.skills; }
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }

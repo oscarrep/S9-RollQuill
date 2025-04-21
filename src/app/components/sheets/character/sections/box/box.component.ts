@@ -7,10 +7,12 @@ import { Component, input } from '@angular/core';
   styleUrl: './box.component.scss'
 })
 export class BoxComponent {
-  title = input<string>()
-  num = input<number|string>()
-  score = input<number>()
-  modifier = input<number>()
-  large = input<boolean>()
-  statBox = input<boolean>()
+  title = input<string>();
+  num = input<number|string>();
+  score = input<number>();
+  proficiencyBonus= input<number>();
+  savingThrow = input<number>();
+  modifier = input<number>();
+  large = input<boolean>();
+  statBox = input<boolean>();
 }

@@ -5,5 +5,5 @@
     <app-top-section [armorClass]="armorClass" [hp]="hitPoints" [currentHp]="7" [initiative]="abilityModifiers?.Dexterity"
         [speed]="race?.speed" [proficiencyBonus]="levelInfo?.prof_bonus" />
 
-    <app-stats-section [abilityScores]="character?.stats" [abilityModifiers]="abilityModifiers" />
+    <app-stats-section [abilityScores]="character?.stats" [abilityModifiers]="abilityModifiers" [proficiencyBonus]="levelInfo?.prof_bonus" />
 </div>
