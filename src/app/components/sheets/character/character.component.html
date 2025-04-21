@@ -1,6 +1,6 @@
 <div class="container">
     <app-name-section [charName]="character?.name" [charRace]="race?.name" [charSubRace]="character?.subrace"
     [charClass]="class?.name" [charSubClass]="character?.subclass" [charLevel]="character?.level" />
-    <app-top-section [armorClass]="armorClass" [initiative]="statModifiers?.dexterity" [speed]="race?.speed"/>
+    <app-top-section [armorClass]="armorClass" [hp]="hitPoints" [currentHp]="7" [initiative]="statModifiers?.dexterity" [speed]="race?.speed"/>
         <app-stats-section />
 </div>

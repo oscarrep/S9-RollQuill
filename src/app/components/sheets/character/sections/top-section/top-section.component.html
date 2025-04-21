@@ -8,7 +8,7 @@
         </div>
 
         <div class="d-flex flex-column justify-content-center ms-1">
-            <app-box [title]="'HP'" [stat]="1" [large]="true"/>
+            <app-box [title]="'HP'" [stat]="`${currentHp()} / ${hp()}`" [large]="true"/>
         </div>
 
         <div class="d-flex flex-column gap-2 ms-1">

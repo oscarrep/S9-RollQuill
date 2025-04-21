@@ -6,6 +6,7 @@ import { NameSectionComponent } from "./sections/name-section/name-section.compo
 import { TopSectionComponent } from "./sections/top-section/top-section.component";
 import { StatsSectionComponent } from "./sections/stats-section/stats-section.component";
 import { DndApiService } from '../../../services/dnd-api.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-character',
@@ -23,6 +24,8 @@ export class CharacterComponent implements OnInit {
   characterList: Character[] = [];
   statModifiers: any;
   armorClass: number = 0;
+  hitPoints: number = 0;
+  currentHp: number = 0;
   @Input() id!: string;
 
   ngOnInit(): void {
@@ -41,18 +44,28 @@ export class CharacterComponent implements OnInit {
     this._characterService.getCharacter(this.id).subscribe((data: Character) => {
       this.character = data;
       console.log(this.character);
-      
+
       this.statModifiers = this.getStatModifiers(this.character.stats);
-      this.calculateArmorClass(this.statModifiers.dexterity);
-      this.getRaceInfo();
-      this.getClassInfo();
-    })
+
+      forkJoin({
+        race: this._dndApiServce.getRaceInfo(this.character.race),
+        class: this._dndApiServce.getClassInfo(this.character.class)
+      }).subscribe(({ race, class: classData }) => {
+        this.race = race;
+        this.class = classData;
+
+        this.calculateMaxHitPoints(this.character!.level);
+        this.calculateArmorClass(this.statModifiers.dexterity);
+      });
+    });
   }
 
   getRaceInfo(): void {
     this._dndApiServce.getRaceInfo(this.character?.race).subscribe((data: any) => {
       this.race = data;
       console.log(data)
+      if (this.character && this.statModifiers && this.class) this.calculateMaxHitPoints(this.character.level);
+      console.log(this.hitPoints);
     })
   }
 
@@ -83,8 +96,15 @@ export class CharacterComponent implements OnInit {
     return modifiers;
   }
 
-  calculateStatModifier(stat: number) { return this.statModifiers = Math.floor((stat - 10) / 2); }
+  calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
   calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
+  calculateMaxHitPoints(level: number) {
+    const lvlOneFormula = this.class?.hit_die + this.statModifiers.constitution;
+    const average = 1 + (this.class?.hit_die / 2);
+    const levelsAfterOne = level - 1;
+    if (level === 1) return this.hitPoints = lvlOneFormula;
+    else if (level > 1) return this.hitPoints = lvlOneFormula + ((average + this.statModifiers.constitution) * levelsAfterOne);
+  }
 }
 
 

@@ -11,4 +11,6 @@ export class TopSectionComponent {
   armorClass = input<number>()
   initiative = input<number>()
   speed = input<number>()
+  hp = input<number>()
+  currentHp = input<number>()
 }
