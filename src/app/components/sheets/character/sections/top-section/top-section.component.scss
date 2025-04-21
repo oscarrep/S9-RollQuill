@@ -13,3 +13,19 @@
 .boxes{
     flex-direction: row;
 }
+
+@media screen and (max-width: 425px) {
+    .d-flex {
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .foto-holder {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .boxes {
+        gap: 0.5rem;
+    }
+}

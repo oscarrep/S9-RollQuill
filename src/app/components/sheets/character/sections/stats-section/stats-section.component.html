@@ -1,1 +1,7 @@
-<p>stats-section works!</p>
+<div class="d-flex mt-3 align-items-start">
+
+    <div class="d-flex flex-column gap-2">
+        <app-stat-row [abilityModifiers]="modifierList().slice(0, 3)" [abilityScores]="scoreList().slice(0, 3)" />
+        <app-stat-row [abilityModifiers]="modifierList().slice(3, 6)" [abilityScores]="scoreList().slice(3, 6)" />
+    </div>
+</div>

@@ -8,6 +8,9 @@ import { Component, input } from '@angular/core';
 })
 export class BoxComponent {
   title = input<string>()
-  stat = input<number|string>()
+  num = input<number|string>()
+  score = input<number>()
+  modifier = input<number>()
   large = input<boolean>()
+  statBox = input<boolean>()
 }

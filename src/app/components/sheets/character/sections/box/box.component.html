@@ -1,4 +1,21 @@
+@if(statBox()!=true){
 <div class="square column-center" [class.large-box]="large()">
     <div class="title"> {{title()}} </div>
-    <div class="stat"> {{stat()}} </div>
+    <div class="num"> {{num()}} </div>
 </div>
+}
+
+@else if(statBox()===true){
+<div class="square-stat column-center" [class.large-box]="large()">
+
+    <div class="title-stat"> {{title()}} </div>
+    <div class="num-big"> {{modifier()}} </div>
+
+    <div class="bottom-row flex-space-between">
+        <div class="num-small flex-center"> {{score()}} </div>
+        <div class="mx-3 checkbox-square"></div>
+        <div class="num-small flex-center"> {{modifier()!}} </div>
+    </div>
+</div>
+
+}

@@ -8,13 +8,14 @@ export interface Character {
     level: number;
     speed: number;
     stats: {
-        strength: number;
-        dexterity: number;
-        constitution: number;
-        intelligence: number;
-        wisdom: number;
-        charisma: number;
+        Strength: number;
+        Dexterity: number;
+        Constitution: number;
+        Intelligence: number;
+        Wisdom: number;
+        Charisma: number;
     };
+    savingThrows: string[];
     skills: string[];
     expertise: string[];
     _id: string;

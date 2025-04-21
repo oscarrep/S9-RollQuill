@@ -23,7 +23,8 @@ export class CharacterComponent implements OnInit {
   class?: any;
   levelInfo?: any;
   characterList: Character[] = [];
-  statModifiers: any;
+  skillProficiencies: string[] = [];
+  abilityModifiers: any;
   armorClass: number = 0;
   hitPoints: number = 0;
   currentHp: number = 0;
@@ -45,33 +46,37 @@ export class CharacterComponent implements OnInit {
       this.character = data;
       console.log(this.character);
 
-      this.statModifiers = this.getStatModifiers(this.character.stats);
+      this.abilityModifiers = this.getabilityModifiers(this.character.stats);
+      this.skillProficiencies=this.getSkillProficiencies();
 
       forkJoin({
         race: this._dndApiServce.getRaceInfo(this.character.race),
         class: this._dndApiServce.getClassInfo(this.character.class),
         levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class, this.character.level)
-      }).subscribe(({ race:raceData, class: classData, levelInfo:levelData }) => {
+      }).subscribe(({ race: raceData, class: classData, levelInfo: levelData }) => {
         this.race = raceData;
         this.class = classData;
         this.levelInfo = levelData;
         console.log(this.race)
         console.log(this.class)
         console.log(this.levelInfo)
+        console.log(this.abilityModifiers)
+        console.log(this.skillProficiencies)
+        console.log(this.character?.savingThrows)
 
         this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
-        this.calculateArmorClass(this.statModifiers.dexterity);
+        this.calculateArmorClass(this.abilityModifiers.Dexterity);
       });
     });
   }
 
-  getStatModifiers(stats?: {
-    strength: number;
-    dexterity: number;
-    constitution: number;
-    intelligence: number;
-    wisdom: number;
-    charisma: number;
+  getabilityModifiers(stats?: {
+    Strength: number;
+    Dexterity: number;
+    Constitution: number;
+    Intelligence: number;
+    Wisdom: number;
+    Charisma: number;
   }): { [key: string]: number } | undefined {
     if (!stats) return;
 
@@ -85,14 +90,16 @@ export class CharacterComponent implements OnInit {
     return modifiers;
   }
 
+
+  getSkillProficiencies() { return this.character!.skills; }
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
   calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
   calculateMaxHitPoints(hitDie: number, level: number) {
-    const lvlOneFormula = hitDie + this.statModifiers.constitution;
+    const lvlOneFormula = hitDie + this.abilityModifiers.Constitution;
     const average = 1 + (hitDie / 2);
     const levelsAfterOne = level - 1;
     if (level === 1) return this.hitPoints = lvlOneFormula;
-    else if (level > 1) return this.hitPoints = lvlOneFormula + ((average + this.statModifiers.constitution) * levelsAfterOne);
+    else if (level > 1) return this.hitPoints = lvlOneFormula + ((average + this.abilityModifiers.Constitution) * levelsAfterOne);
   }
 }
 

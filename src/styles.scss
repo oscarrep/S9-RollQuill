@@ -105,3 +105,24 @@ h2 {
 .column-center {
     flex-direction: column;
 }
+
+@media screen and (max-width: 425px) {
+    h2 {
+        font-size: large !important;
+    }
+
+    p,
+    .add-button {
+        font-size: medium;
+    }
+
+    .flex-space-between {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .flex-center,
+    .column-center {
+        flex-direction: column;
+    }
+}

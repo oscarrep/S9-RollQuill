@@ -3,17 +3,17 @@
 
     <div class="d-flex gap-2">
         <div class="d-flex flex-column gap-2">
-            <app-box [title]="'Initiative'" [stat]="initiative()" />
-            <app-box [title]="'Speed'" [stat]="speed()" />
+            <app-box [title]="'Initiative'" [num]="initiative()" />
+            <app-box [title]="'Speed'" [num]="speed()" />
         </div>
 
         <div class="d-flex flex-column justify-content-center ms-1">
-            <app-box [title]="'HP'" [stat]="`${currentHp()} / ${hp()}`" [large]="true"/>
+            <app-box [title]="'HP'" [num]="`${currentHp()} / ${hp()}`" [large]="true"/>
         </div>
 
         <div class="d-flex flex-column gap-2 ms-1">
-            <app-box [title]="'AC'" [stat]="armorClass()" />
-            <app-box [title]="'PB'" [stat]="proficiencyBonus()" />
+            <app-box [title]="'AC'" [num]="armorClass()" />
+            <app-box [title]="'PB'" [num]="proficiencyBonus()" />
         </div>
     </div>
 </div>
