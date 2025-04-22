@@ -3,7 +3,7 @@
     <h1 class="mb-5">RollQuill</h1>
     <div class="my-5">
 
-        <div class="mb-4"><app-button [home]="true" [text]="'LOG IN'" /></div>
-        <div><app-button [home]="true" [text]="'SIGN UP'" /></div>
+        <div class="mb-4"><app-button [home]="true" [text]="'LOG IN'" (buttonClick)="_navigateService.navigateTo('login')"/></div>
+        <div><app-button [home]="true" [text]="'SIGN UP'" (buttonClick)="_navigateService.navigateTo('signup')"/></div>
     </div>
 </div>

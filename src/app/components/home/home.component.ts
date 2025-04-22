@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
+import { NavigateService } from '../../services/navigate.service';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +9,5 @@ import { ButtonComponent } from "../button/button.component";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
+  _navigateService = inject(NavigateService)
 }

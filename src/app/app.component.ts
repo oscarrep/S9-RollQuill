@@ -12,4 +12,11 @@ export class AppComponent {
   title = 'RollQuill';
   router = inject(Router);
   navigateTo(route: string) { this.router.navigate([`${route}`]); }
+  showHeader = true;
+
+  constructor() {
+    this.router.events.subscribe(() => {
+      this.showHeader = this.router.url !== '/home';
+    });
+  }
 }
