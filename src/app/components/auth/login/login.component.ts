@@ -26,9 +26,10 @@ export class LoginComponent {
 
   login() {
     signInWithEmailAndPassword(this.fireAuth, this.email, this.password)
-      .then(() => {
+      .then((userCredentials) => {
+        const user = userCredentials.user;
         this._sessionService.setSession(true);
-
+        console.log('User logged in:', user.uid, user.email);
         this._navigateService.navigateTo('dashboard')
       })
       .catch(error => console.error('login failed', error));
