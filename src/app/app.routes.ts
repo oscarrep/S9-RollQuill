@@ -4,13 +4,14 @@ import { CharacterComponent } from './components/sheets/character/character.comp
 import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { authGuard } from './guards/auth-guard.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'character/:id', component: CharacterComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+    { path: 'character/:id', component: CharacterComponent, canActivate: [authGuard] },
     { path: '**', redirectTo: 'home' }
 ];
