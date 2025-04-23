@@ -1,0 +1,120 @@
+.square,
+.square-stat {
+    border-radius: 15px;
+    border: 3px solid #373327;
+    background-color: rgba(255, 255, 255, 0.3);
+    aspect-ratio: 1;
+}
+
+.square {
+
+    padding: 5px;
+    height: 75px;
+}
+
+.square-stat {
+    height: 140px;
+}
+
+.title,
+.num {
+    font-family: zain;
+    font-weight: bold;
+}
+
+.title {
+    font-size: larger;
+}
+
+.num {
+    font-size: x-large;
+    margin-top: -10px;
+}
+
+.num.large-box {
+    font-size: xx-large;
+}
+
+.square.large-box {
+    height: 100px;
+    font-size: larger;
+}
+
+.num-small{
+    width: 30px;
+    height: 30px;
+    outline: 3px solid #373327;
+    border-radius: 20%;
+}
+
+.title-stat,
+.num-small,
+.num-big {
+    text-align: center;
+    font-weight: bold;
+    font-family: zain;
+}
+
+.title-stat,
+.num-small {
+    font-size: x-large;
+}
+
+.num-big {
+    font-size: 33px;
+    font-weight: bold;
+    margin-block: -5px;
+}
+
+.bottom-row {
+    margin-top: 5px;
+}
+
+
+.checkbox-square,
+.checkbox-square:checked {
+    outline: 3px solid #373327;
+}
+
+.checkbox-square {
+    border-radius: 20%;
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.checkbox-square:checked {
+    background-color: #373327;
+    border: 3px solid white;
+}
+
+
+@media screen and (max-width: 425px) {
+    .square-stat {
+        max-height: 125px;
+    }
+    
+    .num-big {
+        font-size: 27px;
+    }
+
+    .num-small {
+        width: 20px;
+        height: 20px;
+        font-size: medium;
+        font-weight: bold;
+        padding-top: 2px;
+    }
+
+    .checkbox-square {
+        width: 15px;
+        height: 15px;
+    }
+
+    .bottom-row {
+        flex-direction: row;
+        margin-top: 3px;
+    }
+}

@@ -1,0 +1,39 @@
+.header{
+    background-color: #373327;
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1{
+    font-family: pacifico;
+    color: white;
+    font-size: xx-large;
+}
+
+.profile, .profile-body, .profile-head{
+    border-radius: 50px;
+    
+}
+.profile-body, .profile-head{
+    background-color: white;
+}
+
+.profile{
+    height: 40px;
+    width: 40px;
+    outline: solid 2px white;
+    flex-direction: column;
+    .profile-head{
+        height: 10px;
+        width: 10px;
+    }
+    .profile-body{
+        height: 10px;
+        width: 20px;
+        margin-top: 3px;
+        margin-bottom: 2px;
+    }
+}

@@ -1,0 +1,22 @@
+.foto-holder {
+    border: 3px solid #373327;
+    background-color: white;
+    border-radius: 15px;
+    width: auto;
+    height: auto;
+    //max-height: 100%;
+    max-width: 160px;
+    object-fit: contain;
+    align-self: flex-start;
+    aspect-ratio: 1;
+}
+
+.boxes{
+    flex-direction: row;
+}
+
+@media screen and (max-width: 425px) {
+    .foto-holder {
+        max-width: 125px;
+    }
+}

@@ -1,0 +1,24 @@
+.info {
+    display: flex;
+    flex-direction: row;
+    font-family: zain;
+    font-size: larger;
+}
+
+h2{margin-bottom: -5px;}
+
+@media screen and (max-width: 425px) {
+    .d-flex {
+        align-items: center;
+        gap: 1rem;
+    }
+
+    h2 {
+        font-size: medium;
+    }
+
+    .info {
+        font-size: medium;
+        text-align: center;
+    }
+}

@@ -1,0 +1,11 @@
+.h-scroll{
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.h-scroll::-webkit-scrollbar { 
+    display: none;
+}
