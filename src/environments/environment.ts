@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   host: '',
   apiCharacters: '',
+  apiUsers: '',
 
   dndHost: '',
   dndRaces: '',
