@@ -2,9 +2,9 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { CharacterService } from '../../../services/character.service';
 import { Character } from '../../../interfaces/character';
 import { Router } from '@angular/router';
-import { NameSectionComponent } from "./sections/name-section/name-section.component";
-import { TopSectionComponent } from "./sections/top-section/top-section.component";
-import { StatsSectionComponent } from "./sections/stats-section/stats-section.component";
+import { NameSectionComponent } from '../../sections/name-section/name-section.component';
+import { TopSectionComponent } from '../../sections/top-section/top-section.component';
+import { StatsSectionComponent } from '../../sections/stats-section/stats-section.component';
 import { DndApiService } from '../../../services/dnd-api.service';
 import { forkJoin } from 'rxjs';
 

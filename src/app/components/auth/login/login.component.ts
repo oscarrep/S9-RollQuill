@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from '../../../services/session.service';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ButtonComponent } from "../../button/button.component";
+import { ButtonComponent } from "../../../shared/button/button.component";
 import { NavigateService } from '../../../services/navigate.service';
 
 

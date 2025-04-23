@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ButtonComponent } from "../button/button.component";
-import { NavigateService } from '../../services/navigate.service';
+import { ButtonComponent } from "../../../shared/button/button.component";
+import { NavigateService } from '../../../services/navigate.service';
 
 @Component({
   selector: 'app-home',

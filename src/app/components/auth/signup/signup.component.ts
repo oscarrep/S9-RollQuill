@@ -3,7 +3,7 @@ import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from "../../button/button.component";
+import { ButtonComponent } from "../../../shared/button/button.component";
 import { SessionService } from '../../../services/session.service';
 import { environment } from '../../../../environments/environment';
 
