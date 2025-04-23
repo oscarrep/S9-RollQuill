@@ -9,7 +9,7 @@ import { User } from '../interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
-export class CharacterService {
+export class ApiService {
   private appUrl: string;
   private apiCharacters: string;
   private apiUsers: string;

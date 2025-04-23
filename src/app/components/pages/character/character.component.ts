@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { CharacterService } from '../../../services/character.service';
+import { ApiService } from '../../../services/api.service';
 import { Character } from '../../../interfaces/character';
 import { Router } from '@angular/router';
 import { NameSectionComponent } from '../../sections/name-section/name-section.component';
@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
 })
 export class CharacterComponent implements OnInit {
   router = inject(Router);
-  private _characterService = inject(CharacterService);
+  private _apiService = inject(ApiService);
   private _dndApiServce = inject(DndApiService);
   character?: Character;
   race?: any;
@@ -36,14 +36,14 @@ export class CharacterComponent implements OnInit {
   }
 
   getCharList(): void {
-    this._characterService.getCharacterList().subscribe((data: Character[]) => {
+    this._apiService.getCharacterList().subscribe((data: Character[]) => {
       this.characterList = data;
       console.log(this.characterList);
     })
   }
 
   getCharData(): void {
-    this._characterService.getCharacter(this.id).subscribe((data: Character) => {
+    this._apiService.getCharacter(this.id).subscribe((data: Character) => {
       this.character = data;
       console.log(this.character);
 

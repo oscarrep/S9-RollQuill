@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SectionCharacterComponent } from "../../sections/section-character/section-character.component";
 import { SectionCompendiumComponent } from '../../sections/section-compendium/section-copendium.component';
 import { ActivatedRoute } from '@angular/router';
-import { CharacterService } from '../../../services/character.service';
+import { ApiService } from '../../../services/api.service';
 import { User } from '../../../interfaces/user';
 @Component({
   selector: 'app-dashboard',
@@ -12,13 +12,13 @@ import { User } from '../../../interfaces/user';
 })
 export class DashboardComponent {
   private route = inject(ActivatedRoute)
-  private _characterService = inject(CharacterService)
+  private _apiService = inject(ApiService)
   user?: User;
 
   ngOnInit() {
     const uid = this.route.snapshot.paramMap.get('uid');
     if (uid) {
-      this._characterService.getUser(uid).subscribe((data: User) => {
+      this._apiService.getUser(uid).subscribe((data: User) => {
         this.user = data;
         console.log(this.user);
       })
