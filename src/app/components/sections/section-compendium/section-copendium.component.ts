@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardCompendiumComponent } from "../../cards/card-compendium/card-compendium.component";
+import { CardCompendiumComponent } from '../../widgets/card-compendium/card-compendium.component';
 
 @Component({
   selector: 'app-section-compendium',
