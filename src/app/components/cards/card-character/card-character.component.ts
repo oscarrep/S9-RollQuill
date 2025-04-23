@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppComponent } from '../../../app.component';
+import { NavigateService } from '../../../services/navigate.service';
 
 @Component({
   selector: 'app-card-character',
@@ -9,6 +8,5 @@ import { AppComponent } from '../../../app.component';
   styleUrl: './card-character.component.scss'
 })
 export class CardCharacterComponent {
-
-  app = inject(AppComponent);
+  _navigateService = inject(NavigateService);
 }
