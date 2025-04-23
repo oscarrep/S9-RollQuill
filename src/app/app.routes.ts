@@ -11,7 +11,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+    { path: ':uid/dashboard', component: DashboardComponent, canActivate: [authGuard] },
     { path: 'character/:id', component: CharacterComponent, canActivate: [authGuard] },
     { path: '**', redirectTo: 'home' }
 ];

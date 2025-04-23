@@ -34,7 +34,7 @@ export class SignupComponent {
         fetch(`${this.appUrl}${this.appUsers}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fireUid: userCredentials.user.uid, email: user.email})
+          body: JSON.stringify({ fireUid: userCredentials.user.uid, email: user.email, password: this.password })
         })
           .then(res => res.json())
           .then(data => console.log(data))

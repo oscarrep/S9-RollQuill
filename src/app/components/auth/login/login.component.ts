@@ -30,7 +30,7 @@ export class LoginComponent {
         const user = userCredentials.user;
         this._sessionService.setSession(true);
         console.log('User logged in:', user.uid, user.email);
-        this._navigateService.navigateTo('dashboard')
+        this._navigateService.navigateTo(`${user.uid}/dashboard`);
       })
       .catch(error => console.error('login failed', error));
   }
