@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ButtonComponent } from "../../../shared/button/button.component";
 import { NavigateService } from '../../../services/navigate.service';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -26,14 +27,22 @@ export class LoginComponent {
 
   login() {
     signInWithEmailAndPassword(this.fireAuth, this.email, this.password)
-      .then((userCredentials) => {
+      .then(userCredentials => {
         const user = userCredentials.user;
-        this._sessionService.setSession(true);
-        console.log('User logged in:', user.uid, user.email);
-        this._navigateService.navigateTo(`${user.uid}/dashboard`);
+  
+        fetch(`${environment.host}${environment.apiUsers}/firebase/${user.uid}`)
+          .then(res => res.json())
+          .then(mongoUser => {
+            console.log('Mongo user found:', mongoUser);
+
+            this._sessionService.setLoginSession(user);
+            this._navigateService.navigateTo(`${mongoUser._id}/dashboard`);
+          })
+          console.log('User logged in:', user.uid, user.email);
       })
       .catch(error => console.error('login failed', error));
   }
+
   navToSignup() { this._navigateService.navigateTo('signup') }
   backBtn() { this.location.back(); }
 }

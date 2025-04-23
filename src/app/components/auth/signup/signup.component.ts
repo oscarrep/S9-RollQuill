@@ -27,22 +27,22 @@ export class SignupComponent {
   signUp() {
     createUserWithEmailAndPassword(this.fireAuth, this.email, this.password)
       .then(userCredentials => {
-        const user = userCredentials.user
-
-        console.log('User created:', user.uid, user.email, this.password)
-
+        const user = userCredentials.user;
+  
         fetch(`${this.appUrl}${this.appUsers}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fireUid: userCredentials.user.uid, email: user.email, password: this.password })
+          body: JSON.stringify({ fireUid: user.uid, email: user.email })
         })
           .then(res => res.json())
-          .then(data => console.log(data))
+          .then(data => {
+            console.log('Mongo user created:', data);
+  
+            this._sessionService.setLoginSession(user);
+  
+            this.router.navigate([`${data._id}/dashboard`]);
+          })
           .catch(err => console.error('DB save failed', err));
-
-        this._sessionService.setSession(true);
-
-        if (this._sessionService.getSession() === true) this.router.navigate(['/dashboard']);
       })
       .catch(error => console.error('Error creating user:', error));
   }

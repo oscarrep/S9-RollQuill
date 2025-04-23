@@ -1,9 +1,8 @@
 export interface User {
+    _id: string;
     fireUid: String,
     premium: String, 
-
     email: String,
-    password: String,
 
     characters: String[],
     races: String[],
@@ -13,5 +12,4 @@ export interface User {
     spells: String[],
     items: String[],
     features: String[],
-    _id: string;
 }

@@ -18,10 +18,10 @@ export class DashboardComponent {
   ngOnInit() {
     const uid = this.route.snapshot.paramMap.get('uid');
     if (uid) {
-      this._apiService.getUser(uid).subscribe((data: User) => {
-        this.user = data;
-        console.log(this.user);
-      })
+      this.user = JSON.parse(localStorage.getItem('user')!);
+      console.log('user on dashboard:', this.user);
     }
   }
+
+  
 }
