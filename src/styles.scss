@@ -71,8 +71,14 @@
 }
 
 body {
-    background-color: #FAEABD !important;
+    background-color: #f0ebd9 !important;
+    background: url('/assets/bg.webp') no-repeat fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
 
 h2,
 p,
