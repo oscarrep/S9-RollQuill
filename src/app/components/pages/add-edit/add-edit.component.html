@@ -1,0 +1,11 @@
+<div class="page-container">
+    @if (!data) {
+    <h2>Create {{ formType }}</h2>
+    } @else {
+    <h2>Edit {{ formType }}</h2>
+    }
+
+    
+    <app-character-form [data]="data" />
+    
+</div>

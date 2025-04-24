@@ -1,0 +1,6 @@
+<form (ngSubmit)="submitForm()">
+    <input [(ngModel)]="form.name" name="name" placeholder="Character Name" required />
+    <input [(ngModel)]="form.level" name="level" type="number" placeholder="Level" required />
+
+    <button type="submit">Save</button>
+</form>
