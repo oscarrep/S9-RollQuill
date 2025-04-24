@@ -1,15 +1,15 @@
 export interface User {
     _id: string;
-    fireUid: String,
-    premium: String, 
-    email: String,
+    fireUid: string,
+    premium: string, 
+    email: string,
 
-    characters: String[],
-    races: String[],
-    subraces: String[],
-    classes: String[],
-    subclasses: String[],
-    spells: String[],
-    items: String[],
-    features: String[],
+    characters: string[],
+    races: string[],
+    subraces: string[],
+    classes: string[],
+    subclasses: string[],
+    spells: string[],
+    items: string[],
+    features: string[],
 }

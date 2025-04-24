@@ -18,5 +18,6 @@ export interface Character {
     savingThrows: string[];
     skills: string[];
     expertise: string[];
+    image: string;
     _id: string;
 }

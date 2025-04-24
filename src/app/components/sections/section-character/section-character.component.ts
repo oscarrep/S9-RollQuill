@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardCharacterComponent } from '../../widgets/card-character/card-character.component';
 import { CardCreateComponent } from '../../widgets/card-create/card-create.component';
 import { ButtonComponent } from "../../../shared/button/button.component";
+import { Character } from '../../../interfaces/character';
 
 @Component({
   selector: 'app-section-character',
@@ -10,5 +11,6 @@ import { ButtonComponent } from "../../../shared/button/button.component";
   styleUrl: './section-character.component.scss'
 })
 export class SectionCharacterComponent {
-
+  @Input() characters: Character[] = [];
+  getCharId(char: Character): string { return char?._id ?? crypto.randomUUID();  }
 }

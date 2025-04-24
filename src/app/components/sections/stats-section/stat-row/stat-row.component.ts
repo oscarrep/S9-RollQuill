@@ -13,9 +13,6 @@ export class StatRowComponent {
   savingThrows = input<string>()
   proficiencyBonus = input<number>()
 
-
-  ngOnInit() { console.log('stat-row', this.abilityModifiers()); }
-
   getScoreFor(name: string): number | undefined {
     return this.abilityScores()!.find(score => score.name === name)?.value;
   }
