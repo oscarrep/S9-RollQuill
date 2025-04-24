@@ -4,7 +4,7 @@
         <app-button [text]="'Create'" />
     </div>
     <div>
-        @for(char of characters; track char){
+        @for(char of characters; track getCharId(char)){
         <div class="p-1"><app-card-character [character]="char"/></div>
         }
         <div class="p-1"><app-card-create /></div>

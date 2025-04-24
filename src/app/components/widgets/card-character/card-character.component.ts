@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { NavigateService } from '../../../services/navigate.service';
 import { Character } from '../../../interfaces/character';
 
@@ -11,5 +11,8 @@ import { Character } from '../../../interfaces/character';
 export class CardCharacterComponent {
   _navigateService = inject(NavigateService);
   @Input() character!: Character;
-  @Output() buttonClick = new EventEmitter<void>();
+
+  showCharacter(){
+    this._navigateService.navigateTo(`${this.character.createdBy}/character/${this.character._id}`);
+  }
 }

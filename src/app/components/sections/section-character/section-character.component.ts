@@ -12,4 +12,5 @@ import { Character } from '../../../interfaces/character';
 })
 export class SectionCharacterComponent {
   @Input() characters: Character[] = [];
+  getCharId(char: Character): string { return char?._id ?? crypto.randomUUID();  }
 }

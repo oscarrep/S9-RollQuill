@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { SectionCharacterComponent } from "../../sections/section-character/section-character.component";
 import { SectionCompendiumComponent } from '../../sections/section-compendium/section-copendium.component';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export class DashboardComponent {
   private _apiService = inject(ApiService)
   user?: User;
   characterList = signal<Character[]>([]);
-
+  @Output() buttonClick = new EventEmitter<void>();
 
   ngOnInit() {
     const storedUser = localStorage.getItem('user');
@@ -26,6 +26,7 @@ export class DashboardComponent {
       if (ids?.length) {
         this._apiService.getCharactersByIds(ids).subscribe(chars => {
           this.characterList.set(chars);
+          console.log(this.characterList()!.map(c => c));
         });
       }
     }
