@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from '../../../services/session.service';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ButtonComponent } from "../../button/button.component";
+import { ButtonComponent } from "../../../shared/button/button.component";
 import { NavigateService } from '../../../services/navigate.service';
+import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -17,23 +19,16 @@ import { NavigateService } from '../../../services/navigate.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  private fireAuth = inject(Auth);
-  private router = inject(Router);
-  private _sessionService = inject(SessionService);
+  private _authService = inject(AuthService);
   private _navigateService = inject(NavigateService);
   private location = inject(Location);
-  private route = inject(ActivatedRoute);
 
   login() {
-    signInWithEmailAndPassword(this.fireAuth, this.email, this.password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        this._sessionService.setSession(true);
-        console.log('User logged in:', user.uid, user.email);
-        this._navigateService.navigateTo('dashboard')
-      })
-      .catch(error => console.error('login failed', error));
+    this._authService.login(this.email, this.password)
+      .then(user => this._navigateService.navigateTo(`${user._id}/dashboard`))
+      .catch(err => console.error('Login failed', err));
   }
+
   navToSignup() { this._navigateService.navigateTo('signup') }
   backBtn() { this.location.back(); }
 }

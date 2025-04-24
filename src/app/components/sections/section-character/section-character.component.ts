@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CardCharacterComponent } from "../../cards/card-character/card-character.component";
-import { CardCreateComponent } from '../../cards/card-create/card-create.component';
-import { ButtonComponent } from "../../button/button.component";
+import { CardCharacterComponent } from '../../widgets/card-character/card-character.component';
+import { CardCreateComponent } from '../../widgets/card-create/card-create.component';
+import { ButtonComponent } from "../../../shared/button/button.component";
 
 @Component({
   selector: 'app-section-character',
