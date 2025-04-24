@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { NavigateService } from '../../../services/navigate.service';
+import { Character } from '../../../interfaces/character';
 
 @Component({
   selector: 'app-card-character',
@@ -9,4 +10,6 @@ import { NavigateService } from '../../../services/navigate.service';
 })
 export class CardCharacterComponent {
   _navigateService = inject(NavigateService);
+  @Input() character!: Character;
+  @Output() buttonClick = new EventEmitter<void>();
 }

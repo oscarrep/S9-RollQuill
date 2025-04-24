@@ -43,4 +43,8 @@ export class ApiService {
   getUser(uid: string | undefined):Observable<User>{
     return this.http.get<User>(`${this.appUrl}${this.apiUsers}/${uid}`)
   }
+
+  getCharactersByIds(ids: string[]): Observable<Character[]> {
+    return this.http.post<Character[]>(`${this.appUrl}${this.apiCharacters}/batch`, { ids });
+  }
 }
