@@ -20,5 +20,5 @@ export const environment = {
   }
 };`;
 
-fs.writeFileSync(targetPath, envConfig);
+writeFileSync(targetPath, envConfig);
 console.log('environment.prod generated')
