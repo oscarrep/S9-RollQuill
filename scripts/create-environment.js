@@ -1,7 +1,10 @@
-import fs from 'fs';
-import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-const targetPath = path.join(__dirname, 'src/environments/environment.prod.ts');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const targetPath = join(__dirname,'..', 'src/environments/environment.prod.ts');
 
 const envConfig = `
 export const environment = {
