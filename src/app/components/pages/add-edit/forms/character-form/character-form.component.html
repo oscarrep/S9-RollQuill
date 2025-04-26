@@ -1,6 +1,30 @@
-<form (ngSubmit)="submitForm()">
-    <input [(ngModel)]="form.name" name="name" placeholder="Character Name" required />
-    <input [(ngModel)]="form.level" name="level" type="number" placeholder="Level" required />
+<form [formGroup]="characterForm" (ngSubmit)="createCharacter()">
 
-    <button type="submit">Save</button>
+    <input formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2" />
+    <input formControlName="stats" name="stats" placeholder="Stats" required class="input p-2 mb-2" />
+    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2">
+        <option value="" selected disabled hidden>Race</option>
+        @for(race of raceNames; track race){<option value="${{race}}">{{race}}</option>}
+    </select>
+    <input formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2" />
+    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2">
+        <option value="" selected disabled hidden>Class</option>
+        @for(class of classNames; track class){<option value="${{class}}">{{class}}</option>}
+    </select>
+    <input formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2" />
+    <div class="mb-2">
+        <label>Choose 4 Skills:</label>
+        @for(skill of skills; track skill){
+        <input type="checkbox" [value]="skill" (change)="toggleSkill($event, skill)"
+            [checked]="characterForm.value.skills.includes(skill)" />
+        {{ skill }}
+        }
+    </div>
+    <input formControlName="expertise" name="expertise" placeholder="Expertise" required class="input p-2 mb-2" />
+    <input formControlName="level" name="level" type="number" placeholder="Level" required class="input p-2 mb-2" />
+    <input formControlName="savingThrows" name="savingThrows" placeholder="Saving Throws" required
+        class="input p-2 mb-2" />
+
+    <app-button [login]="true" [type]="'submit'" [text]="'Create Character'" />
+    <app-button [login]="true" (buttonClick)="_navigationService.backBtn()" [type]="'button'" [text]="'Go back'" />
 </form>

@@ -12,6 +12,14 @@ export const environment = {
   dndFeatures: '',
   dndLevels: '',
 
+  dndJson:'',
+  dndClassesJson:'',
+  dndSubclassesJson:'',
+  dndRacesJson:'',
+  dndSubacesJson:'',
+  dndFeaturesJson:'',
+  dndSkillsJson:'',
+
   firebaseConfig: {
     apiKey: "",
     authDomain: "",
