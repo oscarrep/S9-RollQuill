@@ -28,7 +28,7 @@ export class CharacterFormComponent {
   subclasses: string[] = [];
   raceNames: string[] = [];
   subraces: string[] = [];
-
+  selectedClass: any;
   skills: string[] = [];
 
   constructor() {
@@ -50,14 +50,24 @@ export class CharacterFormComponent {
     this.getFromJson('classes');
     this.getFromJson('races');
 
-    this.formValueChanges('class', this.classData, selected => {
-      this.subclasses = selected.subclasses?.map((subclass: any) => subclass.name) || [];
-      this.skills = selected.proficiency_choices?.[0]?.skills || [];
-      this.characterForm.patchValue({ subclass: '', skills: [], savingThrows: (selected.saving_throws ?? []).map((st: any) => st.name) });
+    this.characterForm.get('class')?.valueChanges.subscribe(className => {
+      const selected = this.classData.find(c => c.name === className);
+      this.subclasses = selected?.subclasses?.map((s: any) => s.name) || [];
+      this.characterForm.patchValue({ subclass: '' });
+
+      const skillChoices = selected?.proficiency_choices?.[0]?.skills || [];
+      this.skills = skillChoices;
+      this.characterForm.patchValue({ skills: [] });
+      console.log(this.skills)
+      this.selectedClass = selected;
+      console.log(selected)
+
+      this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
     });
-  
-    this.formValueChanges('race', this.raceData, selected => {
-      this.subraces = selected.subraces?.map((subrace: any) => subrace.name) || [];
+
+    this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
+      const selected = this.raceData.find(race => race.name === raceName);
+      this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
       this.characterForm.patchValue({ subrace: '' });
     });
   }
@@ -71,6 +81,7 @@ export class CharacterFormComponent {
             subclasses: item.subclasses,
             proficiency_choices: item.proficiency_choices,
             saving_throws: item.saving_throws,
+            skillChoose: item.proficiency_choices[0].skillChoose
           }));
           this.classNames = this.classData.map((item: any) => item.name);
           break;
@@ -86,15 +97,6 @@ export class CharacterFormComponent {
         default:
           console.warn(`case for '${toGet}' not handled`);
           break;
-      }
-    });
-  }
-
-  formValueChanges(formName: string, dataList: any[], updateFn: (selected: any) => void) {
-    this.characterForm.get(formName)?.valueChanges.subscribe(name => {
-      const selected = dataList.find(item => item.name === name);
-      if (selected) {
-        updateFn(selected);
       }
     });
   }

@@ -14,14 +14,16 @@
     <select formControlName="subclass" name="subclass" placeholder="Class" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){<option value="{{subclass}}">{{subclass}}</option>}
-    </select>    <div subclass="mb-2">
-        <p>Choose 4 Skills:</p>
+    </select>
+    @if(selectedClass){
+    <div subclass="mb-2">
+        <p>{{selectedClass.name}}s can choose <b>{{selectedClass.skillChoose}}</b> skill proficiencies from:</p>
         @for(skill of skills; track skill){
         <input type="checkbox" [value]="skill" (change)="toggleSkill($event, skill)"
             [checked]="characterForm.value.skills.includes(skill)" />
         {{ skill }}
         }
-    </div>
+    </div>}
     <input formControlName="expertise" name="expertise" placeholder="Expertise" required class="input p-2 mb-2" />
     <input formControlName="level" name="level" type="number" placeholder="Level" required class="input p-2 mb-2" />
     <input formControlName="savingThrows" name="savingThrows" placeholder="Saving Throws" required
