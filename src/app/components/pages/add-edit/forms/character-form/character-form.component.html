@@ -9,10 +9,12 @@
     <input formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2" />
     <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Class</option>
-        @for(class of classNames; track class){<option value="${{class}}">{{class}}</option>}
+        @for(class of classNames; track class){<option value="{{class}}">{{class}}</option>}
     </select>
-    <input formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2" />
-    <div class="mb-2">
+    <select formControlName="subclass" name="subclass" placeholder="Class" required class="input p-2 mb-2">
+        <option value="" selected disabled hidden>Subclass</option>
+        @for(subclass of subclasses; track subclass){<option value="{{subclass}}">{{subclass}}</option>}
+    </select>    <div subclass="mb-2">
         <label>Choose 4 Skills:</label>
         @for(skill of skills; track skill){
         <input type="checkbox" [value]="skill" (change)="toggleSkill($event, skill)"

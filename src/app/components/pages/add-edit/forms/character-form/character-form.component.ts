@@ -49,15 +49,17 @@ export class CharacterFormComponent {
     this.getFromJson('races');
 
     this.characterForm.get('class')?.valueChanges.subscribe(className => {
-      const selected = this.classData.find(_class => _class.name === className);
+      const selected = this.classData.find(c => c.name === className);
       this.subclasses = selected?.subclasses?.map((s: any) => s.name) || [];
       this.characterForm.patchValue({ subclass: '' });
 
       console.log(this.subclasses)
+      console.log(className)
 
-      const skills = selected?.proficiency_choices?.[0]?.skills || [];
+      const skills = selected?.proficiency_choices?.skills || [];
       this.characterForm.patchValue({ skills: [] });
       this.skills = skills;
+      console.log(skills)
       this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
     });
 
