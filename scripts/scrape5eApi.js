@@ -27,11 +27,16 @@ async function fetchData(endpoint) {
                     if (choice.desc && typeof choice.desc === 'string' && choice.desc.includes('Choose')) {
                         const match = choice.desc.match(/Choose.*from (.+)/i);
                         if (match) {
-                            const rawSkills = match[1]
-                                .replace(/\.$/, '')
-                                .split(/, | and /)
-                                .map(skill => skill.trim());
-            
+                            const rawSkillsString = match[1]
+                                .replace(/\.$/, '')           // remove ending "."
+                                .replace(/, and /g, ', ')      // replace ", and " first
+                                .replace(/ and /g, ', ');      // then " and " anywhere else
+
+                            const rawSkills = rawSkillsString
+                                .split(',')                   // NOW split into array
+                                .map(skill => skill.trim())    // NOW map each item
+                                .filter(skill => skill.length > 0); // remove empties
+
                             choice.skills = rawSkills;
                         }
                     }

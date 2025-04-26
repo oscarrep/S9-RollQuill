@@ -14,13 +14,15 @@ import { NavigateService } from '../../../../../services/navigate.service';
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
-  private form = inject(FormBuilder)
+  form = inject(FormBuilder)
   _dndService = inject(DndApiService)
   _navigationService = inject(NavigateService)
   characterForm: FormGroup;
 
-  classData: any[]=[]
-  raceData: any[]=[]
+  standardArray: number[] = [8, 10, 12, 13, 14, 15]
+
+  classData: any[] = []
+  raceData: any[] = []
 
   classNames: string[] = [];
   subclasses: string[] = [];
@@ -48,24 +50,14 @@ export class CharacterFormComponent {
     this.getFromJson('classes');
     this.getFromJson('races');
 
-    this.characterForm.get('class')?.valueChanges.subscribe(className => {
-      const selected = this.classData.find(c => c.name === className);
-      this.subclasses = selected?.subclasses?.map((s: any) => s.name) || [];
-      this.characterForm.patchValue({ subclass: '' });
-
-      console.log(this.subclasses)
-      console.log(className)
-
-      const skills = selected?.proficiency_choices?.skills || [];
-      this.characterForm.patchValue({ skills: [] });
-      this.skills = skills;
-      console.log(skills)
-      this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
+    this.formValueChanges('class', this.classData, selected => {
+      this.subclasses = selected.subclasses?.map((subclass: any) => subclass.name) || [];
+      this.skills = selected.proficiency_choices?.[0]?.skills || [];
+      this.characterForm.patchValue({ subclass: '', skills: [], savingThrows: (selected.saving_throws ?? []).map((st: any) => st.name) });
     });
-
-    this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
-      const selected = this.raceData.find(race => race.name === raceName);
-      this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
+  
+    this.formValueChanges('race', this.raceData, selected => {
+      this.subraces = selected.subraces?.map((subrace: any) => subrace.name) || [];
       this.characterForm.patchValue({ subrace: '' });
     });
   }
@@ -81,21 +73,28 @@ export class CharacterFormComponent {
             saving_throws: item.saving_throws,
           }));
           this.classNames = this.classData.map((item: any) => item.name);
-          console.log(this.classData);
-          console.log(this.classNames);
           break;
+
         case 'races':
           this.raceData = data.map((item: any) => ({
             name: item.name,
             subraces: item.subraces,
           }));
           this.raceNames = this.raceData.map((item: any) => item.name);
-          console.log(this.raceData);
-          console.log(this.raceNames);
           break;
+
         default:
           console.warn(`case for '${toGet}' not handled`);
           break;
+      }
+    });
+  }
+
+  formValueChanges(formName: string, dataList: any[], updateFn: (selected: any) => void) {
+    this.characterForm.get(formName)?.valueChanges.subscribe(name => {
+      const selected = dataList.find(item => item.name === name);
+      if (selected) {
+        updateFn(selected);
       }
     });
   }

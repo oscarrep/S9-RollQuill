@@ -15,7 +15,7 @@
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){<option value="{{subclass}}">{{subclass}}</option>}
     </select>    <div subclass="mb-2">
-        <label>Choose 4 Skills:</label>
+        <p>Choose 4 Skills:</p>
         @for(skill of skills; track skill){
         <input type="checkbox" [value]="skill" (change)="toggleSkill($event, skill)"
             [checked]="characterForm.value.skills.includes(skill)" />
