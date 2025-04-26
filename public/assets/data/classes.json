@@ -68,7 +68,8 @@
           "Nature",
           "Perception",
           "Survival"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -407,7 +408,28 @@
               }
             }
           ]
-        }
+        },
+        "skills": [
+          "Acrobatics",
+          "Animal Handling",
+          "Arcana",
+          "Athletics",
+          "Deception",
+          "History",
+          "Insight",
+          "Intimidation",
+          "Investigation",
+          "Medicine",
+          "Nature",
+          "Perception",
+          "Performance",
+          "Persuasion",
+          "Religion",
+          "Sleight of Hand",
+          "Stealth",
+          "Survival"
+        ],
+        "skillChoose": 3
       },
       {
         "desc": "Three musical instruments of your choice",
@@ -1070,7 +1092,8 @@
           "Medicine",
           "Persuasion",
           "Religion"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -1477,7 +1500,8 @@
           "Perception",
           "Religion",
           "Survival"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -1850,7 +1874,8 @@
           "Intimidation",
           "Perception",
           "Survival"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -2213,7 +2238,8 @@
           "Insight",
           "Religion",
           "Stealth"
-        ]
+        ],
+        "skillChoose": 2
       },
       {
         "desc": "Choose one type of artisan’s tools or one musical instrument",
@@ -2705,7 +2731,8 @@
           "Medicine",
           "Persuasion",
           "Religion"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -3075,7 +3102,8 @@
           "Perception",
           "Stealth",
           "Survival"
-        ]
+        ],
+        "skillChoose": 3
       }
     ],
     "proficiencies": [
@@ -3519,7 +3547,8 @@
           "Persuasion",
           "Sleight of Hand",
           "Stealth"
-        ]
+        ],
+        "skillChoose": 4
       }
     ],
     "proficiencies": [
@@ -3919,7 +3948,8 @@
           "Intimidation",
           "Persuasion",
           "Religion"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -4243,7 +4273,8 @@
           "Investigation",
           "Nature",
           "Religion"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [
@@ -4576,7 +4607,8 @@
           "Investigation",
           "Medicine",
           "Religion"
-        ]
+        ],
+        "skillChoose": 2
       }
     ],
     "proficiencies": [

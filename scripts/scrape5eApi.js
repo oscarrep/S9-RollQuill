@@ -24,20 +24,15 @@ async function fetchData(endpoint) {
 
             if (Array.isArray(data.proficiency_choices)) {
                 for (const choice of data.proficiency_choices) {
-                    if (choice.desc && typeof choice.desc === 'string' && choice.desc.includes('Choose')) {
-                        const match = choice.desc.match(/Choose.*from (.+)/i);
-                        if (match) {
-                            const rawSkillsString = match[1]
-                                .replace(/\.$/, '')           // remove ending "."
-                                .replace(/, and /g, ', ')      // replace ", and " first
-                                .replace(/ and /g, ', ');      // then " and " anywhere else
+                    if (choice.from && Array.isArray(choice.from.options)) {
+                        // Extract skills
+                        const skills = choice.from.options
+                            .filter((opt) => opt.item?.name?.startsWith('Skill:'))
+                            .map((opt) => opt.item.name.replace('Skill: ', '').trim());
 
-                            const rawSkills = rawSkillsString
-                                .split(',')                   // NOW split into array
-                                .map(skill => skill.trim())    // NOW map each item
-                                .filter(skill => skill.length > 0); // remove empties
-
-                            choice.skills = rawSkills;
+                        if (skills.length > 0) {
+                            choice.skills = skills;
+                            choice.skillChoose = choice.choose;
                         }
                     }
                 }
@@ -45,8 +40,6 @@ async function fetchData(endpoint) {
             fullData.push(data);
         }
     } catch (err) { console.error(`Failed to fetch ${endpoint}:`, err.message) }
-
-
 
     return fullData;
 }
