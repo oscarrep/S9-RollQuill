@@ -1,34 +1,56 @@
-<form [formGroup]="characterForm" (ngSubmit)="createCharacter()">
+<form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
     <input formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2" />
     <input formControlName="stats" name="stats" placeholder="Stats" required class="input p-2 mb-2" />
     <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Race</option>
-        @for(race of raceNames; track race){<option value="${{race}}">{{race}}</option>}
+        @for(race of raceNames; track race){<option value="{{race}}">{{race}}</option>}
     </select>
     <input formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2" />
     <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Class</option>
         @for(class of classNames; track class){<option value="{{class}}">{{class}}</option>}
     </select>
-    <select formControlName="subclass" name="subclass" placeholder="Class" required class="input p-2 mb-2">
+    @if(selectedClass){
+    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){<option value="{{subclass}}">{{subclass}}</option>}
     </select>
-    @if(selectedClass){
-    <div subclass="mb-2">
+    <div class="mb-2 subclass-panel">
         <p>{{selectedClass.name}}s can choose <b>{{selectedClass.skillChoose}}</b> skill proficiencies from:</p>
-        @for(skill of skills; track skill){
-        <input type="checkbox" [value]="skill" (change)="toggleSkill($event, skill)"
-            [checked]="characterForm.value.skills.includes(skill)" />
-        {{ skill }}
-        }
-    </div>}
-    <input formControlName="expertise" name="expertise" placeholder="Expertise" required class="input p-2 mb-2" />
-    <input formControlName="level" name="level" type="number" placeholder="Level" required class="input p-2 mb-2" />
-    <input formControlName="savingThrows" name="savingThrows" placeholder="Saving Throws" required
-        class="input p-2 mb-2" />
+        <div class="checkbox-container">
+            @for(skill of skills; track skill){
+            <app-skill-checkbox [skill]="skill" [checked]="isClassSkillChecked(skill)" [disabled]="(!characterForm.value.classSkills.includes(skill)) &&
+            (characterForm.value.classSkills.length >= selectedClass.skillChoose) "
+                (skillToggled)="toggleClassSkill(skill, $event.checked)">
+            </app-skill-checkbox>
+            }
+        </div>
+    </div>
+    <div class="panel mb-2">
+        <p>{{selectedClass.name}}s get the following <b>saving throw</b> proficiencies:</p>
+        <div class="flex-center saving-throws">
+            <b>{{selectedClass.saving_throws[0].name}}</b>
+            <b>{{selectedClass.saving_throws[1].name}}</b>
+        </div>
+    </div>
+    }
 
-    <app-button [login]="true" [type]="'submit'" [text]="'Create Character'" />
-    <app-button [login]="true" (buttonClick)="_navigationService.backBtn()" [type]="'button'" [text]="'Go back'" />
+    <div class="skill-prof">
+        <p>A character's background allows them 2 extra skill proficiencies:</p>
+        <div class="checkbox-container">
+            @for(skill of skillData; track skill){
+            <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill)"
+            [disabled]="!isBackgroundSkillChecked(skill) && characterForm.value.backgroundSkills.length >= 2"                (skillToggled)="toggleBackgroundSkill(skill, $event.checked)">
+            </app-skill-checkbox>
+            }
+        </div>
+    </div>
+
+    <div class="d-flex mt-3">
+        <div class="me-2">
+            <app-button [login]="true" [type]="'submit'" [text]="'Create Character'" />
+        </div>
+        <app-button [login]="true" (buttonClick)="_navigationService.backBtn()" [type]="'button'" [text]="'Go back'" />
+    </div>
 </form>

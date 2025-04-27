@@ -1,5 +1,44 @@
+.input,
+.panel,
+.subclass-panel,
+.skill-prof {
+    border: solid 3px #373327;
+}
+
 .input {
     width: 100%;
     border-radius: 50px;
-    border: solid 3px #373327;
+    z-index: 1;
+}
+
+.subclass-panel {
+    margin-top: -3%;
+}
+
+.panel,
+.subclass-panel,
+.skill-prof {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 90%;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+p {
+    margin-bottom: -2px;
+    font-size: 20px;
+}
+
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.saving-throws {
+    gap: 1rem;
+    font-size: x-large;
 }
