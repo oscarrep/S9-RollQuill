@@ -16,5 +16,10 @@
 
 .checkbox-square:checked {
     background-color: #373327;
-    border: 3px solid white;
+    border: 2px solid white;
+}
+
+.checkbox-square:disabled {
+    background-color: #FAEABD;
+    cursor: auto;
 }
