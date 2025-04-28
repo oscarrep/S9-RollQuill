@@ -30,6 +30,7 @@ export class CharacterFormComponent {
   classSkillsSelected = 0;
 
   selectedClass: any;
+  selectedRace: any;
   classNames: string[] = [];
   subclasses: string[] = [];
   raceNames: string[] = [];
@@ -66,14 +67,16 @@ export class CharacterFormComponent {
       this.skills = skillChoices;
       this.characterForm.patchValue({ classSkills: [] });
       this.selectedClass = selected;
-
+      
       this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
     });
-
+    
     this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
       const selected = this.raceData.find(race => race.name === raceName);
       this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
       this.characterForm.patchValue({ subrace: '' });
+      this.selectedRace = selected;
+      console.log(selected)
     });
 
   }

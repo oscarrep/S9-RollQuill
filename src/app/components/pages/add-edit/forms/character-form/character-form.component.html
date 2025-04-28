@@ -4,24 +4,36 @@
     <input formControlName="stats" name="stats" placeholder="Stats" required class="input p-2 mb-2" />
     <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Race</option>
-        @for(race of raceNames; track race){<option value="{{race}}">{{race}}</option>}
+        @for(race of raceNames; track race){
+        <option value="{{race}}">{{race}}</option>
+        }
     </select>
-    <input formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2" />
+    @if(selectedRace){
+    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2">
+        <option value="" selected disabled hidden>Subrace</option>
+        @for(subrace of subraces; track subrace){
+        <option value="{{subrace}}">{{subrace}}</option>
+        }
+    </select>} 
     <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Class</option>
-        @for(class of classNames; track class){<option value="{{class}}">{{class}}</option>}
+        @for(class of classNames; track class){
+        <option value="{{class}}">{{class}}</option>
+        }
     </select>
     @if(selectedClass){
     <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2">
         <option value="" selected disabled hidden>Subclass</option>
-        @for(subclass of subclasses; track subclass){<option value="{{subclass}}">{{subclass}}</option>}
+        @for(subclass of subclasses; track subclass){
+        <option value="{{subclass}}">{{subclass}}</option>
+        }
     </select>
     <div class="mb-2 subclass-panel">
         <p>{{selectedClass.name}}s can choose <b>{{selectedClass.skillChoose}}</b> skill proficiencies from:</p>
         <div class="checkbox-container">
             @for(skill of skills; track skill){
             <app-skill-checkbox [skill]="skill" [checked]="isClassSkillChecked(skill)" [disabled]="(!characterForm.value.classSkills.includes(skill)) &&
-            (characterForm.value.classSkills.length >= selectedClass.skillChoose) "
+                (characterForm.value.classSkills.length >= selectedClass.skillChoose) "
                 (skillToggled)="toggleClassSkill(skill, $event.checked)">
             </app-skill-checkbox>
             }
@@ -41,7 +53,8 @@
         <div class="checkbox-container">
             @for(skill of skillData; track skill){
             <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill)"
-            [disabled]="!isBackgroundSkillChecked(skill) && characterForm.value.backgroundSkills.length >= 2"                (skillToggled)="toggleBackgroundSkill(skill, $event.checked)">
+                [disabled]="!isBackgroundSkillChecked(skill) && characterForm.value.backgroundSkills.length >= 2"
+                (skillToggled)="toggleBackgroundSkill(skill, $event.checked)">
             </app-skill-checkbox>
             }
         </div>
