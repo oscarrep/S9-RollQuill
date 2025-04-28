@@ -20,7 +20,8 @@ export class CharacterFormComponent {
   _navigationService = inject(NavigateService)
   characterForm: FormGroup;
 
-  standardArray: number[] = [8, 10, 12, 13, 14, 15]
+  standardArray: number[] = [8, 10, 12, 13, 14, 15];
+  statNames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
   classData: any[] = []
   raceData: any[] = []
@@ -41,15 +42,21 @@ export class CharacterFormComponent {
     this.characterForm = this.form.group({
       name: ['', Validators.required],
       race: ['', Validators.required],
-      stats: [[''], Validators.required],
-      subrace: ['', Validators.required],
+      STR: ['', Validators.required],
+      DEX: ['', Validators.required],
+      CON: ['', Validators.required],
+      INT: ['', Validators.required],
+      WIS: ['', Validators.required],
+      CHA: ['', Validators.required],
+      subrace: ['',Validators.required],
       class: ['', Validators.required],
-      subclass: [''],
+      subclass: ['',Validators.required],
       classSkills: [[], Validators.required],
       backgroundSkills: [[], Validators.required],
       expertise: [''],
       level: [1],
-      savingThrows: [[''], Validators.required],
+      speed: 0,
+      savingThrows: [[]],
     })
   }
 
@@ -67,10 +74,10 @@ export class CharacterFormComponent {
       this.skills = skillChoices;
       this.characterForm.patchValue({ classSkills: [] });
       this.selectedClass = selected;
-      
+
       this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
     });
-    
+
     this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
       const selected = this.raceData.find(race => race.name === raceName);
       this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
@@ -98,6 +105,15 @@ export class CharacterFormComponent {
         case 'races':
           this.raceData = data.map((item: any) => ({
             name: item.name,
+            speed: item.speed,
+            ability_bonuses: item.ability_bonuses,
+            alignment: item.alignment,
+            age: item.age,
+            size: item.size,
+            size_description: item.size_description,
+            starting_proficiencies: item.starting_proficiencies,
+            languages: item.languages,
+            traits: item.traits,
             subraces: item.subraces,
           }));
           this.raceNames = this.raceData.map((item: any) => item.name);
@@ -123,21 +139,19 @@ export class CharacterFormComponent {
     const maxSkills = this.selectedClass?.skillChoose || 0;
 
     if (check && currentSkills.length < maxSkills) this.characterForm.patchValue({ classSkills: [...currentSkills, skill] });
-     else if (!check) this.characterForm.patchValue({ classSkills: currentSkills.filter(s => s !== skill) });
-    
+    else if (!check) this.characterForm.patchValue({ classSkills: currentSkills.filter(s => s !== skill) });
+
   }
 
   toggleBackgroundSkill(skill: string, check: boolean) {
     const currentSkills = this.characterForm.value.backgroundSkills as string[];
-    
+
     if (check && currentSkills.length < 2) this.characterForm.patchValue({ backgroundSkills: [...currentSkills, skill] });
-     else if (!check) this.characterForm.patchValue({ backgroundSkills: currentSkills.filter(s => s !== skill) });
-    
+    else if (!check) this.characterForm.patchValue({ backgroundSkills: currentSkills.filter(s => s !== skill) });
+
   }
 
   createCharacter() {
-
-
 
     console.log(this.characterForm.value)
   }

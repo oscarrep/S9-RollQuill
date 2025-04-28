@@ -1,28 +1,59 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
-    <input formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2" />
-    <input formControlName="stats" name="stats" placeholder="Stats" required class="input p-2 mb-2" />
-    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2">
+    <input class formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched"/>
+    <div class="d-flex gap-1">
+        @for (stat of statNames; track stat) {
+        <div class="stat-panel mb-2 column-center">
+            <p><b>{{ stat }}</b></p>
+            <select [formControlName]="stat" required class="stat-input px-2 py-1">
+                @for (num of standardArray; track num) {
+                <option [value]="num">
+                    {{ num }}
+                </option>
+                }
+
+            </select>
+        </div>
+        }
+    </div>
+
+
+
+    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Race</option>
         @for(race of raceNames; track race){
         <option value="{{race}}">{{race}}</option>
         }
     </select>
     @if(selectedRace){
-    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2">
+    <div class="panel mb-2">
+        @if(selectedRace.languages.length>1){
+        <p>Characters with this race can speak and write <u>{{selectedRace.languages[0].index}}</u> and
+            <u>{{selectedRace.languages[1].index}}</u>..
+        </p> }
+        @if(selectedRace.ability_bonuses.length>0){
+        <p>They also get the following ability score bonus: <u>+{{selectedRace.ability_bonuses[0].bonus}}
+                {{selectedRace.ability_bonuses[0].ability_score.name}}</u></p> }
+    </div>
+    @if(selectedRace.subraces.length){
+    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Subrace</option>
         @for(subrace of subraces; track subrace){
         <option value="{{subrace}}">{{subrace}}</option>
         }
-    </select>} 
-    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2">
+    </select>
+    }}
+
+
+
+    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Class</option>
         @for(class of classNames; track class){
         <option value="{{class}}">{{class}}</option>
         }
     </select>
     @if(selectedClass){
-    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2">
+    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){
         <option value="{{subclass}}">{{subclass}}</option>
@@ -48,6 +79,8 @@
     </div>
     }
 
+
+
     <div class="skill-prof">
         <p>A character's background allows them 2 extra skill proficiencies:</p>
         <div class="checkbox-container">
@@ -59,6 +92,12 @@
             }
         </div>
     </div>
+
+
+
+    @if(characterForm.invalid && characterForm.touched){<p class="text-danger mt-3 error-panel column-center"><b>Please complete all required fields.</b></p>}
+
+
 
     <div class="d-flex mt-3">
         <div class="me-2">
