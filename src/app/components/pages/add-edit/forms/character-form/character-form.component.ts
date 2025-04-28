@@ -5,13 +5,14 @@ import { DndApiService } from '../../../../../services/dnd-api.service';
 import { ButtonComponent } from "../../../../../shared/button/button.component";
 import { NavigateService } from '../../../../../services/navigate.service';
 import { SkillCheckboxComponent } from '../../../../../shared/skill-checkbox/skill-checkbox.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -19,6 +20,7 @@ export class CharacterFormComponent {
   _dndService = inject(DndApiService)
   _navigationService = inject(NavigateService)
   characterForm: FormGroup;
+  submitted: boolean = false;
 
   standardArray: number[] = [8, 10, 12, 13, 14, 15];
   statNames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -153,11 +155,6 @@ export class CharacterFormComponent {
 
   }
 
-  createCharacter() {
-    if (!this.selectedRace) { this.characterForm.patchValue({ subrace: '' }); }
-    console.log(this.characterForm.value)
-  }
-
   isSkillSelectedAnywhere(skill: string): boolean {
     const { classSkills, backgroundSkills } = this.characterForm.value;
     return classSkills.includes(skill) || backgroundSkills.includes(skill);
@@ -201,13 +198,36 @@ export class CharacterFormComponent {
   statValueListeners() {
     for (const stat of this.statNames) {
       const control = this.characterForm.get(stat);
-  
+
       if (control) {
         control.valueChanges.subscribe((value) => {
           this.selectedStatValues[stat] = value ? +value : null;
         });
       }
     }
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.characterForm.get(controlName);
+    return this.submitted && control!.invalid || false;
+  }
+
+
+
+
+
+
+
+
+  createCharacter() {
+    this.submitted = true;
+    if (!this.selectedRace) { this.characterForm.patchValue({ subrace: '' }); }
+
+    if (this.characterForm.invalid) {
+      this.characterForm.markAllAsTouched();
+      return;
+    }
+    console.log(this.characterForm.value)
   }
 
 }

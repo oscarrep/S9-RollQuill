@@ -1,12 +1,13 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
-    <input class formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2"
-        [class.invalid]="characterForm.invalid && characterForm.touched" />
+    <input formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('name')}" />
     <div class="d-flex gap-1">
         @for (stat of statNames; track stat) {
         <div class="stat-panel mb-2 column-center">
             <p><b>{{ stat }}</b></p>
-            <select [formControlName]="stat" required class="stat-input px-2 py-1">
+            <select [formControlName]="stat" name="{{stat}}" required class="stat-input px-2 py-1"
+                [ngClass]='{"invalid": isInvalid(stat)}'>
                 @for (num of getAvailableNumbers(stat); track num) {
                 <option [value]="num">
                     {{ num }}
@@ -18,9 +19,8 @@
     </div>
 
 
-
     <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2"
-        [class.invalid]="characterForm.invalid && characterForm.touched">
+        [ngClass]="{'invalid': isInvalid('race')}">
         <option value="" selected disabled hidden>Race</option>
         @for(race of raceNames; track race){
         <option value="{{race}}">{{race}}</option>
@@ -38,7 +38,7 @@
     </div>
     @if(selectedRace.subraces.length){
     <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2"
-        [class.invalid]="characterForm.invalid && characterForm.touched">
+        [ngClass]="{'invalid': isInvalid('subrace')}">
         <option value="" selected disabled hidden>Subrace</option>
         @for(subrace of subraces; track subrace){
         <option value="{{subrace}}">{{subrace}}</option>
@@ -49,7 +49,7 @@
 
 
     <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2"
-        [class.invalid]="characterForm.invalid && characterForm.touched">
+        [ngClass]="{'invalid': isInvalid('class')}">
         <option value="" selected disabled hidden>Class</option>
         @for(class of classNames; track class){
         <option value="{{class}}">{{class}}</option>
@@ -57,7 +57,7 @@
     </select>
     @if(selectedClass){
     <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2"
-        [class.invalid]="characterForm.invalid && characterForm.touched">
+        [ngClass]="{'invalid': isInvalid('subclass')}">
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){
         <option value="{{subclass}}">{{subclass}}</option>
@@ -99,8 +99,11 @@
 
 
 
-    @if(characterForm.invalid && characterForm.touched){<p class="text-danger mt-3 error-panel column-center"><b>Please
-            complete all required fields.</b></p>}
+    @if(submitted && characterForm.invalid){
+    <p class="text-danger mt-3 error-panel column-center">
+        <b>Please fill out all required fields.</b>
+    </p>
+    }
 
 
 
