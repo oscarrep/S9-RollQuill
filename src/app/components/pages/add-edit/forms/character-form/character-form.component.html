@@ -20,7 +20,7 @@
 
 
     <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('race')}">
+        [ngClass]="{'invalid': isInvalid('race')}" (change)="onRaceChange()">
         <option value="" selected disabled hidden>Race</option>
         @for(race of raceNames; track race){
         <option value="{{race}}">{{race}}</option>

@@ -209,11 +209,29 @@ export class CharacterFormComponent {
 
   isInvalid(controlName: string): boolean {
     const control = this.characterForm.get(controlName);
-    return this.submitted && control!.invalid || false;
+    if (!control) return false;
+
+    if (controlName === 'subrace' && (this.selectedRace.subraces.length === 0)) {
+      return false;
+    }
+
+    return control.invalid && (control.touched || this.submitted);
   }
 
 
+  onRaceChange() {
+    const subraceControl = this.characterForm.get('subrace');
 
+    if (this.selectedRace && this.selectedRace.subraces.length === 0 && subraceControl) {
+      subraceControl.clearValidators();
+      subraceControl.reset();
+      subraceControl.updateValueAndValidity();
+    }
+    else if (this.selectedRace && this.selectedRace.subraces.length > 0 && subraceControl) {
+      subraceControl.setValidators(Validators.required);
+      subraceControl.updateValueAndValidity();
+    }
+  }
 
 
 
