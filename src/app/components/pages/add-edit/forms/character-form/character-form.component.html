@@ -1,17 +1,17 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
-    <input class formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched"/>
+    <input class formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2"
+        [class.invalid]="characterForm.invalid && characterForm.touched" />
     <div class="d-flex gap-1">
         @for (stat of statNames; track stat) {
         <div class="stat-panel mb-2 column-center">
             <p><b>{{ stat }}</b></p>
             <select [formControlName]="stat" required class="stat-input px-2 py-1">
-                @for (num of standardArray; track num) {
+                @for (num of getAvailableNumbers(stat); track num) {
                 <option [value]="num">
                     {{ num }}
                 </option>
                 }
-
             </select>
         </div>
         }
@@ -19,7 +19,8 @@
 
 
 
-    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
+    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2"
+        [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Race</option>
         @for(race of raceNames; track race){
         <option value="{{race}}">{{race}}</option>
@@ -36,7 +37,8 @@
                 {{selectedRace.ability_bonuses[0].ability_score.name}}</u></p> }
     </div>
     @if(selectedRace.subraces.length){
-    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
+    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2"
+        [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Subrace</option>
         @for(subrace of subraces; track subrace){
         <option value="{{subrace}}">{{subrace}}</option>
@@ -46,14 +48,16 @@
 
 
 
-    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
+    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2"
+        [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Class</option>
         @for(class of classNames; track class){
         <option value="{{class}}">{{class}}</option>
         }
     </select>
     @if(selectedClass){
-    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2" [class.invalid]="characterForm.invalid && characterForm.touched">
+    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2"
+        [class.invalid]="characterForm.invalid && characterForm.touched">
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){
         <option value="{{subclass}}">{{subclass}}</option>
@@ -95,7 +99,8 @@
 
 
 
-    @if(characterForm.invalid && characterForm.touched){<p class="text-danger mt-3 error-panel column-center"><b>Please complete all required fields.</b></p>}
+    @if(characterForm.invalid && characterForm.touched){<p class="text-danger mt-3 error-panel column-center"><b>Please
+            complete all required fields.</b></p>}
 
 
 

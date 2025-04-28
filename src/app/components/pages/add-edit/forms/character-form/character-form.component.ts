@@ -22,6 +22,7 @@ export class CharacterFormComponent {
 
   standardArray: number[] = [8, 10, 12, 13, 14, 15];
   statNames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+  selectedStatValues: { [key: string]: number | null } = {};
 
   classData: any[] = []
   raceData: any[] = []
@@ -48,9 +49,9 @@ export class CharacterFormComponent {
       INT: ['', Validators.required],
       WIS: ['', Validators.required],
       CHA: ['', Validators.required],
-      subrace: ['',Validators.required],
+      subrace: ['', Validators.required],
       class: ['', Validators.required],
-      subclass: ['',Validators.required],
+      subclass: ['', Validators.required],
       classSkills: [[], Validators.required],
       backgroundSkills: [[], Validators.required],
       expertise: [''],
@@ -64,6 +65,7 @@ export class CharacterFormComponent {
     this.getFromJson('classes');
     this.getFromJson('races');
     this.getFromJson('skills');
+    this.statValueListeners();
 
     this.characterForm.get('class')?.valueChanges.subscribe(className => {
       const selected = this.classData.find(cls => cls.name === className);
@@ -152,7 +154,7 @@ export class CharacterFormComponent {
   }
 
   createCharacter() {
-
+    if (!this.selectedRace) { this.characterForm.patchValue({ subrace: '' }); }
     console.log(this.characterForm.value)
   }
 
@@ -184,4 +186,28 @@ export class CharacterFormComponent {
       this.characterForm.value.classSkills.includes(skill)
     );
   }
+
+  onStatChange(stat: string, event: Event) {
+    this.selectedStatValues[stat] = +(event.target as HTMLSelectElement).value || null;
+  }
+
+  getAvailableNumbers(currentStat: string): number[] {
+    const selectedNumbers = Object.entries(this.selectedStatValues)
+      .filter(([stat, val]) => stat !== currentStat && val !== null)
+      .map(([_, val]) => val);
+    return this.standardArray.filter(num => !selectedNumbers.includes(num!));
+  }
+
+  statValueListeners() {
+    for (const stat of this.statNames) {
+      const control = this.characterForm.get(stat);
+  
+      if (control) {
+        control.valueChanges.subscribe((value) => {
+          this.selectedStatValues[stat] = value ? +value : null;
+        });
+      }
+    }
+  }
+
 }
