@@ -8,6 +8,7 @@ import { SkillCheckboxComponent } from '../../../../../shared/skill-checkbox/ski
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../../services/api.service';
+import { User } from '../../../../../interfaces/user';
 
 @Component({
   selector: 'app-character-form',
@@ -18,10 +19,13 @@ import { ApiService } from '../../../../../services/api.service';
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
+  currentUser: User | null = null;
   form = inject(FormBuilder)
   _dndService = inject(DndApiService)
   _apiService = inject(ApiService)
   _navigationService = inject(NavigateService)
+
+
   characterForm: FormGroup;
   submitted: boolean = false;
 
@@ -73,6 +77,10 @@ export class CharacterFormComponent {
 
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('uid')!;
+      this._apiService.getUser(this.userId).subscribe(user => {
+        this.currentUser = user;
+        console.log(this.currentUser!.characters)
+      });
     });
   }
 
@@ -271,7 +279,7 @@ export class CharacterFormComponent {
       class: form.class,
       subclass: form.subclass,
       level: form.level || 1,
-      speed: form.speed || 30,
+      speed: this.selectedRace.speed,
 
       ability_scores: {
         STR: [{ name: 'Strength', value: Number(form.STR) }],
@@ -292,6 +300,11 @@ export class CharacterFormComponent {
     };
 
     this._apiService.saveCharacter(character).subscribe((savedCharacter: Character) => {
+      if (!this.currentUser!.characters) this.currentUser!.characters = [];
+      this.currentUser!.characters.push(savedCharacter._id!);
+    
+      this._apiService.updateUser(this.userId, this.currentUser!); 
+    
       this._navigationService.navigateTo(`${this.userId}/character/${savedCharacter._id}`);
     });
 

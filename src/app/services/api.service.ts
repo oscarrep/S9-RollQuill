@@ -40,8 +40,12 @@ export class ApiService {
     return this.http.put<void>(`${this.appUrl}${this.apiCharacters}/${id}`, character)
   }
 
-  getUser(uid: string | undefined):Observable<User>{
+  getUser(uid: string | undefined): Observable<User> {
     return this.http.get<User>(`${this.appUrl}${this.apiUsers}/${uid}`)
+  }
+
+  updateUser(uid: string | undefined, user:User): Observable<User> {
+    return this.http.put<User>(`${this.appUrl}${this.apiUsers}/${uid}`, user)
   }
 
   getCharactersByIds(ids: string[]): Observable<Character[]> {
