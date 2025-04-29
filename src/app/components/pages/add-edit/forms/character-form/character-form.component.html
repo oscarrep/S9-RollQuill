@@ -90,9 +90,9 @@
         <p>A character's background allows them 2 extra skill proficiencies:</p>
         <div class="checkbox-container">
             @for(skill of skillData; track skill){
-            <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill)"
-                [disabled]="!isBackgroundSkillChecked(skill) && characterForm.value.backgroundSkills.length >= 2"
-                (skillToggled)="toggleBackgroundSkill(skill, $event.checked)">
+            <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill.name)"
+                [disabled]="!isBackgroundSkillChecked(skill.name) && characterForm.value.backgroundSkills.length >= 2"
+                (skillToggled)="toggleBackgroundSkill(skill.name, $event.checked)">
             </app-skill-checkbox>
             }
         </div>

@@ -2,11 +2,11 @@ export interface Character {
     createdBy: string;
     name: string;
     race: string;
-    subrace: string;
+    subrace?: string;
     class: string;
     subclass: string;
     level: number;
-    speed: number;
+    speed?: number;
     ability_scores: {
         STR: [{ name: 'Strength' }, { value: number }]
         DEX: [{ name: 'Dexterity' }, { value: number }]
@@ -19,6 +19,6 @@ export interface Character {
     classSkills: string[];
     backgroundSkills: string[];
     expertise: string[];
-    image: string;
-    _id: string;
+    image?: string;
+    _id?: string;
 }

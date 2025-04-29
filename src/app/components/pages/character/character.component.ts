@@ -52,7 +52,7 @@ export class CharacterComponent implements OnInit {
 
       this.abilityModifiers = this.getabilityModifiers(this.character.ability_scores)!;
       this.abilityScores = this.transformAbilityScores(this.character.ability_scores)!;
-      this.skillProficiencies = this.character?.skills;
+      this.skillProficiencies = this.character?.classSkills.concat(this.character.backgroundSkills);
       this.savingThrowProficiencies = this.character?.savingThrows;
 
       forkJoin({
@@ -110,7 +110,6 @@ export class CharacterComponent implements OnInit {
     return output;
   }
 
-  getSkillProficiencies() { return this.character!.skills; }
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
   calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
   calculateMaxHitPoints(hitDie: number, level: number) {
@@ -118,7 +117,7 @@ export class CharacterComponent implements OnInit {
     const lvlOneFormula = hitDie + conModifier;
     const average = 1 + (hitDie / 2);
     const levelsAfterOne = level - 1;
-  
+
     if (level === 1) {
       return this.hitPoints = lvlOneFormula;
     } else if (level > 1) {

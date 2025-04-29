@@ -6,6 +6,8 @@ import { ButtonComponent } from "../../../../../shared/button/button.component";
 import { NavigateService } from '../../../../../services/navigate.service';
 import { SkillCheckboxComponent } from '../../../../../shared/skill-checkbox/skill-checkbox.component';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../../../../services/api.service';
 
 @Component({
   selector: 'app-character-form',
@@ -18,9 +20,13 @@ export class CharacterFormComponent {
   @Input() character: Character | null = null;
   form = inject(FormBuilder)
   _dndService = inject(DndApiService)
+  _apiService = inject(ApiService)
   _navigationService = inject(NavigateService)
   characterForm: FormGroup;
   submitted: boolean = false;
+
+  route = inject(ActivatedRoute)
+  userId: string = '';
 
   standardArray: number[] = [8, 10, 12, 13, 14, 15];
   statNames = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
@@ -43,24 +49,31 @@ export class CharacterFormComponent {
 
   constructor() {
     this.characterForm = this.form.group({
+      createdBy: [''],
       name: ['', Validators.required],
       race: ['', Validators.required],
-      STR: ['', Validators.required],
-      DEX: ['', Validators.required],
-      CON: ['', Validators.required],
-      INT: ['', Validators.required],
-      WIS: ['', Validators.required],
-      CHA: ['', Validators.required],
       subrace: ['', Validators.required],
       class: ['', Validators.required],
       subclass: ['', Validators.required],
+      level: [1],
+      speed: 0,
+
+      STR: [0, Validators.required],
+      DEX: [0, Validators.required],
+      CON: [0, Validators.required],
+      INT: [0, Validators.required],
+      WIS: [0, Validators.required],
+      CHA: [0, Validators.required],
+
+      savingThrows: [[]],
       classSkills: [[], Validators.required],
       backgroundSkills: [[], Validators.required],
       expertise: [''],
-      level: [1],
-      speed: 0,
-      savingThrows: [[]],
     })
+
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('uid')!;
+    });
   }
 
   ngOnInit() {
@@ -76,6 +89,7 @@ export class CharacterFormComponent {
 
       const skillChoices = selected?.proficiency_choices?.[0]?.skills || [];
       this.skills = skillChoices;
+      console.log(this.skills)
       this.characterForm.patchValue({ classSkills: [] });
       this.selectedClass = selected;
 
@@ -126,9 +140,10 @@ export class CharacterFormComponent {
         case 'skills':
           this.skillData = data.map((item: any) => ({
             name: item.name,
-            description: item.desc,
-            ability_score: item.ability_score
+            //description: item.desc,
+            //ability_score: item.ability_score
           }));
+          console.log(this.skillData)
           break;
 
         default:
@@ -221,16 +236,15 @@ export class CharacterFormComponent {
 
   onRaceChange() {
     const subraceControl = this.characterForm.get('subrace');
+    if (!subraceControl) return;
 
-    if (this.selectedRace && this.selectedRace.subraces.length === 0 && subraceControl) {
+    if (this.selectedRace && this.selectedRace.subraces.length === 0) {
       subraceControl.clearValidators();
-      subraceControl.reset();
-      subraceControl.updateValueAndValidity();
-    }
-    else if (this.selectedRace && this.selectedRace.subraces.length > 0 && subraceControl) {
+      subraceControl.setValue('');
+    } else {
       subraceControl.setValidators(Validators.required);
-      subraceControl.updateValueAndValidity();
     }
+    subraceControl.updateValueAndValidity();
   }
 
 
@@ -245,6 +259,42 @@ export class CharacterFormComponent {
       this.characterForm.markAllAsTouched();
       return;
     }
+
+    const form = this.characterForm.value;
+
+    const character: Character = {
+      createdBy: this.userId,
+      name: form.name,
+      race: form.race,
+      subrace: form.subrace || '',
+
+      class: form.class,
+      subclass: form.subclass,
+      level: form.level || 1,
+      speed: form.speed || 30,
+
+      ability_scores: {
+        STR: [{ name: 'Strength' }, { value: Number(form.STR) }],
+        DEX: [{ name: 'Dexterity' }, { value: Number(form.DEX) }],
+        CON: [{ name: 'Constitution' }, { value: Number(form.CON) }],
+        INT: [{ name: 'Intelligence' }, { value: Number(form.INT) }],
+        WIS: [{ name: 'Wisdom' }, { value: Number(form.WIS) }],
+        CHA: [{ name: 'Charisma' }, { value: Number(form.CHA) }],
+      },
+
+      savingThrows: form.savingThrows || [],
+
+      classSkills: form.classSkills.map((s: any) => typeof s === 'string' ? s : s.name),
+      backgroundSkills: form.backgroundSkills.map((s: any) => typeof s === 'string' ? s : s.name),
+
+      expertise: form.expertise || [],
+      image: '',
+    };
+
+    this._apiService.saveCharacter(character).subscribe((savedCharacter: Character) => {
+      this._navigationService.navigateTo(`${this.userId}/character/${savedCharacter._id}`);
+    });
+
     console.log(this.characterForm.value)
   }
 
