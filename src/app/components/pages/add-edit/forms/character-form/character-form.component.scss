@@ -1,0 +1,70 @@
+.stat-input {
+    border: solid 2px #373327;
+}
+
+.stat-input.invalid,
+.input.invalid,
+.panel.invalid {
+    border: solid 3px #c4371f;
+}
+
+
+.input,
+.panel,
+.stat-panel,
+.subclass-panel,
+.skill-prof {
+    border: solid 3px #373327;
+}
+
+.input,
+.stat-input {
+    width: 100%;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.subclass-panel {
+    margin-top: -3%;
+}
+
+.stat-panel {
+    width: 10px;
+    padding-inline: 15px;
+    padding-block: 10px;
+}
+
+.panel,
+.subclass-panel,
+.skill-prof {
+    width: 90%;
+    padding: 10px;
+}
+
+.panel,
+.stat-panel,
+.subclass-panel,
+.skill-prof {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+p {
+    margin-bottom: -2px;
+    font-size: 20px;
+}
+
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.saving-throws {
+    gap: 1rem;
+    font-size: x-large;
+}

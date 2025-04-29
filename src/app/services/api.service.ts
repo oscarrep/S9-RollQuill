@@ -28,8 +28,8 @@ export class ApiService {
     return this.http.delete<void>(`${this.appUrl}${this.apiCharacters}/${id}`)
   }
 
-  saveCharacter(character: Character): Observable<void> {
-    return this.http.post<void>(`${this.appUrl}${this.apiCharacters}`, character)
+  saveCharacter(character: Character): Observable<Character> {
+    return this.http.post<Character>(`${this.appUrl}${this.apiCharacters}`, character)
   }
 
   getCharacter(id: string | undefined): Observable<Character> {

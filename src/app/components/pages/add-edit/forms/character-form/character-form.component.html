@@ -1,0 +1,117 @@
+<form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
+
+    <input formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('name')}" />
+    <div class="d-flex gap-1">
+        @for (stat of statNames; track stat) {
+        <div class="stat-panel mb-2 column-center">
+            <p><b>{{ stat }}</b></p>
+            <select [formControlName]="stat" name="{{stat}}" required class="stat-input px-2 py-1"
+                [ngClass]='{"invalid": isInvalid(stat)}'>
+                @for (num of getAvailableNumbers(stat); track num) {
+                <option [value]="num">
+                    {{ num }}
+                </option>
+                }
+            </select>
+        </div>
+        }
+    </div>
+
+
+    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('race')}" (change)="onRaceChange()">
+        <option value="" selected disabled hidden>Race</option>
+        @for(race of raceNames; track race){
+        <option value="{{race}}">{{race}}</option>
+        }
+    </select>
+    @if(selectedRace){
+    <div class="panel mb-2">
+        <p>Your speed is {{selectedRace.speed}}.</p>
+        @if(selectedRace.languages.length>1){
+        <p>Characters with this race can speak and write <u>{{selectedRace.languages[0].index}}</u> and
+            <u>{{selectedRace.languages[1].index}}</u>..
+        </p> }
+        @if(selectedRace.ability_bonuses.length>0){
+        <p>They also get the following ability score bonus: <u>+{{selectedRace.ability_bonuses[0].bonus}}
+                {{selectedRace.ability_bonuses[0].ability_score.name}}</u></p> }
+    </div>
+    @if(selectedRace.subraces.length){
+    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('subrace')}">
+        <option value="" selected disabled hidden>Subrace</option>
+        @for(subrace of subraces; track subrace){
+        <option value="{{subrace}}">{{subrace}}</option>
+        }
+    </select>
+    }}
+
+
+
+    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('class')}">
+        <option value="" selected disabled hidden>Class</option>
+        @for(class of classNames; track class){
+        <option value="{{class}}">{{class}}</option>
+        }
+    </select>
+    @if(selectedClass){
+    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('subclass')}">
+        <option value="" selected disabled hidden>Subclass</option>
+        @for(subclass of subclasses; track subclass){
+        <option value="{{subclass}}">{{subclass}}</option>
+        }
+    </select>
+    <div class="mb-2 subclass-panel">
+        <p>{{selectedClass.name}}s can choose <b>{{selectedClass.skillChoose}}</b> skill proficiencies from:</p>
+        <div class="checkbox-container">
+            @for(skill of skills; track skill){
+            <app-skill-checkbox [skill]="skill" [checked]="isClassSkillChecked(skill)" [disabled]="(!characterForm.value.classSkills.includes(skill)) &&
+                (characterForm.value.classSkills.length >= selectedClass.skillChoose) "
+                (skillToggled)="toggleClassSkill(skill, $event.checked)">
+            </app-skill-checkbox>
+            }
+        </div>
+    </div>
+    <div class="panel mb-2">
+        <p>{{selectedClass.name}}s get the following <b>saving throw</b> proficiencies:</p>
+        <div class="flex-center saving-throws">
+            <b>{{selectedClass.saving_throws[0].name}}</b>
+            <b>{{selectedClass.saving_throws[1].name}}</b>
+        </div>
+    </div>
+    }
+
+
+
+    <div class="skill-prof">
+        <p>A character's background allows them 2 extra skill proficiencies:</p>
+        <div class="checkbox-container">
+            @for(skill of skillData; track skill){
+            <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill.name)"
+                [disabled]="!isBackgroundSkillChecked(skill.name) && characterForm.value.backgroundSkills.length >= 2"
+                (skillToggled)="toggleBackgroundSkill(skill.name, $event.checked)">
+            </app-skill-checkbox>
+            }
+        </div>
+    </div>
+
+
+
+    @if(submitted && characterForm.invalid){
+    <p class="text-danger mt-3 error-panel column-center">
+        <b>Please fill out all required fields.</b>
+    </p>
+    }
+
+
+
+    <div class="d-flex mt-3">
+        <div class="me-2">
+            <app-button [login]="true" [type]="'submit'" [text]="'Create Character'" />
+        </div>
+        <app-button [login]="true" (buttonClick)="_navigationService.backBtn()" [type]="'button'" [text]="'Go back'" />
+    </div>
+</form>
