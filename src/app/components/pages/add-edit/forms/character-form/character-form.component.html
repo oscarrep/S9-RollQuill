@@ -28,6 +28,7 @@
     </select>
     @if(selectedRace){
     <div class="panel mb-2">
+        <p>Your speed is {{selectedRace.speed}}.</p>
         @if(selectedRace.languages.length>1){
         <p>Characters with this race can speak and write <u>{{selectedRace.languages[0].index}}</u> and
             <u>{{selectedRace.languages[1].index}}</u>..
