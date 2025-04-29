@@ -18,6 +18,7 @@ export const routes: Routes = [
     {
         path: ':uid/create',
         component: AddEditComponent,
+        canActivate: [authGuard],
         children: [
           {
             path: 'character',
