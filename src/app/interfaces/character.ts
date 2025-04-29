@@ -16,7 +16,8 @@ export interface Character {
         CHA: [{ name: 'Charisma' }, { value: number }]
     };
     savingThrows: string[];
-    skills: string[];
+    classSkills: string[];
+    backgroundSkills: string[];
     expertise: string[];
     image: string;
     _id: string;
