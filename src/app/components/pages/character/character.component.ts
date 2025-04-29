@@ -56,9 +56,9 @@ export class CharacterComponent implements OnInit {
       this.savingThrowProficiencies = this.character?.savingThrows;
 
       forkJoin({
-        race: this._dndApiServce.getRaceInfo(this.character.race),
-        class: this._dndApiServce.getClassInfo(this.character.class),
-        levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class, this.character.level)
+        race: this._dndApiServce.getRaceInfo(this.character.race.toLowerCase()),
+        class: this._dndApiServce.getClassInfo(this.character.class.toLowerCase()),
+        levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class.toLowerCase(), this.character.level)
       }).subscribe(({ race: raceData, class: classData, levelInfo: levelData }) => {
         this.race = raceData;
         this.class = classData;
@@ -76,34 +76,33 @@ export class CharacterComponent implements OnInit {
     });
   }
 
-  getabilityModifiers(ability_scores?: {
-    [key: string]: [{ name: string }, { value: number }];
-  }): { [key: string]: number } | undefined {
+  getabilityModifiers(ability_scores?: { [key: string]: [{ name: string; value: number }] }): { [key: string]: number } | undefined {
     if (!ability_scores) return;
 
     const modifiers: { [key: string]: number } = {};
 
-    for (const key of Object.keys(ability_scores)) {
-      const score = ability_scores[key];
-      if (score && score[1] && typeof score[1].value === 'number') {
-        modifiers[score[0].name] = this.calculateStatModifier(score[1].value);
+    for (const key in ability_scores) {
+      const scoreArray = ability_scores[key];
+      if (scoreArray && scoreArray.length > 0) {
+        const score = scoreArray[0];
+        if (score && typeof score.value === 'number') {
+          modifiers[score.name] = this.calculateStatModifier(score.value);
+        }
       }
     }
 
     return modifiers;
   }
 
-  transformAbilityScores(ability_scores?: {
-    [key: string]: [{ name: string }, { value: number }];
-  }): { [key: string]: number } | undefined {
+  transformAbilityScores(ability_scores?: { [key: string]: [{ name: string; value: number }]; }): { [key: string]: number } | undefined {
     if (!ability_scores) return;
 
     const output: { [key: string]: number } = {};
 
     for (const key in ability_scores) {
       const arr = ability_scores[key];
-      if (arr && arr.length === 2) {
-        output[arr[0].name] = arr[1].value;
+      if (arr && arr.length > 0) {
+        output[arr[0].name] = arr[0].value;
       }
     }
 

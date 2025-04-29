@@ -56,7 +56,7 @@ export class CharacterFormComponent {
       class: ['', Validators.required],
       subclass: ['', Validators.required],
       level: [1],
-      speed: 0,
+      speed: [0],
 
       STR: [0, Validators.required],
       DEX: [0, Validators.required],
@@ -274,12 +274,12 @@ export class CharacterFormComponent {
       speed: form.speed || 30,
 
       ability_scores: {
-        STR: [{ name: 'Strength' }, { value: Number(form.STR) }],
-        DEX: [{ name: 'Dexterity' }, { value: Number(form.DEX) }],
-        CON: [{ name: 'Constitution' }, { value: Number(form.CON) }],
-        INT: [{ name: 'Intelligence' }, { value: Number(form.INT) }],
-        WIS: [{ name: 'Wisdom' }, { value: Number(form.WIS) }],
-        CHA: [{ name: 'Charisma' }, { value: Number(form.CHA) }],
+        STR: [{ name: 'Strength', value: Number(form.STR) }],
+        DEX: [{ name: 'Dexterity', value: Number(form.DEX) }],
+        CON: [{ name: 'Constitution', value: Number(form.CON) }],
+        INT: [{ name: 'Intelligence', value: Number(form.INT) }],
+        WIS: [{ name: 'Wisdom', value: Number(form.WIS) }],
+        CHA: [{ name: 'Charisma', value: Number(form.CHA) }],
       },
 
       savingThrows: form.savingThrows || [],
