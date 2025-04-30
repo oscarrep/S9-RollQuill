@@ -11,13 +11,14 @@ import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
 import { NameFormComponent } from "../../../../sections/character-form/name-form/name-form.component";
 import { FormValidationService } from '../../../../../services/form-validation.service';
+import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, NameFormComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, NameFormComponent, RaceFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -81,7 +82,6 @@ export class CharacterFormComponent {
       this.userId = params.get('uid')!;
       this._apiService.getUser(this.userId).subscribe(user => {
         this.currentUser = user;
-        console.log(this.currentUser!.characters)
       });
     });
   }
@@ -106,13 +106,13 @@ export class CharacterFormComponent {
       this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
     });
 
-    this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
-      const selected = this.raceData.find(race => race.name === raceName);
+    /*this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
+      const selected = this.raceData.find(r => r.name === raceName);
+      this.selectedRace = { ...selected };
       this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
       this.characterForm.patchValue({ subrace: '' });
-      this.selectedRace = selected;
       console.log(selected)
-    });
+    });*/
 
   }
 
@@ -232,27 +232,19 @@ export class CharacterFormComponent {
     }
   }
 
-  isInvalid(controlName: string): boolean {
+  public isInvalid = (controlName: string): boolean => {
     return this._formValidation.isInvalid(
       this.characterForm,
       controlName,
       this.submitted,
-      () => controlName !== 'subrace' || this.selectedRace.subraces.length > 0
+      () => controlName !== 'subrace' || this.selectedRace?.subraces?.length > 0
     );
-  }
+  };
 
 
-  onRaceChange() {
-    const subraceControl = this.characterForm.get('subrace');
-    if (!subraceControl) return;
-
-    if (this.selectedRace && this.selectedRace.subraces.length === 0) {
-      subraceControl.clearValidators();
-      subraceControl.setValue('');
-    } else {
-      subraceControl.setValidators(Validators.required);
-    }
-    subraceControl.updateValueAndValidity();
+  onRaceChange(selected: any) {
+    this.selectedRace = selected;
+    this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
   }
 
 
@@ -302,9 +294,9 @@ export class CharacterFormComponent {
     this._apiService.saveCharacter(character).subscribe((savedCharacter: Character) => {
       if (!this.currentUser!.characters) this.currentUser!.characters = [];
       this.currentUser!.characters.push(savedCharacter._id!);
-    
-      this._apiService.updateUser(this.userId, this.currentUser!); 
-    
+
+      this._apiService.updateUser(this.userId, this.currentUser!);
+
       this._navigationService.navigateTo(`${this.userId}/character/${savedCharacter._id}`);
     });
 

@@ -1,6 +1,8 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
-    
-    <app-name-form [form]="characterForm" controlName="subrace" [submitted]="submitted" />
+
+    <div class="name-container">
+        <app-name-form [form]="characterForm" controlName="subrace" [submitted]="submitted" />
+    </div>
 
     <div class="d-flex gap-1">
         @for (stat of statNames; track stat) {
@@ -18,36 +20,14 @@
         }
     </div>
 
-
-    <select formControlName="race" name="race" placeholder="Race" required class="select p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('race')}" (change)="onRaceChange()">
-        <option value="" selected disabled hidden>Race</option>
-        @for(race of raceNames; track race){
-        <option value="{{race}}">{{race}}</option>
-        }
-    </select>
-    @if(selectedRace){
-    <div class="panel mb-2">
-        <p>Your speed is {{selectedRace.speed}}.</p>
-        @if(selectedRace.languages.length>1){
-        <p>Characters with this race can speak and write <u>{{selectedRace.languages[0].index}}</u> and
-            <u>{{selectedRace.languages[1].index}}</u>..
-        </p> }
-        @if(selectedRace.ability_bonuses.length>0){
-        <p>They also get the following ability score bonus: <u>+{{selectedRace.ability_bonuses[0].bonus}}
-                {{selectedRace.ability_bonuses[0].ability_score.name}}</u></p> }
-    </div>
-    @if(selectedRace.subraces.length){
-    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="select p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('subrace')}">
-        <option value="" selected disabled hidden>Subrace</option>
-        @for(subrace of subraces; track subrace){
-        <option value="{{subrace}}">{{subrace}}</option>
-        }
-    </select>
-    }}
-
-
+    <app-race-form
+  [form]="characterForm"
+  [raceData]="raceData"
+  [raceNames]="raceNames"
+  [submitted]="submitted"
+  (selectedRaceChange)="onRaceChange($event)"
+  [isInvalid]="isInvalid"
+/>
 
     <select formControlName="class" name="class" placeholder="Class" required class="select p-2 mb-2"
         [ngClass]="{'invalid': isInvalid('class')}">
