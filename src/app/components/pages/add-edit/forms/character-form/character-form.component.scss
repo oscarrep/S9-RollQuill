@@ -3,18 +3,21 @@
 }
 
 .stat-input.invalid,
-.panel.invalid {
+.panel.invalid,
+.select.invalid {
     border: solid 3px #c4371f;
 }
 
 .panel,
 .stat-panel,
 .subclass-panel,
-.skill-prof {
+.skill-prof,
+.select {
     border: solid 3px #373327;
 }
 
-.stat-input {
+.stat-input,
+.select {
     width: 100%;
     border-radius: 50px;
     z-index: 1;

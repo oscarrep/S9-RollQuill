@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -15,18 +15,19 @@ import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
     },
   ],
 })
-export class InputComponent {
+
+export class InputComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() name: string = '';
-  @Input() formControlName?: string;
-  @Input() ngModel?: any;
   @Input() required: boolean = false;
   @Input() invalid: boolean = false;
-  value: string = '';
 
-  onChange = (value: string) => {};
-  onTouched = () => {};
+  value: string = '';
+  disabled: boolean = false;
+
+  onChange = (value: string) => { };
+  onTouched = () => { };
 
   writeValue(value: string): void {
     this.value = value;
@@ -38,6 +39,10 @@ export class InputComponent {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   handleInput(event: Event): void {

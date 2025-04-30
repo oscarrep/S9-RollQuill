@@ -1,0 +1,28 @@
+import { Component, inject, Input } from '@angular/core';
+import { InputComponent } from "../../../../shared/input/input.component";
+import { FormValidationService } from '../../../../services/form-validation.service';
+import { FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-name-form',
+  imports: [InputComponent],
+  templateUrl: './name-form.component.html',
+  styleUrl: './name-form.component.scss'
+})
+export class NameFormComponent {
+  _formValidation = inject(FormValidationService);
+
+  @Input() form!: FormGroup;
+  @Input() controlName!: string;
+  @Input() submitted: boolean = false;
+
+
+  isInvalid(): boolean {
+    return this._formValidation.isInvalid(
+      this.form,
+      this.controlName,
+      this.submitted,
+    );
+  }
+
+}

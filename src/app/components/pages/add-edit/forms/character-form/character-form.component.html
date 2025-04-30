@@ -1,7 +1,7 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
+    
+    <app-name-form [form]="characterForm" controlName="subrace" [submitted]="submitted" />
 
-    <app-input name="name" type="text" placeholder="Character Name" formControlName="name"
-        [invalid]="isInvalid('name')" />
     <div class="d-flex gap-1">
         @for (stat of statNames; track stat) {
         <div class="stat-panel mb-2 column-center">
@@ -19,7 +19,7 @@
     </div>
 
 
-    <select formControlName="race" name="race" placeholder="Race" required class="input p-2 mb-2"
+    <select formControlName="race" name="race" placeholder="Race" required class="select p-2 mb-2"
         [ngClass]="{'invalid': isInvalid('race')}" (change)="onRaceChange()">
         <option value="" selected disabled hidden>Race</option>
         @for(race of raceNames; track race){
@@ -38,7 +38,7 @@
                 {{selectedRace.ability_bonuses[0].ability_score.name}}</u></p> }
     </div>
     @if(selectedRace.subraces.length){
-    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="input p-2 mb-2"
+    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="select p-2 mb-2"
         [ngClass]="{'invalid': isInvalid('subrace')}">
         <option value="" selected disabled hidden>Subrace</option>
         @for(subrace of subraces; track subrace){
@@ -49,7 +49,7 @@
 
 
 
-    <select formControlName="class" name="class" placeholder="Class" required class="input p-2 mb-2"
+    <select formControlName="class" name="class" placeholder="Class" required class="select p-2 mb-2"
         [ngClass]="{'invalid': isInvalid('class')}">
         <option value="" selected disabled hidden>Class</option>
         @for(class of classNames; track class){
@@ -57,7 +57,7 @@
         }
     </select>
     @if(selectedClass){
-    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="input p-2 mb-2"
+    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="select p-2 mb-2"
         [ngClass]="{'invalid': isInvalid('subclass')}">
         <option value="" selected disabled hidden>Subclass</option>
         @for(subclass of subclasses; track subclass){

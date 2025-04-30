@@ -9,14 +9,15 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
-import { InputComponent } from "../../../../../shared/input/input.component";
+import { NameFormComponent } from "../../../../sections/character-form/name-form/name-form.component";
+import { FormValidationService } from '../../../../../services/form-validation.service';
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, InputComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, NameFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -25,7 +26,7 @@ export class CharacterFormComponent {
   _dndService = inject(DndApiService)
   _apiService = inject(ApiService)
   _navigationService = inject(NavigateService)
-
+  _formValidation = inject(FormValidationService);
 
   characterForm: FormGroup;
   submitted: boolean = false;
@@ -232,14 +233,12 @@ export class CharacterFormComponent {
   }
 
   isInvalid(controlName: string): boolean {
-    const control = this.characterForm.get(controlName);
-    if (!control) return false;
-
-    if (controlName === 'subrace' && (this.selectedRace.subraces.length === 0)) {
-      return false;
-    }
-
-    return control.invalid && (control.touched || this.submitted);
+    return this._formValidation.isInvalid(
+      this.characterForm,
+      controlName,
+      this.submitted,
+      () => controlName !== 'subrace' || this.selectedRace.subraces.length > 0
+    );
   }
 
 
