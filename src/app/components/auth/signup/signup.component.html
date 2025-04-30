@@ -2,24 +2,18 @@
     <div class="signup-container">
         <div class="text-container my-5">
             <h1 class="my-5">Create an account</h1>
-            <form>
+            <form [formGroup]="signupForm" (ngSubmit)="signUp()">
                 <div class="mb-3">
-                    <input type="email" [(ngModel)]="email" id="email" name="email" placeholder="Enter an email"
-                        required class="input p-2 mb-2">
+                    <app-input type="email" formControlName="email" placeholder="Email" name="email" />
                 </div>
                 <div>
-                    <input type="password" [(ngModel)]="password" id="password" name="password"
-                        placeholder="Choose a password" required class="input p-2 mb-2">
+                    <app-input type="password" formControlName="password" placeholder="Password" name="password" />
                 </div>
                 <div class="flex-center gap-5 mt-5">
-                    <div class="mb-3">
-                        <app-button [login]="true" (buttonClick)="signUp()" [text]="'Register'" />
-                    </div>
-                    <div class="mb-3">
-                        <app-button [login]="true" (buttonClick)="backBtn()"[text]="'Go back'" />
-                    </div>
+                  <app-button [login]="true" (buttonClick)="signUp()" [text]="'Register'" />
+                  <app-button [login]="true" (buttonClick)="backBtn()" [text]="'Go back'" />
                 </div>
-            </form>
+              </form>
         </div>
     </div>
 </div>

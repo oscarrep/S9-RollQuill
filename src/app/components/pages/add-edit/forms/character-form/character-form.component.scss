@@ -3,13 +3,10 @@
 }
 
 .stat-input.invalid,
-.input.invalid,
 .panel.invalid {
     border: solid 3px #c4371f;
 }
 
-
-.input,
 .panel,
 .stat-panel,
 .subclass-panel,
@@ -17,7 +14,6 @@
     border: solid 3px #373327;
 }
 
-.input,
 .stat-input {
     width: 100%;
     border-radius: 50px;

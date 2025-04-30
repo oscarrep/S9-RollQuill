@@ -1,7 +1,7 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
-    <input formControlName="name" name="name" placeholder="Character Name" required class="input p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('name')}" />
+    <app-input name="name" type="text" placeholder="Character Name" formControlName="name"
+        [invalid]="isInvalid('name')" />
     <div class="d-flex gap-1">
         @for (stat of statNames; track stat) {
         <div class="stat-panel mb-2 column-center">

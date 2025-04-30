@@ -9,13 +9,14 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
+import { InputComponent } from "../../../../../shared/input/input.component";
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule]
+  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, InputComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;

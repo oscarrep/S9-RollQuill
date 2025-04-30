@@ -1,0 +1,10 @@
+input {
+    border: solid 3px #373327;
+    width: 100%;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.input.invalid {
+    border: solid 3px #c4371f;
+}

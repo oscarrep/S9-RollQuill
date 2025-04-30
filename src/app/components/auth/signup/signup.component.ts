@@ -1,31 +1,39 @@
 import { Component, inject } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from "../../../shared/button/button.component";
-import { SessionService } from '../../../services/session.service';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../services/auth.service';
+import { InputComponent } from '../../../shared/input/input.component';
 
 
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule, ButtonComponent],
+  imports: [ReactiveFormsModule, ButtonComponent,InputComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-  email: string = '';
-  password: string = '';
   private router = inject(Router);
   private location = inject(Location)
   private _authService = inject(AuthService);
+  private fb = inject(FormBuilder);
   appUrl = environment.host;
   appUsers = environment.apiUsers;
+  signupForm!: FormGroup;
+
+
+  ngOnInit(): void {
+    this.signupForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
   signUp() {
-    this._authService.signup(this.email, this.password)
+    const { email, password } = this.signupForm.value;
+    this._authService.signup(email, password)
       .then(user => this.router.navigate([`${user._id}/dashboard`]))
       .catch(err => console.error('Signup failed', err));
   }
