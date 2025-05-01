@@ -1,11 +1,12 @@
 import { Component, inject, Input } from '@angular/core';
 import { InputComponent } from "../../../../shared/input/input.component";
 import { FormValidationService } from '../../../../services/form-validation.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-name-form',
-  imports: [InputComponent],
+  imports: [InputComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './name-form.component.html',
   styleUrl: './name-form.component.scss'
 })
