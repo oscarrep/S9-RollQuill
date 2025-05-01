@@ -12,13 +12,14 @@ import { User } from '../../../../../interfaces/user';
 import { NameFormComponent } from "../../../../sections/character-form/name-form/name-form.component";
 import { FormValidationService } from '../../../../../services/form-validation.service';
 import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
+import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, NameFormComponent, RaceFormComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, NameFormComponent, RaceFormComponent, ClassFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -92,7 +93,7 @@ export class CharacterFormComponent {
     this.getFromJson('skills');
     this.statValueListeners();
 
-    this.characterForm.get('class')?.valueChanges.subscribe(className => {
+    /*this.characterForm.get('class')?.valueChanges.subscribe(className => {
       const selected = this.classData.find(cls => cls.name === className);
       this.subclasses = selected?.subclasses?.map((scls: any) => scls.name) || [];
       this.characterForm.patchValue({ subclass: '' });
@@ -104,7 +105,7 @@ export class CharacterFormComponent {
       this.selectedClass = selected;
 
       this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
-    });
+    });*/
 
     /*this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
       const selected = this.raceData.find(r => r.name === raceName);
@@ -163,15 +164,6 @@ export class CharacterFormComponent {
     });
   }
 
-  toggleClassSkill(skill: string, check: boolean) {
-    const currentSkills = this.characterForm.value.classSkills as string[];
-    const maxSkills = this.selectedClass?.skillChoose || 0;
-
-    if (check && currentSkills.length < maxSkills) this.characterForm.patchValue({ classSkills: [...currentSkills, skill] });
-    else if (!check) this.characterForm.patchValue({ classSkills: currentSkills.filter(s => s !== skill) });
-
-  }
-
   toggleBackgroundSkill(skill: string, check: boolean) {
     const currentSkills = this.characterForm.value.backgroundSkills as string[];
 
@@ -185,20 +177,8 @@ export class CharacterFormComponent {
     return classSkills.includes(skill) || backgroundSkills.includes(skill);
   }
 
-  isClassSkillChecked(skill: string): boolean {
-    return this.characterForm.value.classSkills.includes(skill);
-  }
-
   isBackgroundSkillChecked(skill: string): boolean {
     return this.characterForm.value.backgroundSkills.includes(skill);
-  }
-
-  isClassSkillDisabled(skill: string): boolean {
-    const cs = this.characterForm.value.classSkills;
-    return (
-      (!cs.includes(skill) && cs.length >= (this.selectedClass?.skillChoose || 0)) ||
-      this.characterForm.value.backgroundSkills.includes(skill)
-    );
   }
 
   isBackgroundSkillDisabled(skill: string): boolean {

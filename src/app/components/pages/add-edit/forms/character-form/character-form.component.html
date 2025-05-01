@@ -1,6 +1,6 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
-    <div class="name-container">
+    <div class="comp-container">
         <app-name-form [form]="characterForm" controlName="subrace" [submitted]="submitted" />
     </div>
 
@@ -20,51 +20,13 @@
         }
     </div>
 
-    <app-race-form
-  [form]="characterForm"
-  [raceData]="raceData"
-  [raceNames]="raceNames"
-  [submitted]="submitted"
-  (selectedRaceChange)="onRaceChange($event)"
-  [isInvalid]="isInvalid"
-/>
+    <div class="comp-container">
+        <app-race-form [form]="characterForm" [raceData]="raceData" [raceNames]="raceNames" [submitted]="submitted"
+            (selectedRaceChange)="onRaceChange($event)" [isInvalid]="isInvalid" />
 
-    <select formControlName="class" name="class" placeholder="Class" required class="select p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('class')}">
-        <option value="" selected disabled hidden>Class</option>
-        @for(class of classNames; track class){
-        <option value="{{class}}">{{class}}</option>
-        }
-    </select>
-    @if(selectedClass){
-    <select formControlName="subclass" name="subclass" placeholder="Subclass" required class="select p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('subclass')}">
-        <option value="" selected disabled hidden>Subclass</option>
-        @for(subclass of subclasses; track subclass){
-        <option value="{{subclass}}">{{subclass}}</option>
-        }
-    </select>
-    <div class="mb-2 subclass-panel">
-        <p>{{selectedClass.name}}s can choose <b>{{selectedClass.skillChoose}}</b> skill proficiencies from:</p>
-        <div class="checkbox-container">
-            @for(skill of skills; track skill){
-            <app-skill-checkbox [skill]="skill" [checked]="isClassSkillChecked(skill)" [disabled]="(!characterForm.value.classSkills.includes(skill)) &&
-                (characterForm.value.classSkills.length >= selectedClass.skillChoose) "
-                (skillToggled)="toggleClassSkill(skill, $event.checked)">
-            </app-skill-checkbox>
-            }
-        </div>
+        <app-class-form [isInvalid]="isInvalid" [form]="characterForm" [classData]="classData" [submitted]="submitted"
+            [classNames]="classNames" [subclasses]="subclasses" [skills]="skills" />
     </div>
-    <div class="panel mb-2">
-        <p>{{selectedClass.name}}s get the following <b>saving throw</b> proficiencies:</p>
-        <div class="flex-center saving-throws">
-            <b>{{selectedClass.saving_throws[0].name}}</b>
-            <b>{{selectedClass.saving_throws[1].name}}</b>
-        </div>
-    </div>
-    }
-
-
 
     <div class="skill-prof">
         <p>A character's background allows them 2 extra skill proficiencies:</p>

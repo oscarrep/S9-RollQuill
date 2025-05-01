@@ -16,16 +16,13 @@ export class RaceFormComponent {
   @Input() selectedRace!: any;
   @Input() subraces: string[] = [];
   @Input() isInvalid!: (controlName: string) => boolean;
-  @Output() raceChanged = new EventEmitter<void>();
   @Output() selectedRaceChange = new EventEmitter<any>();
 
   private raceSubscription: any;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['form'] && this.form) {
-      if (this.raceSubscription) {
-        this.raceSubscription.unsubscribe();
-      }
+      if (this.raceSubscription) this.raceSubscription.unsubscribe(); 
 
       this.raceSubscription = this.form.get('race')?.valueChanges.subscribe(raceName => {
         const selected = this.raceData.find(race => race.name === raceName);

@@ -1,6 +1,6 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="column-center">
     <select formControlName="race" name="race" placeholder="Race" required class="select p-2 mb-2"
-        [ngClass]="{'invalid': isInvalid('race')}" (change)="raceChanged.emit()">
+        [ngClass]="{'invalid': isInvalid('race')}" (change)="selectedRaceChange.emit()">
         <option value="" selected disabled hidden>Race</option>
         @for(race of raceData; track race) {
         <option [value]="race.name">{{ race.name }}</option>
