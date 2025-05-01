@@ -1,12 +1,13 @@
+<div [formGroup]="form">
 <input
-  [type]="type"
-  [name]="name"
-  [placeholder]="placeholder"
+  [attr.type]="type"
+  [attr.name]="name"
+  [attr.placeholder]="placeholder"
   [required]="required"
-  [disabled]="disabled"
   class="input p-2 mb-2"
-  [ngClass]="{ 'invalid': invalid }"
   [value]="value"
   (input)="handleInput($event)"
   (blur)="onTouched()"
+  [ngClass]="{ 'invalid': invalid }"
 />
+</div>

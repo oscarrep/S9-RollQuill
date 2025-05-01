@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -22,15 +22,16 @@ export class InputComponent implements ControlValueAccessor {
   @Input() name: string = '';
   @Input() required: boolean = false;
   @Input() invalid: boolean = false;
+  @Input() form!: FormGroup;
 
-  value: string = '';
+  @Input() value: string = '';
   disabled: boolean = false;
 
   onChange = (value: string) => { };
   onTouched = () => { };
 
   writeValue(value: string): void {
-    this.value = value;
+    this.value = value ?? '';
   }
 
   registerOnChange(fn: any): void {
@@ -41,13 +42,10 @@ export class InputComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
   handleInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.value = target.value;
     this.onChange(this.value);
   }
+
 }

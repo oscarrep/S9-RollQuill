@@ -4,10 +4,10 @@
             <h1 class="my-5">Log in to your account</h1>
             <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="mb-3">
-                    <app-input type="email" formControlName="email" placeholder="Email" name="email" />
+                    <app-input type="email" formControlName="email" placeholder="Email" name="email" [form]="loginForm"/>
                 </div>
                 <div>
-                    <app-input type="password" formControlName="password" placeholder="Password" name="password" />
+                    <app-input type="password" formControlName="password" placeholder="Password" name="password" [form]="loginForm"/>
                 </div>
                 <div class="column-center mt-5">
                     <div class="gap-3 mb-2 flex-center">
