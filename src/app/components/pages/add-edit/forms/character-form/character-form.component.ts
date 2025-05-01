@@ -13,13 +13,14 @@ import { NameFormComponent } from "../../../../sections/character-form/name-form
 import { FormValidationService } from '../../../../../services/form-validation.service';
 import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
 import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
+import { SkillsFormComponent } from "../../../../sections/character-form/skills-form/skills-form.component";
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule, NameFormComponent, RaceFormComponent, ClassFormComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, CommonModule, NameFormComponent, RaceFormComponent, ClassFormComponent, SkillsFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -92,29 +93,6 @@ export class CharacterFormComponent {
     this.getFromJson('races');
     this.getFromJson('skills');
     this.statValueListeners();
-
-    /*this.characterForm.get('class')?.valueChanges.subscribe(className => {
-      const selected = this.classData.find(cls => cls.name === className);
-      this.subclasses = selected?.subclasses?.map((scls: any) => scls.name) || [];
-      this.characterForm.patchValue({ subclass: '' });
-
-      const skillChoices = selected?.proficiency_choices?.[0]?.skills || [];
-      this.skills = skillChoices;
-      console.log(this.skills)
-      this.characterForm.patchValue({ classSkills: [] });
-      this.selectedClass = selected;
-
-      this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
-    });*/
-
-    /*this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
-      const selected = this.raceData.find(r => r.name === raceName);
-      this.selectedRace = { ...selected };
-      this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
-      this.characterForm.patchValue({ subrace: '' });
-      console.log(selected)
-    });*/
-
   }
 
   getFromJson(toGet: string) {
@@ -164,29 +142,9 @@ export class CharacterFormComponent {
     });
   }
 
-  toggleBackgroundSkill(skill: string, check: boolean) {
-    const currentSkills = this.characterForm.value.backgroundSkills as string[];
-
-    if (check && currentSkills.length < 2) this.characterForm.patchValue({ backgroundSkills: [...currentSkills, skill] });
-    else if (!check) this.characterForm.patchValue({ backgroundSkills: currentSkills.filter(s => s !== skill) });
-
-  }
-
   isSkillSelectedAnywhere(skill: string): boolean {
     const { classSkills, backgroundSkills } = this.characterForm.value;
     return classSkills.includes(skill) || backgroundSkills.includes(skill);
-  }
-
-  isBackgroundSkillChecked(skill: string): boolean {
-    return this.characterForm.value.backgroundSkills.includes(skill);
-  }
-
-  isBackgroundSkillDisabled(skill: string): boolean {
-    const bs = this.characterForm.value.backgroundSkills;
-    return (
-      (!bs.includes(skill) && bs.length >= 2) ||
-      this.characterForm.value.classSkills.includes(skill)
-    );
   }
 
   onStatChange(stat: string, event: Event) {

@@ -26,20 +26,9 @@
 
         <app-class-form [isInvalid]="isInvalid" [form]="characterForm" [classData]="classData" [submitted]="submitted"
             [classNames]="classNames" [subclasses]="subclasses" [skills]="skills" />
-    </div>
 
-    <div class="skill-prof">
-        <p>A character's background allows them 2 extra skill proficiencies:</p>
-        <div class="checkbox-container">
-            @for(skill of skillData; track skill){
-            <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill.name)"
-                [disabled]="!isBackgroundSkillChecked(skill.name) && characterForm.value.backgroundSkills.length >= 2"
-                (skillToggled)="toggleBackgroundSkill(skill.name, $event.checked)">
-            </app-skill-checkbox>
-            }
-        </div>
+        <app-skills-form [isInvalid]="isInvalid" [form]="characterForm" [skillData]="skillData"/>
     </div>
-
 
 
     @if(submitted && characterForm.invalid){
