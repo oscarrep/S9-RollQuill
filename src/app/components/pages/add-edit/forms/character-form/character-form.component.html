@@ -1,7 +1,8 @@
 <form [formGroup]="characterForm" (ngSubmit)="createCharacter()" class="column-center">
 
     <div class="comp-container">
-        <app-name-form [form]="characterForm" controlName="subrace" [submitted]="submitted" />
+        <app-input name="name" type="text" placeholder="Character Name" formControlName="name"
+        [invalid]="isInvalid('name')" [form]="characterForm"/>
     </div>
 
     <div class="d-flex gap-1">
@@ -27,7 +28,7 @@
         <app-class-form [isInvalid]="isInvalid" [form]="characterForm" [classData]="classData" [submitted]="submitted"
             [classNames]="classNames" [subclasses]="subclasses" [skills]="skills" />
 
-        <app-skills-form [isInvalid]="isInvalid" [form]="characterForm" [skillData]="skillData"/>
+        <app-skills-form [isInvalid]="isInvalid" [form]="characterForm" [skillData]="skillData" />
     </div>
 
 

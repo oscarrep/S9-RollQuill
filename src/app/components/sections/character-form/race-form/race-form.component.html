@@ -21,9 +21,10 @@
 
         @if (selectedRace.ability_bonuses.length > 0) {
         <p>
-            They also get the following ability score bonus:
-            <u>+{{ selectedRace.ability_bonuses[0].bonus }}
-                {{ selectedRace.ability_bonuses[0].ability_score.name }}</u>
+            They also get the following ability score bonus:@if(selectedRace.ability_bonuses.length > 1){<br>}
+            @for (bonus of selectedRace.ability_bonuses; track bonus) {
+            +{{ bonus.bonus }} <u class="me-3">{{ bonus.ability_score.name }}</u> 
+            }
         </p>
         }
     </div>

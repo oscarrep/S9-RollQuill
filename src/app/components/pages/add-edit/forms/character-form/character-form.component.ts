@@ -4,23 +4,22 @@ import { Character } from '../../../../../interfaces/character';
 import { DndApiService } from '../../../../../services/dnd-api.service';
 import { ButtonComponent } from "../../../../../shared/button/button.component";
 import { NavigateService } from '../../../../../services/navigate.service';
-import { SkillCheckboxComponent } from '../../../../../shared/skill-checkbox/skill-checkbox.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
-import { NameFormComponent } from "../../../../sections/character-form/name-form/name-form.component";
 import { FormValidationService } from '../../../../../services/form-validation.service';
 import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
 import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
 import { SkillsFormComponent } from "../../../../sections/character-form/skills-form/skills-form.component";
+import { InputComponent } from '../../../../../shared/input/input.component';
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, CommonModule, NameFormComponent, RaceFormComponent, ClassFormComponent, SkillsFormComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, InputComponent, CommonModule, RaceFormComponent, ClassFormComponent, SkillsFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -65,7 +64,8 @@ export class CharacterFormComponent {
       class: ['', Validators.required],
       subclass: ['', Validators.required],
       level: [1],
-      speed: [0],
+      speed: [''],
+      ability_bonuses: [[]],
 
       STR: [0, Validators.required],
       DEX: [0, Validators.required],
@@ -84,6 +84,7 @@ export class CharacterFormComponent {
       this.userId = params.get('uid')!;
       this._apiService.getUser(this.userId).subscribe(user => {
         this.currentUser = user;
+        console.log(this.currentUser)
       });
     });
   }
@@ -127,11 +128,7 @@ export class CharacterFormComponent {
           break;
 
         case 'skills':
-          this.skillData = data.map((item: any) => ({
-            name: item.name,
-            //description: item.desc,
-            //ability_score: item.ability_score
-          }));
+          this.skillData = data.map((item: any) => ({ name: item.name }));
           console.log(this.skillData)
           break;
 
@@ -140,11 +137,6 @@ export class CharacterFormComponent {
           break;
       }
     });
-  }
-
-  isSkillSelectedAnywhere(skill: string): boolean {
-    const { classSkills, backgroundSkills } = this.characterForm.value;
-    return classSkills.includes(skill) || backgroundSkills.includes(skill);
   }
 
   onStatChange(stat: string, event: Event) {
@@ -185,23 +177,22 @@ export class CharacterFormComponent {
     this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
   }
 
-
-
-
-
   createCharacter() {
     this.submitted = true;
-    if (!this.selectedRace) { this.characterForm.patchValue({ subrace: '' }); }
 
     if (this.characterForm.invalid) {
-      this.characterForm.markAllAsTouched();
+      this.characterForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+      console.log('name ', this.characterForm.get('name')?.errors);
+      console.log('race ', this.characterForm.get('race')?.errors);
+      console.log('subrace ', this.characterForm.get('subrace')?.errors);
+      console.log('class ', this.characterForm.get('class')?.errors);
+      console.log('nasubclassme ', this.characterForm.get('subclass')?.errors);
       return;
     }
 
     const form = this.characterForm.value;
-
     const character: Character = {
-      createdBy: this.userId,
+      createdBy: this.currentUser!._id!,
       name: form.name,
       race: form.race,
       subrace: form.subrace || '',
@@ -209,7 +200,7 @@ export class CharacterFormComponent {
       class: form.class,
       subclass: form.subclass,
       level: form.level || 1,
-      speed: this.selectedRace.speed,
+      speed: form.speed,
 
       ability_scores: {
         STR: [{ name: 'Strength', value: Number(form.STR) }],
