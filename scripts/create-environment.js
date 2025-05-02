@@ -15,6 +15,14 @@ export const environment = {
   apiCharacters: '${process.env['apiCharacters']}',
   apiUsers: '${process.env['apiUsers']}',
 
+  dndJson:'${process.env['dndJson']}',
+  dndClassesJson:'${process.env['dndClassesJson']}',
+  dndSubclassesJson:'${process.env['dndSubclassesJson']}',
+  dndRacesJson:'${process.env['dndRacesJson']}',
+  dndSubacesJson:'${process.env['dndSubacesJson']}',
+  dndFeaturesJson:'${process.env['dndFeaturesJson']}',
+  dndSkillsJson:'${process.env['dndSkillsJson']}',
+
   dndHost: '${process.env['dndHost']}',
   dndRaces: '${process.env['dndRaces']}',
   dndSubraces: '${process.env['dndSubraces']}',
