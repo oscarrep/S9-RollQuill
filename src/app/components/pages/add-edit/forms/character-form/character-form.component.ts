@@ -24,6 +24,7 @@ import { InputComponent } from '../../../../../shared/input/input.component';
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
   currentUser: User | null = null;
+  currentUserId: string = '';
   form = inject(FormBuilder)
   _dndService = inject(DndApiService)
   _apiService = inject(ApiService)
@@ -65,7 +66,7 @@ export class CharacterFormComponent {
       subclass: ['', Validators.required],
       level: [1],
       speed: [''],
-      ability_bonuses: [[]],
+      ability_bonuses: [0],
 
       STR: [0, Validators.required],
       DEX: [0, Validators.required],
@@ -83,8 +84,8 @@ export class CharacterFormComponent {
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('uid')!;
       this._apiService.getUser(this.userId).subscribe(user => {
-        this.currentUser = user;
-        console.log(this.currentUser)
+        this.currentUserId = user._id;
+        console.log(this.currentUserId)
       });
     });
   }
@@ -189,10 +190,10 @@ export class CharacterFormComponent {
       console.log('nasubclassme ', this.characterForm.get('subclass')?.errors);
       return;
     }
-
+    console.log(this.currentUserId);
     const form = this.characterForm.value;
     const character: Character = {
-      createdBy: this.currentUser!._id!,
+      createdBy: this.currentUserId,
       name: form.name,
       race: form.race,
       subrace: form.subrace || '',
@@ -201,6 +202,10 @@ export class CharacterFormComponent {
       subclass: form.subclass,
       level: form.level || 1,
       speed: form.speed,
+      ability_bonuses: form.ability_bonuses.map((bonus: any) => ({
+        name: bonus.name,
+        value: bonus.value,
+      })),
 
       ability_scores: {
         STR: [{ name: 'Strength', value: Number(form.STR) }],
@@ -217,16 +222,25 @@ export class CharacterFormComponent {
       backgroundSkills: form.backgroundSkills.map((s: any) => typeof s === 'string' ? s : s.name),
 
       expertise: form.expertise || [],
-      image: '',
+      image: form.image || '',
     };
+    console.log(this.currentUserId);
+    this._apiService.saveCharacter(character).subscribe({
+      next: (savedCharacter: Character) => {
+        const newCharId = savedCharacter._id!;
 
-    this._apiService.saveCharacter(character).subscribe((savedCharacter: Character) => {
-      if (!this.currentUser!.characters) this.currentUser!.characters = [];
-      this.currentUser!.characters.push(savedCharacter._id!);
-
-      this._apiService.updateUser(this.userId, this.currentUser!);
-
-      this._navigationService.navigateTo(`${this.userId}/character/${savedCharacter._id}`);
+        this._apiService.addCharacterToUser(this.userId, newCharId).subscribe({
+          next: () => {
+            this._navigationService.navigateTo(`${this.userId}/character/${newCharId}`);
+          },
+          error: (err) => {
+            console.error('Error updating user with new character:', err);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error creating character:', err);
+      }
     });
 
     console.log(this.characterForm.value)

@@ -34,7 +34,10 @@ export class RaceFormComponent {
         this.form.patchValue({
           subrace: '',
           speed: selected?.speed,
-          ability_bonuses: selected?.ability_bonuses
+          ability_bonuses: selected?.ability_bonuses.map((bonus: any) => ({
+            name: bonus.ability_score.name,
+            value: bonus.bonus,
+          })) || [],
         });
 
         if (this.subraces.length > 0) {
