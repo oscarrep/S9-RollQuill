@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { DeathCheckboxComponent } from '../death-checkbox/death-checkbox.component';
 type DeathSaveType = 'fail' | 'success';
 
@@ -19,6 +19,7 @@ export class BoxComponent {
   long = input<boolean>();
   deathSaves = input<boolean>();
   statBox = input<boolean>();
+  @Input() isHp = false;
   deathSavesArr: { type: DeathSaveType; checked: boolean }[] = [
     { type: 'fail', checked: false },
     { type: 'fail', checked: false },

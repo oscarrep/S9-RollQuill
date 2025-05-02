@@ -13,8 +13,8 @@
 }
 
 .square-death {
-    height: 4.5rem;
-    width: 10rem;
+    height: 5rem;
+    width: 12rem;
 }
 
 .square-stat {
@@ -22,13 +22,19 @@
 }
 
 .title,
+.title-death,
 .num {
     font-family: zain;
     font-weight: bold;
 }
 
+.title-death,
 .title {
     font-size: 1.125rem;
+}
+
+.title-death {
+    margin-top: 1.35rem;
 }
 
 .num {
@@ -42,7 +48,7 @@
 
 .square.large-box {
     height: 6.25rem;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
 }
 
 .num-small {
@@ -71,9 +77,7 @@
     margin-block: -0.3125rem;
 }
 
-.bottom-row {
-    margin-top: 0.3125rem;
-}
+.bottom-row {}
 
 
 .checkbox-square,
@@ -95,86 +99,70 @@
     border: 3px solid white;
 }
 
-.square.long-box {
-    height: 5rem;
-    width: 10rem;
-    background-color: #373327;
-    font-size: 1.25rem;
+.fail-success {
+    margin-top: -1rem;
 }
 
-@media (max-width: 576px) {
-    .square-stat {
-        max-height: 25rem;
-    }
-    .title-stat{
-        font-size: larger;
-    }
+.hp-box .title {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
 
+.hp-box .num {
+    font-size: 2rem;
+}
+
+@media (max-width: 475px) {
     .square {
-        height: 7rem;
-        font-size: larger;
+        height: 4.68rem;
+        font-size: 1.125rem;
     }
 
     .square.large-box {
-        height: 10rem;
-        font-size: x-large;
+        height: 6rem;
+        font-size: 1.25rem;
     }
 
-    .square.long-box {
-        height: 5rem;
-        width: 10rem;
-        background-color: #373327;
-        font-size: x-large;
+    .square-stat {
+        height: 8rem;
     }
 
-    .num-big {
-        font-size: 1,6875rem;
-    }
-
-    .num-small {
-        width: 1.875rem;
-        height: 1.875rem;
-        font-size: medium;
-        font-weight: bold;
-        padding-top: 2px;
-    }
-
-    .checkbox-square {
-        width: 0,9375rem;
-        height: 0,9375rem;
-    }
-
-    .bottom-row {
-        flex-direction: row;
-        margin-top: 3px;
-    }
 }
 
-@media (min-width: 577px) and (max-width: 768px) {
-    .square.large-box {
-        height: 10rem;
-        font-size: x-large;
+@media (min-width: 476) and (max-width: 575px) {
+    .square {
+        height: 6rem;
+        font-size: 1.125rem;
     }
-    
+
+    .square.large-box {
+        height: 8rem;
+        font-size: 1.25rem;
+    }
+
     .square-stat {
-        max-height: 8,4375rem;
+        height: 8rem;
+    }
+
+    .title-stat {
+        font-size: 1rem;
     }
 
     .num-big {
-        font-size: 1,875rem;
+        font-size: 1.5rem;
     }
 
     .num-small {
-        width: 1,5625rem;
-        height: 1,5625rem;
-        font-size: large;
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.875rem;
         font-weight: bold;
-        padding-top: 0,125rem;
+        padding-top: 0.125rem;
     }
 
     .checkbox-square {
-        width: 1,125rem;
-        height: 1,125rem;
+        width: 0.875rem;
+        height: 0.875rem;
     }
 
     .bottom-row {
@@ -183,28 +171,74 @@
     }
 }
 
-@media (min-width: 769px) and (max-width: 993px) {
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .square.large-box {
+        width: clamp(12rem, 30vw, 15rem);
+        height: clamp(12rem, 30vw, 15rem);
+        font-size: clamp(1.25rem, 30vw, 2rem);
+    }
+
+    .square {
+        min-height: 5rem;
+        min-width: 5.75rem;
+        font-size: 1.125rem;
+    }
+
+    .square-death {
+        height: clamp(12rem, 30vw, 15rem);
+        width: clamp(10rem, 30vw, 15rem);
+    }
+
+    .square-stat {
+        max-height: 8.4375rem;
+    }
+
+    .num-big {
+        font-size: 1.875rem;
+    }
+
+    .num-small {
+        width: 1.5625rem;
+        height: 1.5625rem;
+        font-size: large;
+        font-weight: bold;
+        padding-top: 0, 125rem;
+    }
+
+    .checkbox-square {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+
+    .bottom-row {
+        flex-direction: row;
+        margin-top: 0.25rem;
+    }
+}
+
+@media (min-width: 768.2px) and (max-width: 993px) {
     .square-stat {
         max-height: 8.75rem;
     }
 
     .num-big {
-        font-size: 2,0625rem;
+        font-size: 2.0625rem;
     }
 
     .num-small {
-        width: 1,875rem;
-        height: 1,875rem;
+        width: 1.875rem;
+        height: 1.875rem;
         font-size: x-large;
         font-weight: bold;
     }
 
     .checkbox-square {
-        width: 1,25rem;
-        height: 1,25rem;
+        width: 1.25rem;
+        height: 1.25rem;
     }
 
     .bottom-row {
-        margin-top: 0,0625rem;
+        margin-top: 0.0625rem;
     }
 }
