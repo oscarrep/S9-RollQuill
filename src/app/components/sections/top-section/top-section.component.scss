@@ -5,18 +5,39 @@
     width: auto;
     height: auto;
     //max-height: 100%;
-    max-width: 160px;
+    max-width: 10rem;
     object-fit: contain;
     align-self: flex-start;
     aspect-ratio: 1;
 }
 
 .boxes{
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
 }
 
-@media screen and (max-width: 425px) {
+@media (max-width: 576px) {
     .foto-holder {
-        max-width: 125px;
+        max-width: 8rem;
+        height: 10rem;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .foto-holder {
+        max-width: 8rem;
+        height: 10rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width:992px) {
+    .foto-holder {
+        max-width: 15rem;
+        max-height: 15rem;
+    }
+
+    .boxes{
+        display: flex;
+        flex-direction: column;
     }
 }

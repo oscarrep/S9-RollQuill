@@ -1,13 +1,19 @@
-@if(statBox()!=true){
-<div class="square column-center" [class.large-box]="large()">
+@if(deathSaves() === true) {
+<div class="square-death column-center" [class.long-box]="long()" [class.large-box]="large()">
     <div class="title"> {{title()}} </div>
-    <div class="num"> {{num()}} </div>
+    <div class="bottom-row flex-wrap d-flex gap-2 justify-content-center">
+        @for (save of deathSavesArr; track save) {
+            <app-death-checkbox
+              [type]="save.type"
+              [checked]="save.checked"
+              (checkedChange)="save.checked = $event"
+            />
+          }
+    </div>
 </div>
 }
-
-@else if(statBox()===true){
+@else if(statBox() === true) {
 <div class="square-stat column-center" [class.large-box]="large()">
-
     <div class="title-stat"> {{title()}} </div>
     <div class="num-big"> {{modifier()}} </div>
 
@@ -16,5 +22,11 @@
         <div class="mx-3 checkbox-square"></div>
         <div class="num-small flex-center"> {{modifier()}} </div>
     </div>
+</div>
+}
+@else {
+<div class="square column-center" [class.large-box]="large()">
+    <div class="title"> {{title()}} </div>
+    <div class="num"> {{num()}} </div>
 </div>
 }

@@ -1,0 +1,8 @@
+<input
+  type="checkbox"
+  class="checkbox-square"
+  [class.fail]="type === 'fail'"
+  [class.success]="type === 'success'"
+  [checked]="checked"
+  (change)="toggleCheck()"
+/>
