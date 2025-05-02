@@ -1,1 +1,2 @@
-<div class="add-button mb-2" (click)="buttonClick.emit()" [class.home]="home()" [class.login]="login()">{{text()}}</div>
+<button class="add-button mb-2" (click)="buttonClick.emit()" [attr.type]="type" [class.home]="home()"
+    [class.login]="login()">{{text()}}</button>

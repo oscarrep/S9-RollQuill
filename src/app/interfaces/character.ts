@@ -2,21 +2,26 @@ export interface Character {
     createdBy: string;
     name: string;
     race: string;
-    subrace: string;
+    subrace?: string;
     class: string;
     subclass: string;
     level: number;
-    speed: number;
-    stats: {
-        Strength: number;
-        Dexterity: number;
-        Constitution: number;
-        Intelligence: number;
-        Wisdom: number;
-        Charisma: number;
+    speed?: number;
+    ability_bonuses: { name: string; value: number }[];
+
+    ability_scores: {
+        STR: [{ name: 'Strength', value: number }]
+        DEX: [{ name: 'Dexterity', value: number }]
+        CON: [{ name: 'Constitution', value: number }]
+        INT: [{ name: 'Intelligence', value: number }]
+        WIS: [{ name: 'Wisdom', value: number }]
+        CHA: [{ name: 'Charisma', value: number }]
     };
+    
     savingThrows: string[];
-    skills: string[];
+    classSkills: string[];
+    backgroundSkills: string[];
     expertise: string[];
-    _id: string;
+    image?: string;
+    _id?: string;
 }

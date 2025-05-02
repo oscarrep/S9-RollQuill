@@ -25,7 +25,10 @@ export class CharacterComponent implements OnInit {
   characterList: Character[] = [];
   savingThrowProficiencies: string[] = [];
   skillProficiencies: string[] = [];
-  abilityModifiers: any;
+
+  abilityModifiers: { [key: string]: number } = {};
+  abilityScores: { [key: string]: number } = {};
+
   armorClass: number = 0;
   hitPoints: number = 0;
   currentHp: number = 0;
@@ -47,14 +50,15 @@ export class CharacterComponent implements OnInit {
       this.character = data;
       console.log(this.character);
 
-      this.abilityModifiers = this.getabilityModifiers(this.character.stats);
-      this.skillProficiencies=this.character?.skills;
-      this.savingThrowProficiencies=this.character?.savingThrows;
+      this.abilityModifiers = this.getabilityModifiers(this.character.ability_scores)!;
+      this.abilityScores = this.transformAbilityScores(this.character.ability_scores)!;
+      this.skillProficiencies = this.character?.classSkills.concat(this.character.backgroundSkills);
+      this.savingThrowProficiencies = this.character?.savingThrows;
 
       forkJoin({
-        race: this._dndApiServce.getRaceInfo(this.character.race),
-        class: this._dndApiServce.getClassInfo(this.character.class),
-        levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class, this.character.level)
+        race: this._dndApiServce.getRaceInfo(this.character.race.toLowerCase()),
+        class: this._dndApiServce.getClassInfo(this.character.class.toLowerCase()),
+        levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class.toLowerCase(), this.character.level)
       }).subscribe(({ race: raceData, class: classData, levelInfo: levelData }) => {
         this.race = raceData;
         this.class = classData;
@@ -67,40 +71,59 @@ export class CharacterComponent implements OnInit {
         console.log(this.savingThrowProficiencies)
 
         this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
-        this.calculateArmorClass(this.abilityModifiers.Dexterity);
+        this.calculateArmorClass(this.abilityModifiers['Dexterity']);
       });
     });
   }
 
-  getabilityModifiers(stats?: {
-    Strength: number;
-    Dexterity: number;
-    Constitution: number;
-    Intelligence: number;
-    Wisdom: number;
-    Charisma: number;
-  }): { [key: string]: number } | undefined {
-    if (!stats) return;
+  getabilityModifiers(ability_scores?: { [key: string]: [{ name: string; value: number }] }): { [key: string]: number } | undefined {
+    if (!ability_scores) return;
 
     const modifiers: { [key: string]: number } = {};
 
-    for (const stat in stats) {
-      const key = stat as keyof typeof stats;
-      modifiers[key] = this.calculateStatModifier(stats[key]);
+    for (const key in ability_scores) {
+      const scoreArray = ability_scores[key];
+      if (scoreArray && scoreArray.length > 0) {
+        const score = scoreArray[0];
+        if (score && typeof score.value === 'number') {
+          modifiers[score.name] = this.calculateStatModifier(score.value);
+        }
+      }
     }
 
     return modifiers;
   }
 
-  getSkillProficiencies() { return this.character!.skills; }
+  transformAbilityScores(ability_scores?: { [key: string]: [{ name: string; value: number }]; }): { [key: string]: number } | undefined {
+    if (!ability_scores) return;
+
+    const output: { [key: string]: number } = {};
+
+    for (const key in ability_scores) {
+      const arr = ability_scores[key];
+      if (arr && arr.length > 0) {
+        output[arr[0].name] = arr[0].value;
+      }
+    }
+
+    return output;
+  }
+
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
   calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
   calculateMaxHitPoints(hitDie: number, level: number) {
-    const lvlOneFormula = hitDie + this.abilityModifiers.Constitution;
+    const conModifier = this.abilityModifiers['Constitution'];
+    const lvlOneFormula = hitDie + conModifier;
     const average = 1 + (hitDie / 2);
     const levelsAfterOne = level - 1;
-    if (level === 1) return this.hitPoints = lvlOneFormula;
-    else if (level > 1) return this.hitPoints = lvlOneFormula + ((average + this.abilityModifiers.Constitution) * levelsAfterOne);
+
+    if (level === 1) {
+      return this.hitPoints = lvlOneFormula;
+    } else if (level > 1) {
+      return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne);
+    }
+
+    return this.hitPoints = 0;
   }
 }
 

@@ -16,7 +16,7 @@ export class AuthService {
     const userCredentials = await createUserWithEmailAndPassword(this.auth, email, password);
     const user = userCredentials.user;
 
-    const mongoUser = await this.createMongoUser(user.uid, email);
+    const mongoUser = await this.createMongoUser(user.uid, email, password);
     this._sessionService.setLoginSession(mongoUser);
     return mongoUser;
   }
@@ -30,11 +30,11 @@ export class AuthService {
     return mongoUser;
   }
 
-  private async createMongoUser(fireUid: string, email: string) {
+  private async createMongoUser(fireUid: string, email: string, password:string) {
     const response = await fetch(`${this.host}${this.apiUsers}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fireUid, email })
+      body: JSON.stringify({ fireUid, email, password })
     });
     return await response.json();
   }

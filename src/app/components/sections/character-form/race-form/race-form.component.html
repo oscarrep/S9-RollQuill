@@ -1,0 +1,42 @@
+<div [formGroup]="form" class="column-center">
+    <select formControlName="race" name="race" placeholder="Race" required class="select p-2 mb-2"
+        [ngClass]="{'invalid': isInvalid('race')}" (change)="selectedRaceChange.emit()">
+        <option value="" selected disabled hidden>Race</option>
+        @for(race of raceData; track race) {
+        <option [value]="race.name">{{ race.name }}</option>
+        }
+    </select>
+
+    @if (selectedRace) {
+    <div class="panel mb-2">
+        <p>Your speed is {{ selectedRace.speed }}.</p>
+
+        @if (selectedRace.languages.length > 1) {
+        <p>
+            Characters with this race can speak and write
+            <u>{{ selectedRace.languages[0].index }}</u> and
+            <u>{{ selectedRace.languages[1].index }}</u>.
+        </p>
+        }
+
+        @if (selectedRace.ability_bonuses.length > 0) {
+        <p>
+            They also get the following ability score bonus:@if(selectedRace.ability_bonuses.length > 1){<br>}
+            @for (bonus of selectedRace.ability_bonuses; track bonus) {
+            +{{ bonus.bonus }} <u class="me-3">{{ bonus.ability_score.name }}</u> 
+            }
+        </p>
+        }
+    </div>
+
+    @if (selectedRace.subraces.length) {
+    <select formControlName="subrace" name="subrace" placeholder="Subrace" required class="select p-2 mb-2"
+        [ngClass]="{ 'invalid': isInvalid('subrace') }">
+        <option value="" selected disabled hidden>Subrace</option>
+        @for (subrace of subraces; track subrace) {
+        <option [value]="subrace">{{ subrace }}</option>
+        }
+    </select>
+    }
+    }
+</div>

@@ -7,18 +7,26 @@
 
 h2{margin-bottom: -5px;}
 
-@media screen and (max-width: 425px) {
+@media (max-width: 576px) {
     .d-flex {
         align-items: center;
         gap: 1rem;
     }
 
     h2 {
-        font-size: medium;
+        font-size: x-large !important;
     }
 
     .info {
         font-size: medium;
         text-align: center;
     }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+}
+
+@media (min-width: 769px) and (max-width:992px) {
+
 }
