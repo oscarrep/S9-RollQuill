@@ -1,0 +1,38 @@
+.select.invalid {
+    border: solid 3px #c4371f;
+}
+
+.select,
+.panel {
+    border: solid 3px #373327;
+}
+
+.select {
+    width: 100%;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.saving-throws {
+    gap: 1rem;
+    font-size: x-large;
+}
+
+.subclass-panel{margin-top: -3%;}
+
+.subclass-panel, .panel{
+    border: solid 3px #373327;
+    background-color: white;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}

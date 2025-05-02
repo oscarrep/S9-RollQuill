@@ -1,1 +1,13 @@
-<p>input works!</p>
+<div [formGroup]="form">
+<input
+  [attr.type]="type"
+  [attr.name]="name"
+  [attr.placeholder]="placeholder"
+  [required]="required"
+  class="input p-2 mb-2"
+  [value]="value"
+  (input)="handleInput($event)"
+  (blur)="onTouched()"
+  [ngClass]="{ 'invalid': invalid }"
+/>
+</div>

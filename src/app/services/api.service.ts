@@ -40,11 +40,19 @@ export class ApiService {
     return this.http.put<void>(`${this.appUrl}${this.apiCharacters}/${id}`, character)
   }
 
-  getUser(uid: string | undefined):Observable<User>{
+  getUser(uid: string | undefined): Observable<User> {
     return this.http.get<User>(`${this.appUrl}${this.apiUsers}/${uid}`)
+  }
+
+  updateUser(uid: string | undefined, user: User): Observable<User> {
+    return this.http.put<User>(`${this.appUrl}${this.apiUsers}/${uid}`, user)
   }
 
   getCharactersByIds(ids: string[]): Observable<Character[]> {
     return this.http.post<Character[]>(`${this.appUrl}${this.apiCharacters}/batch`, { ids });
+  }
+
+  addCharacterToUser(uid: string, charId: string): Observable<User> {
+    return this.http.patch<User>(`${this.appUrl}${this.apiUsers}/${uid}/add-character/`, { charId });
   }
 }

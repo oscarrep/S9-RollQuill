@@ -4,24 +4,33 @@ import { Character } from '../../../../../interfaces/character';
 import { DndApiService } from '../../../../../services/dnd-api.service';
 import { ButtonComponent } from "../../../../../shared/button/button.component";
 import { NavigateService } from '../../../../../services/navigate.service';
-import { SkillCheckboxComponent } from '../../../../../shared/skill-checkbox/skill-checkbox.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../../services/api.service';
+import { User } from '../../../../../interfaces/user';
+import { FormValidationService } from '../../../../../services/form-validation.service';
+import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
+import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
+import { SkillsFormComponent } from "../../../../sections/character-form/skills-form/skills-form.component";
+import { InputComponent } from '../../../../../shared/input/input.component';
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, SkillCheckboxComponent, CommonModule]
+  imports: [ReactiveFormsModule, ButtonComponent, InputComponent, CommonModule, RaceFormComponent, ClassFormComponent, SkillsFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
+  currentUser: User | null = null;
+  currentUserId: string = '';
   form = inject(FormBuilder)
   _dndService = inject(DndApiService)
   _apiService = inject(ApiService)
   _navigationService = inject(NavigateService)
+  _formValidation = inject(FormValidationService);
+
   characterForm: FormGroup;
   submitted: boolean = false;
 
@@ -56,7 +65,8 @@ export class CharacterFormComponent {
       class: ['', Validators.required],
       subclass: ['', Validators.required],
       level: [1],
-      speed: [0],
+      speed: [''],
+      ability_bonuses: [0],
 
       STR: [0, Validators.required],
       DEX: [0, Validators.required],
@@ -73,6 +83,10 @@ export class CharacterFormComponent {
 
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('uid')!;
+      this._apiService.getUser(this.userId).subscribe(user => {
+        this.currentUserId = user._id;
+        console.log(this.currentUserId)
+      });
     });
   }
 
@@ -81,29 +95,6 @@ export class CharacterFormComponent {
     this.getFromJson('races');
     this.getFromJson('skills');
     this.statValueListeners();
-
-    this.characterForm.get('class')?.valueChanges.subscribe(className => {
-      const selected = this.classData.find(cls => cls.name === className);
-      this.subclasses = selected?.subclasses?.map((scls: any) => scls.name) || [];
-      this.characterForm.patchValue({ subclass: '' });
-
-      const skillChoices = selected?.proficiency_choices?.[0]?.skills || [];
-      this.skills = skillChoices;
-      console.log(this.skills)
-      this.characterForm.patchValue({ classSkills: [] });
-      this.selectedClass = selected;
-
-      this.characterForm.patchValue({ savingThrows: (selected?.saving_throws ?? []).map((st: any) => st.name) });
-    });
-
-    this.characterForm.get('race')?.valueChanges.subscribe(raceName => {
-      const selected = this.raceData.find(race => race.name === raceName);
-      this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
-      this.characterForm.patchValue({ subrace: '' });
-      this.selectedRace = selected;
-      console.log(selected)
-    });
-
   }
 
   getFromJson(toGet: string) {
@@ -138,11 +129,7 @@ export class CharacterFormComponent {
           break;
 
         case 'skills':
-          this.skillData = data.map((item: any) => ({
-            name: item.name,
-            //description: item.desc,
-            //ability_score: item.ability_score
-          }));
+          this.skillData = data.map((item: any) => ({ name: item.name }));
           console.log(this.skillData)
           break;
 
@@ -151,52 +138,6 @@ export class CharacterFormComponent {
           break;
       }
     });
-  }
-
-  toggleClassSkill(skill: string, check: boolean) {
-    const currentSkills = this.characterForm.value.classSkills as string[];
-    const maxSkills = this.selectedClass?.skillChoose || 0;
-
-    if (check && currentSkills.length < maxSkills) this.characterForm.patchValue({ classSkills: [...currentSkills, skill] });
-    else if (!check) this.characterForm.patchValue({ classSkills: currentSkills.filter(s => s !== skill) });
-
-  }
-
-  toggleBackgroundSkill(skill: string, check: boolean) {
-    const currentSkills = this.characterForm.value.backgroundSkills as string[];
-
-    if (check && currentSkills.length < 2) this.characterForm.patchValue({ backgroundSkills: [...currentSkills, skill] });
-    else if (!check) this.characterForm.patchValue({ backgroundSkills: currentSkills.filter(s => s !== skill) });
-
-  }
-
-  isSkillSelectedAnywhere(skill: string): boolean {
-    const { classSkills, backgroundSkills } = this.characterForm.value;
-    return classSkills.includes(skill) || backgroundSkills.includes(skill);
-  }
-
-  isClassSkillChecked(skill: string): boolean {
-    return this.characterForm.value.classSkills.includes(skill);
-  }
-
-  isBackgroundSkillChecked(skill: string): boolean {
-    return this.characterForm.value.backgroundSkills.includes(skill);
-  }
-
-  isClassSkillDisabled(skill: string): boolean {
-    const cs = this.characterForm.value.classSkills;
-    return (
-      (!cs.includes(skill) && cs.length >= (this.selectedClass?.skillChoose || 0)) ||
-      this.characterForm.value.backgroundSkills.includes(skill)
-    );
-  }
-
-  isBackgroundSkillDisabled(skill: string): boolean {
-    const bs = this.characterForm.value.backgroundSkills;
-    return (
-      (!bs.includes(skill) && bs.length >= 2) ||
-      this.characterForm.value.classSkills.includes(skill)
-    );
   }
 
   onStatChange(stat: string, event: Event) {
@@ -222,48 +163,37 @@ export class CharacterFormComponent {
     }
   }
 
-  isInvalid(controlName: string): boolean {
-    const control = this.characterForm.get(controlName);
-    if (!control) return false;
+  public isInvalid = (controlName: string): boolean => {
+    return this._formValidation.isInvalid(
+      this.characterForm,
+      controlName,
+      this.submitted,
+      () => controlName !== 'subrace' || this.selectedRace?.subraces?.length > 0
+    );
+  };
 
-    if (controlName === 'subrace' && (this.selectedRace.subraces.length === 0)) {
-      return false;
-    }
 
-    return control.invalid && (control.touched || this.submitted);
+  onRaceChange(selected: any) {
+    this.selectedRace = selected;
+    this.subraces = selected?.subraces?.map((sr: any) => sr.name) || [];
   }
-
-
-  onRaceChange() {
-    const subraceControl = this.characterForm.get('subrace');
-    if (!subraceControl) return;
-
-    if (this.selectedRace && this.selectedRace.subraces.length === 0) {
-      subraceControl.clearValidators();
-      subraceControl.setValue('');
-    } else {
-      subraceControl.setValidators(Validators.required);
-    }
-    subraceControl.updateValueAndValidity();
-  }
-
-
-
-
 
   createCharacter() {
     this.submitted = true;
-    if (!this.selectedRace) { this.characterForm.patchValue({ subrace: '' }); }
 
     if (this.characterForm.invalid) {
-      this.characterForm.markAllAsTouched();
+      this.characterForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+      console.log('name ', this.characterForm.get('name')?.errors);
+      console.log('race ', this.characterForm.get('race')?.errors);
+      console.log('subrace ', this.characterForm.get('subrace')?.errors);
+      console.log('class ', this.characterForm.get('class')?.errors);
+      console.log('nasubclassme ', this.characterForm.get('subclass')?.errors);
       return;
     }
-
+    console.log(this.currentUserId);
     const form = this.characterForm.value;
-
     const character: Character = {
-      createdBy: this.userId,
+      createdBy: this.currentUserId,
       name: form.name,
       race: form.race,
       subrace: form.subrace || '',
@@ -271,7 +201,11 @@ export class CharacterFormComponent {
       class: form.class,
       subclass: form.subclass,
       level: form.level || 1,
-      speed: form.speed || 30,
+      speed: form.speed,
+      ability_bonuses: form.ability_bonuses.map((bonus: any) => ({
+        name: bonus.name,
+        value: bonus.value,
+      })),
 
       ability_scores: {
         STR: [{ name: 'Strength', value: Number(form.STR) }],
@@ -288,11 +222,25 @@ export class CharacterFormComponent {
       backgroundSkills: form.backgroundSkills.map((s: any) => typeof s === 'string' ? s : s.name),
 
       expertise: form.expertise || [],
-      image: '',
+      image: form.image || '',
     };
+    console.log(this.currentUserId);
+    this._apiService.saveCharacter(character).subscribe({
+      next: (savedCharacter: Character) => {
+        const newCharId = savedCharacter._id!;
 
-    this._apiService.saveCharacter(character).subscribe((savedCharacter: Character) => {
-      this._navigationService.navigateTo(`${this.userId}/character/${savedCharacter._id}`);
+        this._apiService.addCharacterToUser(this.userId, newCharId).subscribe({
+          next: () => {
+            this._navigationService.navigateTo(`${this.userId}/character/${newCharId}`);
+          },
+          error: (err) => {
+            console.error('Error updating user with new character:', err);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error creating character:', err);
+      }
     });
 
     console.log(this.characterForm.value)

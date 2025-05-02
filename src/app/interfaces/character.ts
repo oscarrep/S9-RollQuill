@@ -7,6 +7,8 @@ export interface Character {
     subclass: string;
     level: number;
     speed?: number;
+    ability_bonuses: { name: string; value: number }[];
+
     ability_scores: {
         STR: [{ name: 'Strength', value: number }]
         DEX: [{ name: 'Dexterity', value: number }]
@@ -15,6 +17,7 @@ export interface Character {
         WIS: [{ name: 'Wisdom', value: number }]
         CHA: [{ name: 'Charisma', value: number }]
     };
+    
     savingThrows: string[];
     classSkills: string[];
     backgroundSkills: string[];

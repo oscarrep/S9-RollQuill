@@ -1,23 +1,23 @@
+.comp-container {
+    width: 100%;
+}
+
 .stat-input {
     border: solid 2px #373327;
 }
 
 .stat-input.invalid,
-.input.invalid,
-.panel.invalid {
+.panel.invalid,
+.select.invalid {
     border: solid 3px #c4371f;
 }
 
-
-.input,
-.panel,
 .stat-panel,
 .subclass-panel,
 .skill-prof {
     border: solid 3px #373327;
 }
 
-.input,
 .stat-input {
     width: 100%;
     border-radius: 50px;
@@ -34,14 +34,12 @@
     padding-block: 10px;
 }
 
-.panel,
 .subclass-panel,
 .skill-prof {
     width: 90%;
     padding: 10px;
 }
 
-.panel,
 .stat-panel,
 .subclass-panel,
 .skill-prof {

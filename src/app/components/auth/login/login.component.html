@@ -2,14 +2,12 @@
     <div class="login-container">
         <div class="text-container my-5">
             <h1 class="my-5">Log in to your account</h1>
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="mb-3">
-                    <input type="email" [(ngModel)]="email" id="email" name="email"
-                        placeholder="Enter your account email" required class="input p-2 mb-2">
+                    <app-input type="email" formControlName="email" placeholder="Email" name="email" [form]="loginForm"/>
                 </div>
                 <div>
-                    <input type="password" [(ngModel)]="password" id="password" name="password"
-                        placeholder="Enter your password" required class="input p-2 mb-2">
+                    <app-input type="password" formControlName="password" placeholder="Password" name="password" [form]="loginForm"/>
                 </div>
                 <div class="column-center mt-5">
                     <div class="gap-3 mb-2 flex-center">

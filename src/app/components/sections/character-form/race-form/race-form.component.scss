@@ -1,0 +1,25 @@
+.select.invalid {
+    border: solid 3px #c4371f;
+}
+
+.select,
+.panel {
+    border: solid 3px #373327;
+}
+
+.select {
+    width: 100%;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.panel {
+    width: 90%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}

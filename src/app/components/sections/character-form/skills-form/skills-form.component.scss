@@ -1,0 +1,17 @@
+.skill-prof {
+    width: 90%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    border: solid 3px #373327;
+}
+
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
