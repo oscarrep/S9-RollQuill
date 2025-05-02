@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-
 .zain-extralight {
     font-family: "Zain", sans-serif;
     font-weight: 200;
@@ -72,6 +71,7 @@
 
 body {
     background-color: #FAEABD !important;
+    overflow-x: hidden!important;
     /*
     background-color: #f0ebd9 !important;
     background: url('/assets/bg.webp') no-repeat fixed; 
@@ -81,6 +81,13 @@ body {
     background-size: cover;
     */
 }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden!important;
+  }
 
 
 h2,
@@ -124,7 +131,6 @@ h2 {
     }
 
     .flex-space-between {
-        //flex-direction: column;
         gap: 0.5rem;
     }
 

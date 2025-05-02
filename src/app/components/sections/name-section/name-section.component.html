@@ -1,21 +1,29 @@
-<div class="container d-flex mt-3">
-    <div class="ms-2">
-        <app-button [text]="'Rest'" />
-    </div>
-    <div class="ms-auto column-center">
-        <h2><b>{{charName()}}</b></h2>
-        <div class="info">
-            Level {{charLevel()}}
-            
-            {{charRace()}}
-            {{charSubRace()}}
-
-            {{charSubClass()}}
-            {{charClass()}}
-
+<div class="container mt-3">
+    <div class="row">
+        <div class="buttons gap-2 me-2">
+            <app-button [text]="'Rest'" />
+            <div class="level">
+                Level {{charLevel()}}
+            </div>
+            <app-button [text]="'Level Up'" />
         </div>
     </div>
-    <div class="ms-auto me-2">
-        <app-button [text]="'Level Up'" />
+    <div class="row">
+        <div class="ms-auto column-center">
+            <h2><b>{{charName()}}</b></h2>
+            <div class="info gap-2">
+                <div>
+                    @if(charSubRace()){ {{charSubRace()}} }
+                    @else{ {{charRace()}} }
+
+                </div>
+                <div>
+                    {{charSubClass()}}
+                    {{charClass()}}
+                </div>
+
+            </div>
+        </div>
     </div>
+
 </div>
