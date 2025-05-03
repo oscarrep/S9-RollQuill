@@ -35,21 +35,27 @@
     }
 }
 
-@media (min-width: 576px) and (max-width: 768px) {
+@media (max-width: 375px) {
     .foto-holder {
-        width: clamp(12rem, 30vw, 15rem);
-        height: clamp(12rem, 30vw, 15rem);
+        width: 11rem;
+        height: 11rem;
     }
 }
 
-@media (min-width: 768.2px) and (max-width:992px) {
+@media (min-width: 376px) and (max-width: 575px) {
     .foto-holder {
-        max-width: 15rem;
-        max-height: 15rem;
+        width: clamp(10rem, 30vw, 12rem);
+        height: clamp(10rem, 30vw, 12rem);
     }
+}
 
-    .boxes {
-        display: flex;
-        flex-direction: column;
+@media (min-width: 576px) and (max-width: 768px) {
+    .foto-holder {
+        width: clamp(12rem, 30vw, 14.5rem);
+        height: clamp(14.5rem, 30vw, 14.5rem);
     }
+}
+
+@media (min-width: 768.2px) and (max-width: 992px) {
+    
 }

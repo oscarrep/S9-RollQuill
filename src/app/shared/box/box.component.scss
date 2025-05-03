@@ -112,32 +112,64 @@
     font-size: 2rem;
 }
 
-@media (max-width: 475px) {
+@media (max-width: 375px) {
     .square {
-        height: 4.68rem;
+        height: 5.25rem;
         font-size: 1.125rem;
     }
 
     .square.large-box {
-        height: 6rem;
         font-size: 1.25rem;
+        width: 11rem;
+        height: 11rem;
+    }
+
+    .square-death {
+        height: 11rem;
+        width: 11rem;
     }
 
     .square-stat {
         height: 8rem;
     }
 
+    .title-stat {
+        font-size: 1rem;
+    }
+
+    .num-big {
+        font-size: 1.5rem;
+    }
+
+    .num-small {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.875rem;
+        font-weight: bold;
+        padding-top: 0.125rem;
+    }
+
+    .checkbox-square {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    .bottom-row {
+        flex-direction: row;
+        margin-top: 0.25rem;
+    }
 }
 
-@media (min-width: 476) and (max-width: 575px) {
+@media (min-width: 376px) and (max-width: 575px) {
     .square {
         height: 6rem;
         font-size: 1.125rem;
     }
 
     .square.large-box {
-        height: 8rem;
         font-size: 1.25rem;
+        width: clamp(10rem, 30vw, 12rem);
+        height: clamp(10rem, 30vw, 12rem);
     }
 
     .square-stat {
@@ -175,19 +207,19 @@
 @media (min-width: 576px) and (max-width: 768px) {
     .square.large-box {
         width: clamp(12rem, 30vw, 15rem);
-        height: clamp(12rem, 30vw, 15rem);
+        height: clamp(6rem, 30vw, 7rem);
         font-size: clamp(1.25rem, 30vw, 2rem);
     }
 
     .square {
-        min-height: 5rem;
-        min-width: 5.75rem;
+        min-height: clamp(6rem, 30vw, 7rem);
+        min-width: clamp(6rem, 30vw, 7rem);
         font-size: 1.125rem;
     }
 
     .square-death {
-        height: clamp(12rem, 30vw, 15rem);
-        width: clamp(10rem, 30vw, 15rem);
+        width: clamp(12rem, 30vw, 15rem);
+        height: clamp(6rem, 30vw, 7rem);
     }
 
     .square-stat {
@@ -217,28 +249,4 @@
     }
 }
 
-@media (min-width: 768.2px) and (max-width: 993px) {
-    .square-stat {
-        max-height: 8.75rem;
-    }
-
-    .num-big {
-        font-size: 2.0625rem;
-    }
-
-    .num-small {
-        width: 1.875rem;
-        height: 1.875rem;
-        font-size: x-large;
-        font-weight: bold;
-    }
-
-    .checkbox-square {
-        width: 1.25rem;
-        height: 1.25rem;
-    }
-
-    .bottom-row {
-        margin-top: 0.0625rem;
-    }
-}
+@media (min-width: 768.2px) and (max-width: 992px) {}

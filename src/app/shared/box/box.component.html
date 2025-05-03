@@ -2,22 +2,27 @@
 <div class="square-death column-center" [class.large-box]="large()">
     <div class="title-death"> {{ title() }} </div>
     <div class="bottom-row d-flex flex-column align-items-center gap-4">
-        <div class="d-flex flex-column text-center">
-            <div class="d-flex gap-2">
-                @for (save of deathSavesArr.slice(0, 3); track save) {
-                <app-death-checkbox [type]="save.type" [checked]="save.checked"
-                    (checkedChange)="save.checked = $event" />
-                }
+        <div class="d-flex text-center">
+            <div class="d-block">
+                <p>
+                    💀<br>
+                    💗
+                </p>
             </div>
-            <p>Failures</p>
-       
-            <div class="d-flex gap-2">
-                @for (save of deathSavesArr.slice(3, 6); track save) {
-                <app-death-checkbox [type]="save.type" [checked]="save.checked"
-                    (checkedChange)="save.checked = $event" />
-                }
+            <div class="d-block ms-2">
+                <div class="d-flex gap-2">
+                    @for (save of deathSavesArr.slice(0, 3); track save) {
+                    <app-death-checkbox [type]="save.type" [checked]="save.checked"
+                        (checkedChange)="save.checked = $event" />
+                    }
+                </div>
+                <div class="d-flex gap-2 mt-2">
+                    @for (save of deathSavesArr.slice(3, 6); track save) {
+                    <app-death-checkbox [type]="save.type" [checked]="save.checked"
+                        (checkedChange)="save.checked = $event" />
+                    }
+                </div>
             </div>
-            <p>Successes</p>
         </div>
     </div>
 </div>
@@ -25,12 +30,12 @@
 
 @else if(statBox() === true) {
 <div class="square-stat column-center" [class.large-box]="large()">
+    <div class="checkbox-square"></div>
     <div class="title-stat"> {{title()}} </div>
     <div class="num-big"> {{modifier()}} </div>
 
-    <div class="bottom-row flex-space-between">
+    <div class="bottom-row flex-space-between gap-5">
         <div class="num-small flex-center"> {{score()}} </div>
-        <div class="mx-3 checkbox-square"></div>
         <div class="num-small flex-center"> {{modifier()}} </div>
     </div>
 </div>
