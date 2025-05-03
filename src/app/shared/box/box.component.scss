@@ -30,7 +30,7 @@
 
 .title-death,
 .title {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
 }
 
 .title-death {
@@ -68,7 +68,7 @@
 
 .title-stat,
 .num-small {
-    font-size: x-large;
+    font-size: 1.5rem;
 }
 
 .num-big {
@@ -104,12 +104,20 @@
 }
 
 .hp-box .title {
-    font-size: 1.125rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
 .hp-box .num {
     font-size: 2rem;
+}
+
+.max-hp {
+    outline: 3px solid #373327;
+    display: flex;
+    border-radius: 15px;
+    padding: 0.3rem 2rem;
+    font-size: large;
 }
 
 @media (max-width: 375px) {
@@ -133,10 +141,6 @@
         height: 8rem;
     }
 
-    .title-stat {
-        font-size: 1rem;
-    }
-
     .num-big {
         font-size: 1.5rem;
     }
@@ -155,26 +159,25 @@
     }
 
     .bottom-row {
-        flex-direction: row;
         margin-top: 0.25rem;
     }
 }
 
 @media (min-width: 376px) and (max-width: 575.98px) {
     .square {
-        width:  5.75rem;
+        width: 5.75rem;
         height: 5.75rem;
         font-size: 1.125rem;
     }
 
     .square.large-box {
         font-size: 1.25rem;
-        width:  12rem;
+        width: 12rem;
         height: 12rem;
     }
 
     .square-death {
-        width:  12rem;
+        width: 12rem;
         height: 12rem;
     }
 
@@ -182,10 +185,6 @@
         height: 8rem;
     }
 
-    .title-stat {
-        font-size: 1rem;
-    }
-
     .num-big {
         font-size: 1.5rem;
     }
@@ -204,7 +203,6 @@
     }
 
     .bottom-row {
-        flex-direction: row;
         margin-top: 0.25rem;
     }
 }
@@ -228,14 +226,6 @@
         height: clamp(6rem, 30vw, 7rem);
     }
 
-    .square-stat {
-        max-height: 8.4375rem;
-    }
-
-    .num-big {
-        font-size: 1.875rem;
-    }
-
     .num-small {
         width: 1.5625rem;
         height: 1.5625rem;
@@ -252,6 +242,11 @@
     .bottom-row {
         flex-direction: row;
         margin-top: 0.25rem;
+    }
+
+    .max-hp{
+        margin-top: -1.5rem;
+        padding: 0.1rem 2rem;
     }
 }
 

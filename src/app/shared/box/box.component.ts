@@ -19,7 +19,9 @@ export class BoxComponent {
   long = input<boolean>();
   deathSaves = input<boolean>();
   statBox = input<boolean>();
-  @Input() isHp = false;
+  @Input() currentHp?: number | string;
+  @Input() isHp: boolean = false;
+
   deathSavesArr: { type: DeathSaveType; checked: boolean }[] = [
     { type: 'fail', checked: false },
     { type: 'fail', checked: false },
