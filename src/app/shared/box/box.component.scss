@@ -72,13 +72,10 @@
 }
 
 .num-big {
-    font-size: 2.0625rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-block: -0.3125rem;
 }
-
-.bottom-row {}
-
 
 .checkbox-square,
 .checkbox-square:checked {
@@ -138,11 +135,11 @@
     }
 
     .square-stat {
-        height: 8rem;
+        height: 7.285rem;
     }
 
     .num-big {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .num-small {
@@ -264,6 +261,10 @@
     }
 
     .square-death {
+        width: 15rem;
+        height: 10rem;
+    }
+    .square-stat {
         width: 15rem;
         height: 10rem;
     }
