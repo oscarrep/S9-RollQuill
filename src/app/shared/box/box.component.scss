@@ -160,7 +160,7 @@
     }
 }
 
-@media (min-width: 376px) and (max-width: 575px) {
+@media (min-width: 376px) and (max-width: 575.98px) {
     .square {
         width:  5.75rem;
         height: 5.75rem;
@@ -255,4 +255,21 @@
     }
 }
 
-@media (min-width: 768.2px) and (max-width: 992px) {}
+@media (min-width: 768.2px) and (max-width: 992px) {
+    .square.large-box {
+        width: 15rem;
+        height: 10rem;
+        font-size: 2rem;
+    }
+
+    .square {
+        min-height: 10rem;
+        min-width: 10rem;
+        font-size: 1.125rem;
+    }
+
+    .square-death {
+        width: 15rem;
+        height: 10rem;
+    }
+}

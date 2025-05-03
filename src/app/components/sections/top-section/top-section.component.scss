@@ -15,10 +15,24 @@
     max-width: 100%;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 375px) {
     .foto-holder {
-        width: 6rem;
-        height: 6rem;
+        width: 11rem;
+        height: 11rem;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 575.98px) {
+    .foto-holder {
+        width: clamp(12rem, 30vw, 12rem);
+        height: clamp(12rem, 30vw, 12rem);
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .foto-holder {
+        width: clamp(12rem, 30vw, 14.5rem);
+        height: clamp(14.5rem, 30vw, 14.5rem);
     }
 
     .top-section .container {
@@ -35,27 +49,9 @@
     }
 }
 
-@media (max-width: 375px) {
-    .foto-holder {
-        width: 11rem;
-        height: 11rem;
-    }
-}
-
-@media (min-width: 376px) and (max-width: 575px) {
-    .foto-holder {
-        width: clamp(12rem, 30vw, 12rem);
-        height: clamp(12rem, 30vw, 12rem);
-    }
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
-    .foto-holder {
-        width: clamp(12rem, 30vw, 14.5rem);
-        height: clamp(14.5rem, 30vw, 14.5rem);
-    }
-}
-
 @media (min-width: 768.2px) and (max-width: 992px) {
-    
+    .foto-holder {
+        width:  20.5rem;
+        height: 20.5rem;
+    }
 }

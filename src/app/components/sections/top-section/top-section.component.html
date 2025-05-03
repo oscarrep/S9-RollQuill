@@ -1,5 +1,5 @@
 <div class="d-flex mt-3 align-items-start">
-    <div class="d-block d-sm-none">
+    <div class="d-block d-sm-none d-md-none">
         <div class="d-flex gap-2 mb-2">
             <img class="foto-holder" src="assets/swordsman-color.png" alt="foto">
             <app-box [title]="'HP'" [num]="`${currentHp()} / ${hp()}`" [large]="true" [isHp]="true" />
@@ -22,7 +22,30 @@
         </div>
     </div>
 
-    <div class="d-none d-sm-block">
+    <div class="d-none d-sm-block d-md-none">
+        <div class="d-flex gap-2">
+            <div class=" ms-2 d-flex flex-column gap-2">
+                <img class="foto-holder" src="assets/swordsman-color.png" alt="foto">
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+                <app-box [title]="'HP'" [num]="`${currentHp()} / ${hp()}`" [large]="true" [isHp]="true" />
+                <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
+            </div>
+            <div class="d-block">
+                <div class="d-flex gap-2 mb-2">
+                    <app-box [title]="'AC'" [num]="armorClass()" />
+                    <app-box [title]="'Speed'" [num]="speed()" />
+                </div>
+                <div class="d-flex gap-2">
+                    <app-box [title]="'Initiative'" [num]="initiative()" />
+                    <app-box [title]="'PB'" [num]="proficiencyBonus()" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none d-sm-none d-md-block">
         <div class="d-flex gap-2">
             <div class=" ms-2 d-flex flex-column gap-2">
                 <img class="foto-holder" src="assets/swordsman-color.png" alt="foto">
