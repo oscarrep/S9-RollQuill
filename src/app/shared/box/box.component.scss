@@ -162,14 +162,20 @@
 
 @media (min-width: 376px) and (max-width: 575px) {
     .square {
-        height: 6rem;
+        width:  5.75rem;
+        height: 5.75rem;
         font-size: 1.125rem;
     }
 
     .square.large-box {
         font-size: 1.25rem;
-        width: clamp(10rem, 30vw, 12rem);
-        height: clamp(10rem, 30vw, 12rem);
+        width:  12rem;
+        height: 12rem;
+    }
+
+    .square-death {
+        width:  12rem;
+        height: 12rem;
     }
 
     .square-stat {
