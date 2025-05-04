@@ -8,6 +8,7 @@ import { StatsSectionComponent } from '../../sections/stats-section/stats-sectio
 import { DndApiService } from '../../../services/dnd-api.service';
 import { forkJoin } from 'rxjs';
 import { SkillsSectionComponent } from "../../sections/skills-section/skills-section.component";
+import { DndJsonService } from '../../../services/dnd-json.service';
 
 @Component({
   selector: 'app-character',
@@ -19,6 +20,7 @@ export class CharacterComponent implements OnInit {
   router = inject(Router);
   private _apiService = inject(ApiService);
   private _dndApiService = inject(DndApiService);
+  private _dndJSONService = inject(DndJsonService);
   character?: Character;
   race?: any;
   class?: any;
@@ -34,11 +36,14 @@ export class CharacterComponent implements OnInit {
   hitPoints: number = 0;
   currentHp: number = 0;
   @Input() id!: string;
-  skillData: { name: string, stat: string }[]|undefined;
+  skillData: { name: string, stat: string }[] | undefined;
 
   ngOnInit(): void {
     this.getCharData();
-    this.getFromJson('skills');
+    this._dndJSONService.getSkills().subscribe(data => {
+      this.skillData = data;
+      console.log(this.skillData);
+    });
   }
 
   getCharList(): void {
@@ -59,19 +64,20 @@ export class CharacterComponent implements OnInit {
       this.savingThrowProficiencies = this.character?.savingThrows;
 
       forkJoin({
-        race: this._dndApiService.getRaceInfo(this.character.race.toLowerCase()),
-        class: this._dndApiService.getClassInfo(this.character.class.toLowerCase()),
+        race: this._dndJSONService.getRaceByName(this.character.race.toLowerCase()),
+        class: this._dndJSONService.getClassByName(this.character.class.toLowerCase()),
         levelInfo: this._dndApiService.getClassLevelInfo(this.character.class.toLowerCase(), this.character.level)
-      }).subscribe(({ race: raceData, class: classData, levelInfo: levelData }) => {
-        this.race = raceData;
-        this.class = classData;
-        this.levelInfo = levelData;
-        console.log(this.race)
-        console.log(this.class)
-        console.log(this.levelInfo)
-        console.log(this.abilityModifiers)
-        console.log(this.skillProficiencies)
-        console.log(this.savingThrowProficiencies)
+      }).subscribe(({ race, class: classData, levelInfo }) => {
+        this.race = race
+        this.class = classData
+        this.levelInfo = levelInfo
+
+        console.log(this.race);
+        console.log(this.class);
+        console.log(this.levelInfo);
+        console.log(this.abilityModifiers);
+        console.log(this.skillProficiencies);
+        console.log(this.savingThrowProficiencies);
 
         this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
         this.calculateArmorClass(this.abilityModifiers['Dexterity']);
@@ -79,10 +85,10 @@ export class CharacterComponent implements OnInit {
     });
   }
 
-  getabilityModifiers(ability_scores?: { [key: string]: [{ name: string; value: number }] }): { [key: string]: number } | undefined {
-    if (!ability_scores) return;
+  getabilityModifiers(ability_scores ?: { [key: string]: [{ name: string; value: number }] }): { [key: string]: number } | undefined {
+      if(!ability_scores) return;
 
-    const modifiers: { [key: string]: number } = {};
+      const modifiers: { [key: string]: number } = {};
 
     for (const key in ability_scores) {
       const scoreArray = ability_scores[key];
@@ -92,7 +98,7 @@ export class CharacterComponent implements OnInit {
           modifiers[score.name] = this.calculateStatModifier(score.value);
       }
     }
-console.log(modifiers)
+    console.log(modifiers)
     return modifiers;
   }
 
@@ -117,19 +123,12 @@ console.log(modifiers)
     const average = 1 + (hitDie / 2);
     const levelsAfterOne = level - 1;
 
-    if (level === 1) 
-      return this.hitPoints = lvlOneFormula; 
-    else if (level > 1) 
-      return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne); 
+    if (level === 1)
+      return this.hitPoints = lvlOneFormula;
+    else if (level > 1)
+      return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne);
 
     return this.hitPoints = 0;
-  }
-
-  getFromJson(toGet: string) {
-    this._dndApiService.getFromJson(`${toGet}`).subscribe((data: any[]) => {
-      this.skillData = data.map((item: any) => ({ name: item.name, stat: item.ability_score.name }));
-      console.log(this.skillData)
-    });
   }
 }
 
