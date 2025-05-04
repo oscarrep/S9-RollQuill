@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { BoxComponent } from '../../../../shared/box/box.component';
+import { REVERSE_STAT_NAME_MAP } from '../../../../shared/stat-map';
 
 @Component({
   selector: 'app-stat-row',
@@ -19,37 +20,11 @@ export class StatRowComponent {
   }
 
   getShortName(fullName: string): string {
-    const map: { [key: string]: string } = {
-      Strength: 'STR',
-      Dexterity: 'DEX',
-      Constitution: 'CON',
-      Intelligence: 'INT',
-      Wisdom: 'WIS',
-      Charisma: 'CHA'
-    };
-    return map[fullName] || '';
+    return REVERSE_STAT_NAME_MAP[fullName] || '';
   }
 
   checkProficiency(proficiencies: string[], ability: string): boolean {
     const shortAbility = this.getShortName(ability);
     return proficiencies.includes(shortAbility)
   }
-
-  /*getSavingThrowModifier(modName: string, modValue: number): number {
-    const savingThrows = this.savingThrows();
-    const profBonus = this.proficiencyBonus();
-  
-    if (!savingThrows || !profBonus) {
-      throw new Error('Required data not available yet');
-    }
-  
-    const short = this.getShortName(modName);
-    const isProficient = savingThrows.includes(short);
-  
-    return isProficient ? modValue + profBonus : modValue;
-  }
-
-  get isReady(): boolean {
-    return !!this.savingThrows() && !!this.proficiencyBonus() && !!this.abilityModifiers();
-  }*/
 }

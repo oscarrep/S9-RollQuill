@@ -9,6 +9,7 @@ import { DndApiService } from '../../../services/dnd-api.service';
 import { forkJoin } from 'rxjs';
 import { SkillsSectionComponent } from "../../sections/skills-section/skills-section.component";
 import { DndJsonService } from '../../../services/dnd-json.service';
+import { STAT_NAME_MAP } from '../../../shared/stat-map';
 
 @Component({
   selector: 'app-character',
@@ -58,8 +59,11 @@ export class CharacterComponent implements OnInit {
       this.character = data;
       console.log(this.character);
 
-      this.abilityModifiers = this.getabilityModifiers(this.character.ability_scores)!;
+
       this.abilityScores = this.transformAbilityScores(this.character.ability_scores)!;
+      this.abilityScores = this.calculateRaceStatBonuses(this.abilityScores, this.character.ability_bonuses)!;
+      this.abilityModifiers = this.getabilityModifiers(this.abilityScores)!;
+
       this.skillProficiencies = this.character?.classSkills.concat(this.character.backgroundSkills);
       this.savingThrowProficiencies = this.character?.savingThrows;
 
@@ -85,20 +89,14 @@ export class CharacterComponent implements OnInit {
     });
   }
 
-  getabilityModifiers(ability_scores ?: { [key: string]: [{ name: string; value: number }] }): { [key: string]: number } | undefined {
-      if(!ability_scores) return;
+  getabilityModifiers(abilityScores: { [key: string]: number }) {
+    const modifiers: { [key: string]: number } = {};
 
-      const modifiers: { [key: string]: number } = {};
-
-    for (const key in ability_scores) {
-      const scoreArray = ability_scores[key];
-      if (scoreArray && scoreArray.length > 0) {
-        const score = scoreArray[0];
-        if (score && typeof score.value === 'number')
-          modifiers[score.name] = this.calculateStatModifier(score.value);
-      }
+    for (const key in abilityScores) {
+      const score = abilityScores[key];
+      modifiers[key] = this.calculateStatModifier(score);
     }
-    console.log(modifiers)
+
     return modifiers;
   }
 
@@ -117,6 +115,18 @@ export class CharacterComponent implements OnInit {
 
   calculateStatModifier(stat: number) { return Math.floor((stat - 10) / 2); }
   calculateArmorClass(stat: number) { return this.armorClass = 10 + stat; }
+  calculateRaceStatBonuses(abilityScores: any, raceBonuses: any) {
+    const updatedScores = { ...abilityScores };
+
+    for (const bonus of raceBonuses) {
+      const fullName = STAT_NAME_MAP[bonus.name];
+      if (fullName && updatedScores[fullName] !== undefined) {
+        updatedScores[fullName] += bonus.value;
+      }
+    }
+
+    return updatedScores;
+  }
   calculateMaxHitPoints(hitDie: number, level: number) {
     const conModifier = this.abilityModifiers['Constitution'];
     const lvlOneFormula = hitDie + conModifier;
