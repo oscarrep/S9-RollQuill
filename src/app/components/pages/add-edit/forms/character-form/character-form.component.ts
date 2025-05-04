@@ -13,6 +13,7 @@ import { RaceFormComponent } from "../../../../sections/character-form/race-form
 import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
 import { SkillsFormComponent } from "../../../../sections/character-form/skills-form/skills-form.component";
 import { InputComponent } from '../../../../../shared/input/input.component';
+import { DndJsonService } from '../../../../../services/dnd-json.service';
 
 @Component({
   selector: 'app-character-form',
@@ -26,7 +27,7 @@ export class CharacterFormComponent {
   currentUser: User | null = null;
   currentUserId: string = '';
   form = inject(FormBuilder)
-  _dndService = inject(DndApiService)
+  _dndJSONService = inject(DndJsonService)
   _apiService = inject(ApiService)
   _navigationService = inject(NavigateService)
   _formValidation = inject(FormValidationService);
@@ -91,53 +92,22 @@ export class CharacterFormComponent {
   }
 
   ngOnInit() {
-    this.getFromJson('classes');
-    this.getFromJson('races');
-    this.getFromJson('skills');
-    this.statValueListeners();
-  }
-
-  getFromJson(toGet: string) {
-    this._dndService.getFromJson(`${toGet}`).subscribe((data: any[]) => {
-      switch (toGet) {
-        case 'classes':
-          this.classData = data.map((item: any) => ({
-            name: item.name,
-            subclasses: item.subclasses,
-            proficiency_choices: item.proficiency_choices,
-            saving_throws: item.saving_throws,
-            skillChoose: item.proficiency_choices[0].skillChoose
-          }));
-          this.classNames = this.classData.map((item: any) => item.name);
-          break;
-
-        case 'races':
-          this.raceData = data.map((item: any) => ({
-            name: item.name,
-            speed: item.speed,
-            ability_bonuses: item.ability_bonuses,
-            alignment: item.alignment,
-            age: item.age,
-            size: item.size,
-            size_description: item.size_description,
-            starting_proficiencies: item.starting_proficiencies,
-            languages: item.languages,
-            traits: item.traits,
-            subraces: item.subraces,
-          }));
-          this.raceNames = this.raceData.map((item: any) => item.name);
-          break;
-
-        case 'skills':
-          this.skillData = data.map((item: any) => ({ name: item.name }));
-          console.log(this.skillData)
-          break;
-
-        default:
-          console.warn(`case for '${toGet}' not handled`);
-          break;
-      }
+    this._dndJSONService.getClasses().subscribe(data => {
+      this.classData = data;
+      this.classNames = data.map(item => item.name);
     });
+  
+    this._dndJSONService.getRaces().subscribe(data => {
+      this.raceData = data;
+      this.raceNames = data.map(item => item.name);
+    });
+  
+    this._dndJSONService.getSkills().subscribe(data => {
+      this.skillData = data;
+      console.log(this.skillData);
+    });
+  
+    this.statValueListeners();
   }
 
   onStatChange(stat: string, event: Event) {
