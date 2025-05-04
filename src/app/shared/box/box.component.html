@@ -31,7 +31,12 @@
         <div class="num-big"> {{modifier()}} </div>
         <div class="bottom-row flex-center">
             <div class="num-small flex-center"> {{score()}} </div>
-            <div class="num-small flex-center"> {{modifier()}} </div>
+            @if(proficient()){
+            <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
+            }
+            @else{
+            <div class="num-small flex-center"> {{modifier()}}</div>
+            }
         </div>
     </div>
 </div>

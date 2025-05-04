@@ -9,24 +9,22 @@
 p {
     margin-top: 0.1rem;
     margin-bottom: 0;
-    font-family:zain;
+    font-family: zain;
 }
 
-.name{
+.name {}
 
-}
-
-.stat{
+.stat {
     font-weight: 300;
 }
 
-.modifier{
+.modifier {
     font-weight: bolder;
 }
 
 .checkbox-square,
 .checkbox-square:checked {
-    margin-top: 2px;
+    margin-top: 0.5rem;
     outline: 2px solid #373327;
 }
 
@@ -38,17 +36,10 @@ p {
     display: inline-block;
     flex-shrink: 0;
     cursor: pointer;
-    margin-top: 0.5rem;
 }
 
 .checkbox-square:checked {
     background-color: #373327;
-    border: 2px solid white;
-}
-
-.checkbox-square:disabled {
-    background-color: #FAEABD;
-    cursor: auto;
 }
 
 @media (max-width: 375px) {
@@ -59,19 +50,21 @@ p {
 
 @media (min-width: 376px) and (max-width: 575px) {
 
-    .skill-container{
+    .skill-container {
         width: clamp(11rem, 50vw, 17.5rem);
     }
 }
+
 @media (min-width: 576px) and (max-width: 768px) {
 
-    .skill-container{
+    .skill-container {
         width: clamp(17.5rem, 50vw, 21.8rem);
     }
 }
+
 @media (min-width: 769px) and (max-width: 992px) {
 
-    .skill-container{
+    .skill-container {
         width: clamp(21.8rem, 50vw, 28.25rem);
     }
 }

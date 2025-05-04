@@ -3,7 +3,8 @@
         @for(skill of displaySkills().slice(0,9); track skill.name){
         <div class="skill-container gap-2 d-block mb-1">
             <div class="d-flex gap-2 ms-2 me-3">
-                <div class="checkbox-square mt-2"></div>
+                <input disabled type="checkbox" class="checkbox-square"
+                    [checked]="proficiencies()?.includes(skill.name)" />
                 <p class="name">{{skill.name}}</p>
                 <div class="d-flex ms-auto gap-2">
                     <p class="stat hide-xs">{{skill.stat}}</p>
@@ -20,7 +21,8 @@
         @for(skill of displaySkills().slice(9,18); track skill.name){
         <div class="skill-container gap-2 d-block mb-1">
             <div class="d-flex gap-2 ms-2 me-3">
-                <div class="checkbox-square mt-2"></div>
+                <input disabled type="checkbox" class="checkbox-square"
+                    [checked]="proficiencies()?.includes(skill.name)" />
                 <p class="name">{{skill.name}}</p>
                 <div class="d-flex ms-auto gap-2">
                     <p class="stat hide-xs">{{skill.stat}}</p>

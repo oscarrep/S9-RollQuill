@@ -13,12 +13,12 @@ export class BoxComponent {
   num = input<number | string>();
   score = input<number>();
   proficiencyBonus = input<number>();
-  savingThrow = input<number>();
   modifier = input<number>();
   large = input<boolean>();
   long = input<boolean>();
   deathSaves = input<boolean>();
   statBox = input<boolean>();
+  proficient = input<boolean>();
   @Input() currentHp?: number | string;
   @Input() isHp: boolean = false;
 
@@ -30,4 +30,6 @@ export class BoxComponent {
     { type: 'success', checked: false },
     { type: 'success', checked: false }
   ];
+
+  calculateProficiency(modifier: number, pb: number) { return modifier + pb; }
 }

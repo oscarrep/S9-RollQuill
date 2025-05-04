@@ -1,7 +1,7 @@
 <div class="container flex-center">
 
     <div class="d-flex flex-column gap-2">
-        <app-stat-row [abilityModifiers]="modifierList().slice(0, 3)" [abilityScores]="scoreList().slice(0, 3)" [proficiencyBonus]="proficiencyBonus()"/>
-        <app-stat-row [abilityModifiers]="modifierList().slice(3, 6)" [abilityScores]="scoreList().slice(3, 6)" [proficiencyBonus]="proficiencyBonus()"/>
+        <app-stat-row [proficiencies]="proficiencies()" [abilityModifiers]="modifierList().slice(0, 3)" [abilityScores]="scoreList().slice(0, 3)" [proficiencyBonus]="proficiencyBonus()"/>
+        <app-stat-row [proficiencies]="proficiencies()" [abilityModifiers]="modifierList().slice(3, 6)" [abilityScores]="scoreList().slice(3, 6)" [proficiencyBonus]="proficiencyBonus()"/>
     </div>
 </div>

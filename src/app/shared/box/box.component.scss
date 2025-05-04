@@ -47,33 +47,34 @@
     font-size: 1.5rem;
 }
 
-.num-small {
+.num-small, .num-save {
     width: 1.875rem;
     height: 1.875rem;
     outline: 3px solid #373327;
     border-radius: 20%;
+    margin-bottom: 0.65rem;
+    margin-inline: 0.65rem;
+    padding-top: 0.35rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .title-stat,
 .num-small,
+.num-save,
 .num-big {
     text-align: center;
     font-weight: bold;
     font-family: zain;
 }
 
-.title-stat {
-    font-size: 1.5rem;
+.num-save{
+    background-color: #373327;
+    color: #FAEABD
 }
 
-.num-small {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-bottom: 0.65rem;
-    margin-inline: 0.65rem;
-    padding-top: 0.35rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+.title-stat {
+    font-size: 1.5rem;
 }
 
 .num-big {
@@ -136,7 +137,7 @@
         font-size: 2rem;
     }
 
-    .num-small {
+    .num-small, .num-save {
         width: 1.5rem;
         height: 1.5rem;
     }
@@ -177,7 +178,7 @@
         margin: 0.2rem;
     }
 
-    .num-small {
+    .num-small, .num-save {
         width: 2rem;
         height: 2rem;
         font-weight: bold;
@@ -212,7 +213,7 @@
         display: block;
     }
 
-    .num-small {
+    .num-small, .num-save {
         width: 1.5625rem;
         height: 1.5625rem;
         font-size: large;

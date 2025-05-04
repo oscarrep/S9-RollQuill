@@ -12,6 +12,7 @@ export class StatsSectionComponent {
   abilityScores = input<{ [key: string]: number }>();
   abilityModifiers = input<{ [key: string]: number }>();
   proficiencyBonus = input<number>()
+  proficiencies = input<string[]>()
 
   modifierList = this.mapEntries(this.abilityModifiers);
   scoreList = this.mapEntries(this.abilityScores);

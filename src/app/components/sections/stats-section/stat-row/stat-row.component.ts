@@ -10,6 +10,7 @@ import { BoxComponent } from '../../../../shared/box/box.component';
 export class StatRowComponent {
   abilityScores = input<{ name: string; value: number }[]>();
   abilityModifiers = input<{ name: string; value: number }[]>();
+  proficiencies = input<string[]>()
   savingThrows = input<string>()
   proficiencyBonus = input<number>()
 
@@ -27,6 +28,11 @@ export class StatRowComponent {
       Charisma: 'CHA'
     };
     return map[fullName] || '';
+  }
+
+  checkProficiency(proficiencies: string[], ability: string): boolean {
+    const shortAbility = this.getShortName(ability);
+    return proficiencies.includes(shortAbility)
   }
 
   /*getSavingThrowModifier(modName: string, modValue: number): number {
