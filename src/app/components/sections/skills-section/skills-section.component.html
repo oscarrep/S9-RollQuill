@@ -1,1 +1,26 @@
-<p>skills-section works!</p>
+<div class="d-flex gap-2">
+    <div class="flex-column">
+        @for(skill of displaySkills().slice(0,9); track skill.name){
+        <div class="skill-container gap-2 d-block">
+            <div class="d-flex gap-2 ms-2 me-3">
+                <div class="checkbox-square"></div>
+                <p>{{skill.name}}
+                <p class="hide-xs">({{skill.stat}})
+                <p>{{skill.modifier}}
+            </div>
+        </div>
+        }
+    </div>
+    <div class="flex-column">
+        @for(skill of displaySkills().slice(9,18); track skill.name){
+        <div class="skill-container gap-2 d-block">
+            <div class="d-flex gap-2 ms-2 me-3">
+                <div class="checkbox-square"></div>
+                <p>{{skill.name}}
+                <p class="hide-xs">({{skill.stat}})
+                <p>{{skill.modifier}}
+            </div>
+        </div>
+        }
+    </div>
+</div>

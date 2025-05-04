@@ -7,17 +7,18 @@ import { TopSectionComponent } from '../../sections/top-section/top-section.comp
 import { StatsSectionComponent } from '../../sections/stats-section/stats-section.component';
 import { DndApiService } from '../../../services/dnd-api.service';
 import { forkJoin } from 'rxjs';
+import { SkillsSectionComponent } from "../../sections/skills-section/skills-section.component";
 
 @Component({
   selector: 'app-character',
-  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent],
+  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'
 })
 export class CharacterComponent implements OnInit {
   router = inject(Router);
   private _apiService = inject(ApiService);
-  private _dndApiServce = inject(DndApiService);
+  private _dndApiService = inject(DndApiService);
   character?: Character;
   race?: any;
   class?: any;
@@ -33,9 +34,11 @@ export class CharacterComponent implements OnInit {
   hitPoints: number = 0;
   currentHp: number = 0;
   @Input() id!: string;
+  skillData: { name: string, stat: string }[]|undefined;
 
   ngOnInit(): void {
     this.getCharData();
+    this.getFromJson('skills');
   }
 
   getCharList(): void {
@@ -56,9 +59,9 @@ export class CharacterComponent implements OnInit {
       this.savingThrowProficiencies = this.character?.savingThrows;
 
       forkJoin({
-        race: this._dndApiServce.getRaceInfo(this.character.race.toLowerCase()),
-        class: this._dndApiServce.getClassInfo(this.character.class.toLowerCase()),
-        levelInfo: this._dndApiServce.getClassLevelInfo(this.character.class.toLowerCase(), this.character.level)
+        race: this._dndApiService.getRaceInfo(this.character.race.toLowerCase()),
+        class: this._dndApiService.getClassInfo(this.character.class.toLowerCase()),
+        levelInfo: this._dndApiService.getClassLevelInfo(this.character.class.toLowerCase(), this.character.level)
       }).subscribe(({ race: raceData, class: classData, levelInfo: levelData }) => {
         this.race = raceData;
         this.class = classData;
@@ -85,12 +88,11 @@ export class CharacterComponent implements OnInit {
       const scoreArray = ability_scores[key];
       if (scoreArray && scoreArray.length > 0) {
         const score = scoreArray[0];
-        if (score && typeof score.value === 'number') {
+        if (score && typeof score.value === 'number')
           modifiers[score.name] = this.calculateStatModifier(score.value);
-        }
       }
     }
-
+console.log(modifiers)
     return modifiers;
   }
 
@@ -101,9 +103,7 @@ export class CharacterComponent implements OnInit {
 
     for (const key in ability_scores) {
       const arr = ability_scores[key];
-      if (arr && arr.length > 0) {
-        output[arr[0].name] = arr[0].value;
-      }
+      if (arr && arr.length > 0) output[arr[0].name] = arr[0].value;
     }
 
     return output;
@@ -117,13 +117,19 @@ export class CharacterComponent implements OnInit {
     const average = 1 + (hitDie / 2);
     const levelsAfterOne = level - 1;
 
-    if (level === 1) {
-      return this.hitPoints = lvlOneFormula;
-    } else if (level > 1) {
-      return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne);
-    }
+    if (level === 1) 
+      return this.hitPoints = lvlOneFormula; 
+    else if (level > 1) 
+      return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne); 
 
     return this.hitPoints = 0;
+  }
+
+  getFromJson(toGet: string) {
+    this._dndApiService.getFromJson(`${toGet}`).subscribe((data: any[]) => {
+      this.skillData = data.map((item: any) => ({ name: item.name, stat: item.ability_score.name }));
+      console.log(this.skillData)
+    });
   }
 }
 
