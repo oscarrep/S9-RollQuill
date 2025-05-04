@@ -10,6 +10,7 @@ export class SkillsSectionComponent {
   abilityModifiers = input<{ [key: string]: number }>();
   skillData = input<{ name: string, stat: string }[] | undefined>();
   proficiencyBonus = input<number>()
+  proficiencies = input<string[]>()
 
   abilityShorts: { [key: string]: string } = {
     'STR': 'Strength',
@@ -32,5 +33,7 @@ export class SkillsSectionComponent {
       return { ...skill, modifier };
     });
   });
+
+  calculateProficiency(modifier: number, pb: number) { return modifier + pb; }
 
 }
