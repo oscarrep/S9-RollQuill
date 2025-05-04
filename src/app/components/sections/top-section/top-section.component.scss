@@ -24,9 +24,10 @@
 
 @media (min-width: 376px) and (max-width: 575.98px) {
     .foto-holder {
-        width: clamp(12rem, 30vw, 12rem);
-        height: clamp(12rem, 30vw, 12rem);
+        width: clamp(12rem, 50vw, 15.56rem);
+        height: clamp(12rem, 50vw, 15.56rem);
     }
+    .top-container{width:95vw}
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
