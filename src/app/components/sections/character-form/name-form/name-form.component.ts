@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-name-form',
   imports: [InputComponent, ReactiveFormsModule, CommonModule],
+  standalone:true,
   templateUrl: './name-form.component.html',
   styleUrl: './name-form.component.scss'
 })

@@ -4,6 +4,7 @@ import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule
 
 @Component({
   selector: 'app-input',
+  standalone:true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',

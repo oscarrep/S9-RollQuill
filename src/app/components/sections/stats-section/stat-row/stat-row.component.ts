@@ -5,6 +5,7 @@ import { REVERSE_STAT_NAME_MAP } from '../../../../shared/stat-map';
 @Component({
   selector: 'app-stat-row',
   imports: [BoxComponent],
+  standalone:true,
   templateUrl: './stat-row.component.html',
   styleUrl: './stat-row.component.scss'
 })

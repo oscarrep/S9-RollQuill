@@ -5,6 +5,7 @@ import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-race-form',
   imports: [CommonModule, ReactiveFormsModule],
+  standalone:true,
   templateUrl: './race-form.component.html',
   styleUrl: './race-form.component.scss'
 })

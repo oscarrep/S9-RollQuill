@@ -6,6 +6,7 @@ type DeathSaveType = 'fail' | 'success';
 @Component({
   selector: 'app-box',
   imports: [DeathCheckboxComponent],
+  standalone:true,
   templateUrl: './box.component.html',
   styleUrl: './box.component.scss'
 })

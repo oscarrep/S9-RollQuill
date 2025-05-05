@@ -15,6 +15,7 @@ import { loadHpLocally } from '../../../services/hp.service';
 
 @Component({
   selector: 'app-character',
+  standalone:true,
   imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'

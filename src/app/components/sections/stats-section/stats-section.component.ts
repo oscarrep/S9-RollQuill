@@ -3,6 +3,7 @@ import { StatRowComponent } from "./stat-row/stat-row.component";
 
 @Component({
   selector: 'app-stats-section',
+  standalone:true,
   imports: [StatRowComponent],
   templateUrl: './stats-section.component.html',
   styleUrl: './stats-section.component.scss'

@@ -7,6 +7,7 @@ import { User } from '../../../interfaces/user';
 import { Character } from '../../../interfaces/character';
 @Component({
   selector: 'app-dashboard',
+  standalone:true,
   imports: [SectionCharacterComponent, SectionCompendiumComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

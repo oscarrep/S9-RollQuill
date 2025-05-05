@@ -4,6 +4,7 @@ import { CardCompendiumComponent } from '../../widgets/card-compendium/card-comp
 @Component({
   selector: 'app-section-compendium',
   imports: [CardCompendiumComponent],
+  standalone:true,
   templateUrl: './section-compendium.component.html',
   styleUrl: './section-compendium.component.scss'
 })
