@@ -1,32 +1,56 @@
-@if(deathSaves() === true) {
-<div class="square-death column-center" [class.long-box]="long()" [class.large-box]="large()">
-    <div class="title"> {{title()}} </div>
-    <div class="bottom-row flex-wrap d-flex gap-2 justify-content-center">
-        @for (save of deathSavesArr; track save) {
-            <app-death-checkbox
-              [type]="save.type"
-              [checked]="save.checked"
-              (checkedChange)="save.checked = $event"
-            />
-          }
+@if (deathSaves() === true) {
+<div class="square-death column-center" [class.large-box]="large()">
+    <div class="title-death"> {{ title() }} </div>
+    <div class="bottom-row d-flex flex-column align-items-center">
+        <div class="d-flex text-center">
+            <div class="death-checks column-gap-5 row-gap-4">
+                <div class="d-flex gap-2">
+                    💀
+                    @for (save of deathSavesArr.slice(0, 3); track save) {
+                    <app-death-checkbox [type]="save.type" [checked]="save.checked"
+                        (checkedChange)="save.checked = $event" />
+                    }
+                </div>
+                <div class="d-flex gap-2">
+                    💗
+                    @for (save of deathSavesArr.slice(3, 6); track save) {
+                    <app-death-checkbox [type]="save.type" [checked]="save.checked"
+                        (checkedChange)="save.checked = $event" />
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 }
+
 @else if(statBox() === true) {
 <div class="square-stat column-center" [class.large-box]="large()">
-    <div class="title-stat"> {{title()}} </div>
-    <div class="num-big"> {{modifier()}} </div>
-
-    <div class="bottom-row flex-space-between">
-        <div class="num-small flex-center"> {{score()}} </div>
-        <div class="mx-3 checkbox-square"></div>
-        <div class="num-small flex-center"> {{modifier()}} </div>
+    <div class="column-center stat-gap">
+        <div class="title-stat"> {{title()}} </div>
+        <div class="num-big"> {{modifier()}} </div>
+        <div class="bottom-row flex-center">
+            <div class="num-small flex-center"> {{score()}} </div>
+            @if(proficient()){
+            <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
+            }
+            @else{
+            <div class="num-small flex-center"> {{modifier()}}</div>
+            }
+        </div>
     </div>
 </div>
 }
+
 @else {
-<div class="square column-center" [class.large-box]="large()">
-    <div class="title"> {{title()}} </div>
-    <div class="num"> {{num()}} </div>
+<div class="square column-center" [class.large-box]="large()" [class.hp-box]="isHp" (click)="openModal()">
+    <div class="title"> {{ title() }} </div>
+    @if(isHp){
+    <div class="column-center">
+        <p class="num">{{currentHp}}</p>
+        <p class="max-hp">Max Hp: <b class="ms-1">{{num()}}</b> </p>
+    </div>
+    }
+    @else{ <div class="num"> {{ num() }} </div> }
 </div>
 }

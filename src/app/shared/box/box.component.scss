@@ -13,8 +13,8 @@
 }
 
 .square-death {
-    height: 4.5rem;
-    width: 10rem;
+    height: 5rem;
+    width: 12rem;
 }
 
 .square-stat {
@@ -22,13 +22,15 @@
 }
 
 .title,
+.title-death,
 .num {
     font-family: zain;
     font-weight: bold;
 }
 
+.title-death,
 .title {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
 }
 
 .num {
@@ -42,169 +44,226 @@
 
 .square.large-box {
     height: 6.25rem;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
 }
 
-.num-small {
+.num-small, .num-save {
     width: 1.875rem;
     height: 1.875rem;
     outline: 3px solid #373327;
     border-radius: 20%;
+    margin-bottom: 0.65rem;
+    margin-inline: 0.65rem;
+    padding-top: 0.35rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .title-stat,
 .num-small,
+.num-save,
 .num-big {
     text-align: center;
     font-weight: bold;
     font-family: zain;
 }
 
-.title-stat,
-.num-small {
-    font-size: x-large;
+.num-save{
+    background-color: #373327;
+    color: #FAEABD
+}
+
+.title-stat {
+    font-size: 1.5rem;
 }
 
 .num-big {
-    font-size: 2.0625rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-block: -0.3125rem;
 }
 
-.bottom-row {
-    margin-top: 0.3125rem;
+.fail-success {
+    margin-top: -1rem;
 }
 
+.hp-box .title {
+    font-size: 2rem;
+    font-weight: bold;
+}
 
-.checkbox-square,
-.checkbox-square:checked {
+.hp-box .num {
+    font-size: 2rem;
+}
+
+.max-hp {
     outline: 3px solid #373327;
+    display: flex;
+    border-radius: 15px;
+    padding: 0.3rem 2rem;
+    font-size: large;
 }
 
-.checkbox-square {
-    border-radius: 20%;
-    width: 1.25rem;
-    height: 1.25rem;
-    appearance: none;
-    display: inline-block;
-    flex-shrink: 0;
+.death-checks{
+    display: flex;
 }
 
-.checkbox-square:checked {
-    background-color: #373327;
-    border: 3px solid white;
-}
-
-.square.long-box {
-    height: 5rem;
-    width: 10rem;
-    background-color: #373327;
-    font-size: 1.25rem;
-}
-
-@media (max-width: 576px) {
-    .square-stat {
-        max-height: 25rem;
-    }
-    .title-stat{
-        font-size: larger;
-    }
-
+@media (max-width: 375px) {
     .square {
-        height: 7rem;
-        font-size: larger;
+        height: 5.25rem;
+        font-size: 1.125rem;
     }
 
     .square.large-box {
-        height: 10rem;
-        font-size: x-large;
+        font-size: 1.25rem;
+        width: 11rem;
+        height: 11rem;
     }
 
-    .square.long-box {
-        height: 5rem;
-        width: 10rem;
-        background-color: #373327;
-        font-size: x-large;
+    .square-death {
+        height: 7rem;
+        width: 95vw;
+    }
+
+    .square-stat {
+        height: 7.285rem;
+    }
+
+    .title {
+        font-size: 1.38rem;
     }
 
     .num-big {
-        font-size: 1,6875rem;
+        font-size: 2rem;
     }
 
-    .num-small {
-        width: 1.875rem;
-        height: 1.875rem;
-        font-size: medium;
-        font-weight: bold;
-        padding-top: 2px;
-    }
-
-    .checkbox-square {
-        width: 0,9375rem;
-        height: 0,9375rem;
+    .num-small, .num-save {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     .bottom-row {
-        flex-direction: row;
-        margin-top: 3px;
+        margin-top: 0.25rem;
     }
 }
 
-@media (min-width: 577px) and (max-width: 768px) {
-    .square.large-box {
-        height: 10rem;
-        font-size: x-large;
+@media (min-width: 376px) and (max-width: 575.98px) {
+    .square {
+        width: clamp(4rem, 50vw, 5.75rem);
+        height: clamp(4rem, 50vw, 5.75rem);
     }
-    
+
+    .square.large-box {
+        font-size: 1.25rem;
+        width: clamp(10rem, 50vw, 20rem);
+        height: clamp(12rem, 50vw, 12rem);
+    }
+
+    .square-death {
+        width: 95vw;
+        height: 7rem;
+    }
+
     .square-stat {
-        max-height: 8,4375rem;
+        width: clamp(8rem, 50vw, 12rem);
+        height: clamp(8rem, 50vw, 12rem);
+    }
+
+    .title-stat {
+        font-size: 1.7rem;
     }
 
     .num-big {
-        font-size: 1,875rem;
+        font-size: 3rem;
+        margin: 0.2rem;
     }
 
-    .num-small {
-        width: 1,5625rem;
-        height: 1,5625rem;
+    .num-small, .num-save {
+        width: 2rem;
+        height: 2rem;
+        font-weight: bold;
+        padding-top: 0.125rem;
+    }
+
+    .bottom-row {
+        gap: 3.5rem;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .square.large-box {
+        width: clamp(12rem, 30vw, 15rem);
+        height: clamp(6rem, 30vw, 7rem);
+        font-size: clamp(1.25rem, 30vw, 2rem);
+    }
+
+    .square {
+        min-height: clamp(6rem, 30vw, 7rem);
+        min-width: clamp(6rem, 30vw, 7rem);
+        font-size: 1.125rem;
+    }
+
+    .square-death {
+        width: clamp(12rem, 30vw, 15rem);
+        height: clamp(6rem, 30vw, 7rem);
+    }
+
+    .death-checks{
+        display: block;
+    }
+
+    .num-small, .num-save {
+        width: 1.5625rem;
+        height: 1.5625rem;
         font-size: large;
         font-weight: bold;
-        padding-top: 0,125rem;
-    }
-
-    .checkbox-square {
-        width: 1,125rem;
-        height: 1,125rem;
+        padding-top: 0, 125rem;
     }
 
     .bottom-row {
         flex-direction: row;
         margin-top: 0.25rem;
     }
+
+    .max-hp {
+        margin-top: -1.5rem;
+        padding: 0.1rem 2rem;
+    }
 }
 
-@media (min-width: 769px) and (max-width: 993px) {
+@media (min-width: 768.2px) and (max-width: 992px) {
+    .square.large-box {
+        width: 15rem;
+        height: 10rem;
+        font-size: 2rem;
+    }
+
+    .square {
+        min-height: 10rem;
+        min-width: 10rem;
+        font-size: 1.125rem;
+    }
+
+    .square-death {
+        width: 15rem;
+        height: 10rem;
+    }
+
+    .death-checks{
+        display: flex;
+        flex-direction: column;
+    }
+
     .square-stat {
-        max-height: 8.75rem;
+        width: 15rem;
+        height: 10rem;
     }
 
-    .num-big {
-        font-size: 2,0625rem;
+    .num-big, .num {
+        font-size: 2.5rem;
+        margin: 0.2rem;
     }
 
-    .num-small {
-        width: 1,875rem;
-        height: 1,875rem;
-        font-size: x-large;
-        font-weight: bold;
-    }
-
-    .checkbox-square {
-        width: 1,25rem;
-        height: 1,25rem;
-    }
-
-    .bottom-row {
-        margin-top: 0,0625rem;
-    }
+    .title{ font-size: 2rem;}
 }

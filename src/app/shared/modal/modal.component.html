@@ -1,0 +1,9 @@
+<div class="modal">
+    <div class="modal-content">
+        <app-button (click)="closed.emit()" [text]="'Close'" />
+        @if(type === 'hp') {
+        <app-hp-modal [currentHp]="currentHp" [maxHp]="maxHp" (updated)="hpUpdated.emit($event)"
+            (onClose)="closed.emit()" [characterId]="characterId"/>
+        }
+    </div>
+</div>

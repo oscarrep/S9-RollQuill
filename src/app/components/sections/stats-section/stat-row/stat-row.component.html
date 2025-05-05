@@ -1,6 +1,5 @@
 <div class="d-flex gap-2 justify-content-center">
     @for(mod of abilityModifiers(); track mod.value){
-    <app-box [title]="mod.name" [score]="getScoreFor(mod.name)" [modifier]="mod.value" [large]="true" [statBox]="true"
-        [savingThrow]="" />
+    <app-box [title]="mod.name" [proficiencyBonus]="proficiencyBonus()" [score]="getScoreFor(mod.name)" [modifier]="mod.value" [large]="true" [statBox]="true" [proficient]="checkProficiency(proficiencies()!, mod.name)"/>
     }
 </div>
