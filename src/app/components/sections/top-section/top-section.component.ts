@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 import { BoxComponent } from '../../../shared/box/box.component';
 
 @Component({
@@ -14,5 +14,6 @@ export class TopSectionComponent {
   hp = input<number>()
   currentHp = input<number>()
   proficiencyBonus = input<number>()
+  @Input() characterId!: string;
   @Output() open = new EventEmitter<string>();
 }

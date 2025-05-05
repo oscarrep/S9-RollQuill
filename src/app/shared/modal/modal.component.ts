@@ -13,7 +13,7 @@ export class ModalComponent {
   @Input() type: string | null = null;
   @Input() currentHp!: number;
   @Input() maxHp!: number;
-
+  @Input() characterId!: string;
   @Output() closed = new EventEmitter<void>();
   @Output() hpUpdated = new EventEmitter<number>();
 

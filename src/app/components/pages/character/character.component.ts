@@ -11,6 +11,7 @@ import { SkillsSectionComponent } from "../../sections/skills-section/skills-sec
 import { DndJsonService } from '../../../services/dnd-json.service';
 import { STAT_NAME_MAP } from '../../../shared/stat-map';
 import { ModalComponent } from '../../../shared/modal/modal.component';
+import { loadHpLocally } from '../../../services/hp.service';
 
 @Component({
   selector: 'app-character',
@@ -40,6 +41,8 @@ export class CharacterComponent implements OnInit {
   @Input() id!: string;
   skillData: { name: string, stat: string }[] | undefined;
   modalType: string | null = null;
+  characterId!: string;
+
 
   ngOnInit(): void {
     this.getCharData();
@@ -59,6 +62,7 @@ export class CharacterComponent implements OnInit {
   getCharData(): void {
     this._apiService.getCharacter(this.id).subscribe((data: Character) => {
       this.character = data;
+      this.characterId = data._id!;
       console.log(this.character);
 
 
@@ -87,7 +91,7 @@ export class CharacterComponent implements OnInit {
 
         this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
         this.calculateArmorClass(this.abilityModifiers['Dexterity']);
-        this.currentHp = this.hitPoints;
+        this.currentHp = loadHpLocally(this.character?._id!, this.hitPoints);
       });
     });
   }

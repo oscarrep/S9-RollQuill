@@ -22,6 +22,8 @@ export class BoxComponent {
   proficient = input<boolean>();
   @Input() currentHp?: number | string;
   @Input() isHp: boolean = false;
+  @Input() characterId!: string;
+  
   @Output() open = new EventEmitter<string>();
 
   deathSavesArr: { type: DeathSaveType; checked: boolean }[] = [

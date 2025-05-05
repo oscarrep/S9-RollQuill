@@ -13,7 +13,7 @@
 
     @if (modalType) {
     <app-modal [type]="modalType" [currentHp]="currentHp" [maxHp]="hitPoints" (closed)="onCloseModal()"
-        (hpUpdated)="currentHp = $event" />
+        (hpUpdated)="currentHp = $event" [characterId]="characterId"/>
     }
 
 </div>
