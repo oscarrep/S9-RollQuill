@@ -2,8 +2,8 @@
     background-color: rgba(55, 51, 39, 0.5);
     border-radius: 20px;
     border: none;
-    height: 130px;
-    width: 380px;
+    height: 8.125rem;
+    width: 23.75rem;
 
     .name-level,
     .race-class {
@@ -14,21 +14,83 @@
         background-color: white;
         width: 7rem;
         height: 7rem;
+        aspect-ratio: 1;
         border-radius: 15px;
     }
 
 }
 
+p {
+    margin-top: -1rem;
+}
+
+h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem;
+}
+
+.buttons{
+    display:flex;
+    flex-direction: column;
+    gap: 0.5rem
+}
+
 .card:hover {
     background-color: rgba(255, 255, 255, 0.5);
-    cursor:pointer;
+    cursor: pointer;
 
     .foto-holder {
         background-color: #373327;
     }
 
-    .name-level,
-    .race-class {
+    .name-level {
         color: #373327;
+    }
+}
+
+@media (max-width:375px) {
+    .card {
+        width: 20.5rem;
+        height: 6rem;
+
+        .foto-holder {
+            width: 5rem;
+            height: 5rem;
+        }
+    }
+
+    .hide-xs {
+        display: none;
+    }
+}
+
+@media (min-width:376px) and (max-width: 575.98px) {
+    .card {
+        width: 33rem;
+        height: 8rem;
+
+        .foto-holder {
+            width: 7rem;
+            height: 7rem;
+        }
+    }
+
+    .hide-xs {
+        display: none;
+    }
+}
+@media (min-width:576px) and (max-width: 768px) {
+    .card {
+        width: clamp(10rem, 50vw, 20.5rem);
+        height: 8rem;
+
+        .foto-holder {
+            width: 7rem;
+            height: 7rem;
+        }
+    }
+
+    .hide-md {
+        display: none;
     }
 }
