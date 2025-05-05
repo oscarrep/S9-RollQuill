@@ -1,36 +1,46 @@
-.header{
+
+.header {
+    top: 0;
+    z-index: 1000;
     background-color: #373327;
     height: 5rem;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding-inline: 1rem;
+    overflow: hidden;
+    position: sticky;
 }
 
-h1{
+.title {
+    left: 50%;
     font-family: pacifico;
     color: white;
-    font-size: xx-large;
+    font-size: 1.75rem;
+    white-space: nowrap;
 }
 
-.profile, .profile-body, .profile-head{
-    border-radius: 50px;
-    
-}
-.profile-body, .profile-head{
-    background-color: white;
-}
-
-.profile{
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 40px;
     width: 40px;
+    border-radius: 50px;
     outline: solid 2px white;
+    cursor: pointer;
     flex-direction: column;
-    .profile-head{
+
+    .profile-head,
+    .profile-body {
+        background-color: white;
+        border-radius: 50px;
+    }
+
+    .profile-head {
         height: 10px;
         width: 10px;
     }
-    .profile-body{
+
+    .profile-body {
         height: 10px;
         width: 20px;
         margin-top: 3px;
