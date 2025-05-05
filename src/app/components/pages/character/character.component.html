@@ -2,11 +2,17 @@
     [charClass]="class?.name" [charSubClass]="character?.subclass" [charLevel]="character?.level" />
 <div class="column-center gap-3">
 
-    <app-top-section [armorClass]="armorClass" [hp]="hitPoints" [currentHp]="7"
+    <app-top-section [armorClass]="armorClass" [hp]="hitPoints" [currentHp]="7" (open)="onOpenModal($event)"
         [initiative]="abilityModifiers['Dexterity']" [speed]="race?.speed" [proficiencyBonus]="levelInfo?.prof_bonus" />
 
-    <app-stats-section [proficiencies]="savingThrowProficiencies" [abilityScores]="abilityScores" [abilityModifiers]="abilityModifiers"
-        [proficiencyBonus]="levelInfo?.prof_bonus" />
+    <app-stats-section [proficiencies]="savingThrowProficiencies" [abilityScores]="abilityScores"
+        [abilityModifiers]="abilityModifiers" [proficiencyBonus]="levelInfo?.prof_bonus" />
 
-    <app-skills-section [proficiencies]="skillProficiencies" [abilityModifiers]="abilityModifiers" [proficiencyBonus]="levelInfo?.prof_bonus" [skillData]="skillData"/>
+    <app-skills-section [proficiencies]="skillProficiencies" [abilityModifiers]="abilityModifiers"
+        [proficiencyBonus]="levelInfo?.prof_bonus" [skillData]="skillData" />
+
+    @if (modalType) {
+    <app-modal [type]="modalType" (closed)="onCloseModal()" />
+    }
+
 </div>

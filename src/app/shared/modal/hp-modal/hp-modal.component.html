@@ -1,0 +1,11 @@
+<div class="hp-controls">
+    <app-button [text]="'-10'" (buttonClick)="changeHp(-10)" />
+    <app-button [text]="'-5'" (buttonClick)="changeHp(-5)" />
+    <app-button [text]="'-1'" (buttonClick)="changeHp(-1)" />
+
+    <app-input [value]="hp.toString()" type="number" placeholder="HP" (input)="onHpInput($event)" />
+
+    <app-button [text]="'+1'" (buttonClick)="changeHp(1)" />
+    <app-button [text]="'+5'" (buttonClick)="changeHp(5)" />
+    <app-button [text]="'+10'" (buttonClick)="changeHp(10)" />
+</div>

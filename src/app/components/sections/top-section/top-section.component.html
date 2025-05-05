@@ -2,7 +2,7 @@
     <div class="d-block d-sm-none d-md-none top-container">
         <div class="d-flex gap-2 mb-2">
             <img class="foto-holder" src="assets/swordsman-color.png" alt="foto">
-            <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true" />
+            <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true" (open)="open.emit($event)"/>
         </div>
         <div class="d-flex gap-2 column-center">
             <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
@@ -24,7 +24,7 @@
 
             <div class="d-flex flex-column gap-2">
                 <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true"
-                    [isHp]="true" />
+                    [isHp]="true" (open)="open.emit($event)"/>
                 <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
             </div>
             <div class="d-block">
@@ -48,7 +48,7 @@
 
             <div class="d-flex flex-column gap-2">
                 <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true"
-                    [isHp]="true" />
+                    [isHp]="true" (open)="open.emit($event)"/>
                 <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
             </div>
             <div class="d-block">

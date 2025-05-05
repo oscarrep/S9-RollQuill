@@ -10,10 +10,11 @@ import { forkJoin } from 'rxjs';
 import { SkillsSectionComponent } from "../../sections/skills-section/skills-section.component";
 import { DndJsonService } from '../../../services/dnd-json.service';
 import { STAT_NAME_MAP } from '../../../shared/stat-map';
+import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-character',
-  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent],
+  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'
 })
@@ -38,6 +39,7 @@ export class CharacterComponent implements OnInit {
   currentHp: number = 0;
   @Input() id!: string;
   skillData: { name: string, stat: string }[] | undefined;
+  modalType: string | null = null;
 
   ngOnInit(): void {
     this.getCharData();
@@ -140,7 +142,13 @@ export class CharacterComponent implements OnInit {
 
     return this.hitPoints = 0;
   }
+
+
+  onOpenModal(type: string) {
+    this.modalType = type;
+  }
+  
+  onCloseModal() {
+    this.modalType = null;
+  }
 }
-
-
-
