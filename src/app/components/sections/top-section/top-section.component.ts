@@ -17,4 +17,8 @@ export class TopSectionComponent {
   proficiencyBonus = input<number>()
   @Input() characterId!: string;
   @Output() open = new EventEmitter<string>();
+
+  openImgModal(){
+    this.open.emit('img');
+  }
 }

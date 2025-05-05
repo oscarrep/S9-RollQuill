@@ -11,9 +11,11 @@
     <app-skills-section [proficiencies]="skillProficiencies" [abilityModifiers]="abilityModifiers"
         [proficiencyBonus]="levelInfo?.prof_bonus" [skillData]="skillData" />
 
-    @if (modalType) {
+    @if (modalType=='hp') {
     <app-modal [type]="modalType" [currentHp]="currentHp" [maxHp]="hitPoints" (closed)="onCloseModal()"
         (hpUpdated)="currentHp = $event" [characterId]="characterId"/>
+    }@else if (modalType=='img') {
+        <app-modal [type]="modalType" (closed)="onCloseModal()" />
     }
 
 </div>

@@ -1,9 +1,10 @@
 <div class="d-flex mt-3 align-items-start">
     <div class="d-block d-sm-none d-md-none top-container">
         <div class="d-flex gap-2 mb-2">
-            <img class="foto-holder" src="assets/swordsman-color.png" alt="foto">
+            <div> <img class="foto-holder" src="assets/swordsman-color.png" alt="foto" (click)="openImgModal()">
+            </div>
             <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true"
-                (open)="open.emit($event)" [characterId]="characterId"/>
+                (open)="open.emit($event)" [characterId]="characterId" />
         </div>
         <div class="d-flex gap-2 column-center">
             <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
@@ -25,7 +26,7 @@
 
             <div class="d-flex flex-column gap-2">
                 <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true"
-                    (open)="open.emit($event)" [characterId]="characterId"/>
+                    (open)="open.emit($event)" [characterId]="characterId" />
                 <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
             </div>
             <div class="d-block">

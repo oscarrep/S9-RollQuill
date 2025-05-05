@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HpModalComponent } from "./hp-modal/hp-modal.component";
 import { ButtonComponent } from '../button/button.component';
+import { ImgModalComponent } from './img-modal/img-modal.component';
 
 @Component({
   selector: 'app-modal',
   standalone:true,
-  imports: [HpModalComponent, ButtonComponent],
+  imports: [HpModalComponent, ButtonComponent, ImgModalComponent],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss'
 })
