@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-section-character',
+  standalone:true,
   imports: [CardCharacterComponent, CardCreateComponent, ButtonComponent],
   templateUrl: './section-character.component.html',
   styleUrl: './section-character.component.scss'

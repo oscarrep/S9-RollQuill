@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-death-checkbox',
   imports: [],
+  standalone:true,
   templateUrl: './death-checkbox.component.html',
   styleUrl: './death-checkbox.component.scss'
 })

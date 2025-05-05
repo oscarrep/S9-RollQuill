@@ -6,6 +6,7 @@ import { SkillCheckboxComponent } from '../../../../shared/skill-checkbox/skill-
 @Component({
   selector: 'app-class-form',
   imports: [CommonModule, ReactiveFormsModule, SkillCheckboxComponent],
+  standalone:true,
   templateUrl: './class-form.component.html',
   styleUrl: './class-form.component.scss'
 })

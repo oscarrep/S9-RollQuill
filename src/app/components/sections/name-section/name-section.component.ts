@@ -4,6 +4,7 @@ import { ButtonComponent } from '../../../shared/button/button.component';
 @Component({
   selector: 'app-name-section',
   imports: [ButtonComponent],
+  standalone:true,
   templateUrl: './name-section.component.html',
   styleUrl: './name-section.component.scss'
 })

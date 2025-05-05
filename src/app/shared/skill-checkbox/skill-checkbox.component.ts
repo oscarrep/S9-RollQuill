@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-skill-checkbox',
   imports: [],
+  standalone:true,
   templateUrl: './skill-checkbox.component.html',
   styleUrl: './skill-checkbox.component.scss'
 })

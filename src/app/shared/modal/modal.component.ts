@@ -4,6 +4,7 @@ import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-modal',
+  standalone:true,
   imports: [HpEditModalComponent, ButtonComponent],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss'

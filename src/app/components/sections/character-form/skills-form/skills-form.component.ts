@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-skills-form',
   imports: [SkillCheckboxComponent, CommonModule, ReactiveFormsModule],
+  standalone:true,
   templateUrl: './skills-form.component.html',
   styleUrl: './skills-form.component.scss'
 })

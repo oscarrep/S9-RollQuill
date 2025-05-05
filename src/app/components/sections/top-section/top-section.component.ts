@@ -4,6 +4,7 @@ import { BoxComponent } from '../../../shared/box/box.component';
 @Component({
   selector: 'app-top-section',
   imports: [BoxComponent],
+  standalone:true,
   templateUrl: './top-section.component.html',
   styleUrl: './top-section.component.scss'
 })

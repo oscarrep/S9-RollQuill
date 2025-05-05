@@ -4,6 +4,7 @@ import { AppComponent } from '../../../app.component';
 @Component({
   selector: 'app-header',
   imports: [],
+  standalone:true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

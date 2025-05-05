@@ -10,6 +10,7 @@ import { InputComponent } from '../../../shared/input/input.component';
 
 @Component({
   selector: 'app-signup',
+  standalone:true,
   imports: [ReactiveFormsModule, ButtonComponent,InputComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'

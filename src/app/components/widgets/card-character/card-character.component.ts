@@ -5,6 +5,7 @@ import { Character } from '../../../interfaces/character';
 @Component({
   selector: 'app-card-character',
   imports: [],
+  standalone:true,
   templateUrl: './card-character.component.html',
   styleUrl: './card-character.component.scss'
 })
