@@ -1,12 +1,11 @@
 import { Component, EventEmitter, inject, Input, input, Output, ViewChild } from '@angular/core';
 import { DeathCheckboxComponent } from '../death-checkbox/death-checkbox.component';
-import { NavigateService } from '../../services/navigate.service';
-import { ModalComponent } from '../modal/modal.component';
+
 type DeathSaveType = 'fail' | 'success';
 
 @Component({
   selector: 'app-box',
-  imports: [DeathCheckboxComponent, ModalComponent],
+  imports: [DeathCheckboxComponent],
   templateUrl: './box.component.html',
   styleUrl: './box.component.scss'
 })

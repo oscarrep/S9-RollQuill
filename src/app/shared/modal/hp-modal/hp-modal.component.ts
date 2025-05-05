@@ -30,4 +30,13 @@ export class HpEditModalComponent {
     this.hp = parseInt(value, 10) || 0;
   }
 
+  apply(): void {
+    this.updated.emit(this.hp);
+  }
+
+  close(): void {
+    this.onClose.emit();
+  }
+
+
 }
