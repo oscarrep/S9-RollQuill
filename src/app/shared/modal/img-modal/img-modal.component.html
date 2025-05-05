@@ -1,3 +1,7 @@
-<div>
-    <app-input [type]="'file'"/>
+<div class="img-modal">
+    <div class="img-modal-bg flex-center">
+        <div class="img-modal-content" (click)="$event.stopPropagation()">
+            <app-button (buttonClick)="openUploadWidget()" [text]="'Upload Image'" />
+        </div>
+    </div>
 </div>
