@@ -87,6 +87,7 @@ export class CharacterComponent implements OnInit {
 
         this.calculateMaxHitPoints(this.class!.hit_die, this.character!.level);
         this.calculateArmorClass(this.abilityModifiers['Dexterity']);
+        this.currentHp = this.hitPoints;
       });
     });
   }
@@ -143,11 +144,10 @@ export class CharacterComponent implements OnInit {
     return this.hitPoints = 0;
   }
 
-
   onOpenModal(type: string) {
     this.modalType = type;
   }
-  
+
   onCloseModal() {
     this.modalType = null;
   }
