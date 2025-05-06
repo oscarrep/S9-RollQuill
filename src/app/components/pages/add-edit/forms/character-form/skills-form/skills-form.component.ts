@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SkillCheckboxComponent } from '../../../../shared/skill-checkbox/skill-checkbox.component';
+import { SkillCheckboxComponent } from '../../../../../../shared/skill-checkbox/skill-checkbox.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

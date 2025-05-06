@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { CardCharacterComponent } from '../../widgets/card-character/card-character.component';
-import { CardCreateComponent } from '../../widgets/card-create/card-create.component';
-import { ButtonComponent } from "../../../shared/button/button.component";
-import { Character } from '../../../interfaces/character';
-import { NavigateService } from '../../../services/navigate.service';
+import { CardCharacterComponent } from '../../../widgets/card-character/card-character.component';
+import { CardCreateComponent } from '../../../widgets/card-create/card-create.component';
+import { ButtonComponent } from "../../../../shared/button/button.component";
+import { Character } from '../../../../interfaces/character';
+import { NavigateService } from '../../../../services/navigate.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

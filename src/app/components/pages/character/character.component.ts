@@ -2,17 +2,17 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Character } from '../../../interfaces/character';
 import { Router } from '@angular/router';
-import { NameSectionComponent } from '../../sections/name-section/name-section.component';
-import { TopSectionComponent } from '../../sections/top-section/top-section.component';
-import { StatsSectionComponent } from '../../sections/stats-section/stats-section.component';
+import { NameSectionComponent } from './name-section/name-section.component';
+import { TopSectionComponent } from './top-section/top-section.component';
+import { StatsSectionComponent } from './stats-section/stats-section.component';
 import { DndApiService } from '../../../services/dnd-api.service';
 import { forkJoin } from 'rxjs';
-import { SkillsSectionComponent } from "../../sections/skills-section/skills-section.component";
+import { SkillsSectionComponent } from "./skills-section/skills-section.component";
 import { DndJsonService } from '../../../services/dnd-json.service';
 import { STAT_NAME_MAP } from '../../../shared/stat-map';
 import { ModalComponent } from '../../../shared/modal/modal.component';
 import { loadHpLocally } from '../../../services/hp.service';
-import { CharacterFooterComponent } from "../../sections/character-footer/character-footer.component";
+import { CharacterFooterComponent } from "./character-footer/character-footer.component";
 
 @Component({
   selector: 'app-character',

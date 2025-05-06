@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
-import { InputComponent } from "../../../../shared/input/input.component";
-import { FormValidationService } from '../../../../services/form-validation.service';
+import { InputComponent } from '../../../../../../shared/input/input.component';
+import { FormValidationService } from '../../../../../../services/form-validation.service';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

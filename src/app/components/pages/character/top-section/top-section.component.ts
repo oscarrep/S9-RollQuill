@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, input, Output } from '@angular/core';
-import { BoxComponent } from '../../../shared/box/box.component';
+import { BoxComponent } from '../../../../shared/box/box.component';
 
 @Component({
   selector: 'app-top-section',

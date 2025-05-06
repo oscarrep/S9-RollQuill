@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { BoxComponent } from '../../../../shared/box/box.component';
-import { REVERSE_STAT_NAME_MAP } from '../../../../shared/stat-map';
+import { BoxComponent } from '../../../../../shared/box/box.component';
+import { REVERSE_STAT_NAME_MAP } from '../../../../../shared/stat-map';
 
 @Component({
   selector: 'app-stat-row',

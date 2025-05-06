@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
-import { SectionCharacterComponent } from "../../sections/section-character/section-character.component";
-import { SectionCompendiumComponent } from '../../sections/section-compendium/section-copendium.component';
+import { SectionCharacterComponent } from "./section-character/section-character.component";
+import { SectionCompendiumComponent } from './section-compendium/section-copendium.component';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 import { User } from '../../../interfaces/user';

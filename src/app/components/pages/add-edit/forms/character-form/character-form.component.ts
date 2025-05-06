@@ -9,9 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
 import { FormValidationService } from '../../../../../services/form-validation.service';
-import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
-import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
-import { SkillsFormComponent } from "../../../../sections/character-form/skills-form/skills-form.component";
+import { RaceFormComponent } from "./race-form/race-form.component";
+import { ClassFormComponent } from './class-form/class-form.component';
+import { SkillsFormComponent } from './skills-form/skills-form.component';
 import { InputComponent } from '../../../../../shared/input/input.component';
 import { DndJsonService } from '../../../../../services/dnd-json.service';
 

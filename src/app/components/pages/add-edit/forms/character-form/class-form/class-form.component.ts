@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SkillCheckboxComponent } from '../../../../shared/skill-checkbox/skill-checkbox.component';
+import { SkillCheckboxComponent } from '../../../../../../shared/skill-checkbox/skill-checkbox.component';
 
 @Component({
   selector: 'app-class-form',
