@@ -1,7 +1,13 @@
 <div class="img-modal">
-    <div class="img-modal-bg flex-center">
-        <div class="img-modal-content" (click)="$event.stopPropagation()">
+    <div class="img-modal-bg">
+        <div class="img-modal-content column-center" (click)="$event.stopPropagation()">
             <app-button (buttonClick)="openUploadWidget()" [text]="'Upload Image'" />
+            @if(imgUrl){
+            <div class="mt-2 mb-4">
+                <img [src]="imgUrl" alt="Character Image" class="img-preview" />
+            </div>
+            }
+            <app-button (buttonClick)="apply(character)" [text]="'Apply'" />
         </div>
     </div>
 </div>

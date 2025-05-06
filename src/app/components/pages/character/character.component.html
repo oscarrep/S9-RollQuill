@@ -15,7 +15,7 @@
     <app-modal [type]="modalType" [currentHp]="currentHp" [maxHp]="hitPoints" (closed)="onCloseModal()"
         (hpUpdated)="currentHp = $event" [characterId]="characterId"/>
     }@else if (modalType=='img') {
-        <app-modal [type]="modalType" (closed)="onCloseModal()" />
+        <app-modal [type]="modalType" (closed)="onCloseModal()" [character]="character!"/>
     }
 
 </div>

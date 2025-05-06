@@ -5,7 +5,7 @@
             @if(type === 'hp') {
             <app-hp-modal [currentHp]="currentHp" [maxHp]="maxHp" (updated)="hpUpdated.emit($event)"
                 (onClose)="closed.emit()" [characterId]="characterId" />
-            }@else if (type==='img') {<app-img-modal (onClose)="closed.emit()" [characterId]="characterId" />}
+            }@else if (type==='img') {<app-img-modal (onClose)="closed.emit()" [character]="character!" />}
         </div>
     </div>
 </div>

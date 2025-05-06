@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HpModalComponent } from "./hp-modal/hp-modal.component";
 import { ButtonComponent } from '../button/button.component';
 import { ImgModalComponent } from './img-modal/img-modal.component';
+import { Character } from '../../interfaces/character';
 
 @Component({
   selector: 'app-modal',
@@ -16,6 +17,7 @@ export class ModalComponent {
   @Input() currentHp!: number;
   @Input() maxHp!: number;
   @Input() characterId!: string;
+  @Input() character!: Character;
   @Output() closed = new EventEmitter<void>();
   @Output() hpUpdated = new EventEmitter<number>();
 
