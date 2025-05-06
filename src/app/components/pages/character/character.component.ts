@@ -15,7 +15,7 @@ import { loadHpLocally } from '../../../services/hp.service';
 
 @Component({
   selector: 'app-character',
-  standalone:true,
+  standalone: true,
   imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'
@@ -43,6 +43,7 @@ export class CharacterComponent implements OnInit {
   skillData: { name: string, stat: string }[] | undefined;
   modalType: string | null = null;
   characterId!: string;
+  imageUrl: string = '';
 
 
   ngOnInit(): void {
@@ -64,6 +65,7 @@ export class CharacterComponent implements OnInit {
     this._apiService.getCharacter(this.id).subscribe((data: Character) => {
       this.character = data;
       this.characterId = data._id!;
+      this.imageUrl = data.image!;
       console.log(this.character);
 
 

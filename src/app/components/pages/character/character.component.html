@@ -3,7 +3,7 @@
 <div class="column-center gap-3">
 
     <app-top-section [armorClass]="armorClass" [hp]="hitPoints" [currentHp]="currentHp" (open)="onOpenModal($event)"
-        [initiative]="abilityModifiers['Dexterity']" [speed]="race?.speed" [proficiencyBonus]="levelInfo?.prof_bonus" />
+        [initiative]="abilityModifiers['Dexterity']" [speed]="race?.speed" [proficiencyBonus]="levelInfo?.prof_bonus" [image]="imageUrl" />
 
     <app-stats-section [proficiencies]="savingThrowProficiencies" [abilityScores]="abilityScores"
         [abilityModifiers]="abilityModifiers" [proficiencyBonus]="levelInfo?.prof_bonus" />
@@ -11,9 +11,11 @@
     <app-skills-section [proficiencies]="skillProficiencies" [abilityModifiers]="abilityModifiers"
         [proficiencyBonus]="levelInfo?.prof_bonus" [skillData]="skillData" />
 
-    @if (modalType) {
+    @if (modalType=='hp') {
     <app-modal [type]="modalType" [currentHp]="currentHp" [maxHp]="hitPoints" (closed)="onCloseModal()"
         (hpUpdated)="currentHp = $event" [characterId]="characterId"/>
+    }@else if (modalType=='img') {
+        <app-modal [type]="modalType" (closed)="onCloseModal()" [character]="character!"/>
     }
 
 </div>
