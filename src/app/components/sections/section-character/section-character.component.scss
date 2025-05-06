@@ -8,9 +8,22 @@
   gap: 19px;
 }
 
-@media (max-width: 768px) {
+.marginRight {
+  margin-right: 10px;
+}
+
+@media (max-width: 375px) {
+  .marginRight {
+    margin-right: -10px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 768px) {
   .grid-wrapper {
     display: none;
+  }
+  .marginRight {
+    margin-right: 0.2rem;
   }
 }
 
@@ -24,6 +37,7 @@
     gap: 5px;
   }
 }
+
 @media (min-width: 769px) and (max-width: 992px) {
   .hide-tablet {
     display: none;

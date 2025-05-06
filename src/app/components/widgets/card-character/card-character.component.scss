@@ -52,6 +52,19 @@ h2 {
     }
 }
 
+
+
+@media (max-width:475px) {
+    .hide-xs {
+        display: none;
+    }
+}
+@media (min-width:475px) {
+    .hide-md {
+        display: none;
+    }
+}
+
 @media (max-width:768px) {
     .card {
         width: clamp(20rem, 95vw, 45rem);
@@ -66,18 +79,22 @@ h2 {
         }
     }
 
-    .hide-xs {
-        display: none;
-    }
+
 }
 
 @media (min-width:375px) and (max-width: 768px) {
     .card-bg {
         height: 8rem;
+
         .foto-holder {
             width: 7rem;
             height: 7rem;
         }
+    }
+
+    .buttons {
+        margin-top: 0.4rem;
+        gap: 1rem
     }
 }
 
@@ -91,6 +108,11 @@ h2 {
         }
     }
 
+    .buttons {
+        margin-top: 0.4rem;
+        gap: 1rem
+    }
+    
     .hide-md {
         display: none;
     }
