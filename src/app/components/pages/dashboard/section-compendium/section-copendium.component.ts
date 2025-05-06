@@ -4,10 +4,10 @@ import { CardCompendiumComponent } from '../../../widgets/card-compendium/card-c
 @Component({
   selector: 'app-section-compendium',
   imports: [CardCompendiumComponent],
-  standalone:true,
+  standalone: true,
   templateUrl: './section-compendium.component.html',
   styleUrl: './section-compendium.component.scss'
 })
 export class SectionCompendiumComponent {
-
+  compendiumNames = ['Races', 'Classes', 'Features', 'Spells', 'Items'];
 }

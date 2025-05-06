@@ -1,14 +1,18 @@
-.card {
-    background-color: rgba(55, 51, 39, 0.5);
-    border-radius: 20px;
-    border: none;
-    height: 8.125rem;
-    width: 23.75rem;
+.card-bg {
+    height: 8rem;
+    width: 100%;
 
     .name-level,
     .race-class {
         color: white;
     }
+}
+
+.card {
+    background-color: none;
+    background-color: rgba(55, 51, 39, 0.5);
+    border-radius: 20px;
+    border: none;
 }
 
 .foto-holder {
@@ -19,8 +23,6 @@
     border-radius: 15px;
     object-fit: cover;
 }
-
-
 
 p {
     margin-top: -1rem;
@@ -50,9 +52,25 @@ h2 {
     }
 }
 
-@media (max-width:375px) {
+
+
+@media (max-width:475px) {
+    .hide-xs {
+        display: none;
+    }
+}
+@media (min-width:475px) {
+    .hide-md {
+        display: none;
+    }
+}
+
+@media (max-width:768px) {
     .card {
-        width: 20.5rem;
+        width: clamp(20rem, 95vw, 45rem);
+    }
+
+    .card-bg {
         height: 6rem;
 
         .foto-holder {
@@ -61,14 +79,11 @@ h2 {
         }
     }
 
-    .hide-xs {
-        display: none;
-    }
+
 }
 
-@media (min-width:376px) and (max-width: 575.98px) {
-    .card {
-        width: 33rem;
+@media (min-width:375px) and (max-width: 768px) {
+    .card-bg {
         height: 8rem;
 
         .foto-holder {
@@ -77,14 +92,14 @@ h2 {
         }
     }
 
-    .hide-xs {
-        display: none;
+    .buttons {
+        margin-block: 0.4rem;
+        gap: 1rem
     }
 }
 
-@media (min-width:576px) and (max-width: 768px) {
-    .card {
-        width: clamp(10rem, 50vw, 20.5rem);
+@media (min-width:769px) and (max-width: 992px) {
+    .card-bg {
         height: 8rem;
 
         .foto-holder {
@@ -93,6 +108,11 @@ h2 {
         }
     }
 
+    .buttons {
+        margin-block: 0.4rem;
+        gap: 1rem
+    }
+    
     .hide-md {
         display: none;
     }

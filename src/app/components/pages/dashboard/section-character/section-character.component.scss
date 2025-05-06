@@ -1,14 +1,50 @@
-.columns{
-    display: flex;
-    flex-wrap: wrap;
+.grid-wrapper {
+  padding: 0 19px;
 }
 
-.columns > div {
-    flex: 1 1 100%; /* Default: full width (stacked) */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 19px;
+}
+
+.marginRight {
+  margin-right: 10px;
+}
+
+@media (max-width: 375px) {
+  .marginRight {
+    margin-right: -10px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 768px) {
+  .grid-wrapper {
+    display: none;
+  }
+  .marginRight {
+    margin-right: 0.2rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-tablet {
+    display: none;
   }
 
-  @media (min-width: 576px) {
-    .columns > div {
-      flex: 1 1 calc(50% - 1rem); /* Two cards per row, minus gap */
-    }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
   }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .hide-tablet {
+    display: none;
+  }
+
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
