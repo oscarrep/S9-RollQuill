@@ -1,7 +1,7 @@
 export interface User {
     _id: string;
     fireUid: string,
-    premium: string, 
+    premium: boolean,
     email: string,
 
     characters: string[],
