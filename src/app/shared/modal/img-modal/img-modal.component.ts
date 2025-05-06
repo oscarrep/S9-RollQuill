@@ -65,7 +65,5 @@ export class ImgModalComponent {
     })
   }
 
-  close(): void {
-    this.onClose.emit();
-  }
+  close(): void {  this.onClose.emit(); }
 }

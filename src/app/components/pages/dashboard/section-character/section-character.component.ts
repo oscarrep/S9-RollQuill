@@ -1,4 +1,4 @@
-import { Component, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CardCharacterComponent } from '../../../widgets/card-character/card-character.component';
 import { CardCreateComponent } from '../../../widgets/card-create/card-create.component';
 import { ButtonComponent } from "../../../../shared/button/button.component";
@@ -19,26 +19,18 @@ export class SectionCharacterComponent {
   _navigateService = inject(NavigateService);
   route = inject(ActivatedRoute);
   userId: string = ''
-  @Output() showPopUp: boolean = false;
+  @Output() requestPremium = new EventEmitter<void>();
 
   constructor() {
-    this.route.paramMap.subscribe(params => {
-      this.userId = params.get('uid')!;
-    });
+    this.route.paramMap.subscribe(params => {this.userId = params.get('uid')!;});
   }
 
   isPremium(){
-    /*if(this.premium) this.navCreate();
-      else*/ this.premiumPopUp();
+    if(this.premium) this.navCreate();
+      else this.requestPremium.emit();
   }
 
-  premiumPopUp() {
-    this.showPopUp = !this.showPopUp;
+  navCreate() { this._navigateService.navigateTo(`${this.userId}/create`); }
 
-  }
-
-  navCreate() {
-    this._navigateService.navigateTo(`${this.userId}/create`);
-  }
   getCharId(char: Character): string { return char?._id ?? crypto.randomUUID(); }
 }

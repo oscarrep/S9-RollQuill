@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 import { User } from '../../../interfaces/user';
 import { Character } from '../../../interfaces/character';
+import { ModalComponent } from '../../../shared/modal/modal.component';
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports: [SectionCharacterComponent, SectionCompendiumComponent],
+  imports: [SectionCharacterComponent, SectionCompendiumComponent, ModalComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -18,7 +19,7 @@ export class DashboardComponent {
   user?: User;
   characterList = signal<Character[]>([]);
   @Output() buttonClick = new EventEmitter<void>();
-  @Input() showPopUp: boolean = false;
+  showPopUp: boolean = false;
 
   ngOnInit() {
     const storedUser = localStorage.getItem('user');
@@ -33,5 +34,9 @@ export class DashboardComponent {
         });
       }
     }
+  }
+
+  openPremiumModal() {
+    this.showPopUp = true;
   }
 }
