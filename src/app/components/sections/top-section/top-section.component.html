@@ -1,8 +1,11 @@
 <div class="d-flex mt-3 align-items-start">
     <div class="d-block d-sm-none d-md-none top-container">
         <div class="d-flex gap-2 mb-2">
-            <div> <img class="foto-holder" src="assets/swordsman-color.png" alt="foto" (click)="openImgModal()">
-            </div>
+            @if(image){
+            <div> <img class="foto-holder" src="{{image}}" alt="foto" (click)="openImgModal()"></div>
+            }@else{
+            <div> <img class="foto-holder" src="assets/swordsman-color.png" alt="foto" (click)="openImgModal()"></div>
+            }
             <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true"
                 (open)="open.emit($event)" [characterId]="characterId" />
         </div>

@@ -3,7 +3,7 @@
 <div class="column-center gap-3">
 
     <app-top-section [armorClass]="armorClass" [hp]="hitPoints" [currentHp]="currentHp" (open)="onOpenModal($event)"
-        [initiative]="abilityModifiers['Dexterity']" [speed]="race?.speed" [proficiencyBonus]="levelInfo?.prof_bonus" />
+        [initiative]="abilityModifiers['Dexterity']" [speed]="race?.speed" [proficiencyBonus]="levelInfo?.prof_bonus" [image]="imageUrl" />
 
     <app-stats-section [proficiencies]="savingThrowProficiencies" [abilityScores]="abilityScores"
         [abilityModifiers]="abilityModifiers" [proficiencyBonus]="levelInfo?.prof_bonus" />

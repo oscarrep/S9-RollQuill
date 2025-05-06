@@ -15,6 +15,7 @@ export class TopSectionComponent {
   hp = input<number>()
   currentHp = input<number>()
   proficiencyBonus = input<number>()
+  @Input() image!: string;
   @Input() characterId!: string;
   @Output() open = new EventEmitter<string>();
 
