@@ -1,5 +1,9 @@
 <div class="header-margin"></div>
 <div>
     <app-section-compendium/>
-    <app-section-character [characters]="characterList()" />
+    <app-section-character [characters]="characterList()" [premium]="this.user!.premium"/>
 </div>
+
+@if(this.showPopUp){
+
+}

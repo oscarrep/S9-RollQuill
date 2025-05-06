@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, Output } from '@angular/core';
 import { CardCharacterComponent } from '../../widgets/card-character/card-character.component';
 import { CardCreateComponent } from '../../widgets/card-create/card-create.component';
 import { ButtonComponent } from "../../../shared/button/button.component";
@@ -15,14 +15,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SectionCharacterComponent {
   @Input() characters: Character[] = [];
+  @Input() premium: any;
   _navigateService = inject(NavigateService);
   route = inject(ActivatedRoute);
   userId: string = ''
+  @Output() showPopUp: boolean = false;
 
   constructor() {
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('uid')!;
     });
+  }
+
+  isPremium(){
+    /*if(this.premium) this.navCreate();
+      else*/ this.premiumPopUp();
+  }
+
+  premiumPopUp() {
+    this.showPopUp = !this.showPopUp;
+
   }
 
   navCreate() {
