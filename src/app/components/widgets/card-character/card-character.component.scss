@@ -9,16 +9,18 @@
     .race-class {
         color: white;
     }
-
-    .foto-holder {
-        background-color: white;
-        width: 7rem;
-        height: 7rem;
-        aspect-ratio: 1;
-        border-radius: 15px;
-    }
-
 }
+
+.foto-holder {
+    background-color: white;
+    width: 7rem;
+    height: 7rem;
+    aspect-ratio: 1;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+
 
 p {
     margin-top: -1rem;
@@ -29,8 +31,8 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.buttons{
-    display:flex;
+.buttons {
+    display: flex;
     flex-direction: column;
     gap: 0.5rem
 }
@@ -79,6 +81,7 @@ h2 {
         display: none;
     }
 }
+
 @media (min-width:576px) and (max-width: 768px) {
     .card {
         width: clamp(10rem, 50vw, 20.5rem);
