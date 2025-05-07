@@ -13,10 +13,18 @@
             <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
 
             <div class="d-flex gap-2">
-                <app-box [title]="'Initiative'" [num]="initiative()" />
-                <app-box [title]="'Speed'" [num]="speed()" />
-                <app-box [title]="'AC'" [num]="armorClass()" />
-                <app-box [title]="'PB'" [num]="proficiencyBonus()" />
+                <app-box
+                    [desc]="'Initiative is used to establish the order of turns during a fight. It uses your Dexterity modifier'"
+                    [title]="'Initiative'" [num]="initiative()" />
+                <app-box
+                    [desc]="'Every character and monster has a speed, which is the distance in feet that the character or monster can walk in 1 round'"
+                    [title]="'Speed'" [num]="speed()" />
+                <app-box
+                    [desc]="'Armor Class (AC) is the measure of how hard it is for an attacker to hit you when rolling to attack'"
+                    [title]="'AC'" [num]="armorClass()" />
+                <app-box
+                    [desc]="'The Proficiency Bonus is used in D&D 5e to calculate many Skills, Ability throws and also attack.'"
+                    [title]="'PB'" [num]="proficiencyBonus()" />
             </div>
         </div>
     </div>
@@ -39,12 +47,20 @@
             </div>
             <div class="d-block">
                 <div class="d-flex gap-2 mb-2">
-                    <app-box [title]="'AC'" [num]="armorClass()" />
-                    <app-box [title]="'Speed'" [num]="speed()" />
+                    <app-box
+                        [desc]="'Armor Class (AC) is the measure of how hard it is for an attacker to hit you when rolling to attack'"
+                        [title]="'AC'" [num]="armorClass()" />
+                    <app-box
+                        [desc]="'Every character and monster has a speed, which is the distance in feet that the character or monster can walk in 1 round'"
+                        [title]="'Speed'" [num]="speed()" />
                 </div>
                 <div class="d-flex gap-2">
-                    <app-box [title]="'Initiative'" [num]="initiative()" />
-                    <app-box [title]="'PB'" [num]="proficiencyBonus()" />
+                    <app-box
+                        [desc]="'Initiative is used to establish the order of turns during a fight. It uses your Dexterity modifier'"
+                        [title]="'Initiative'" [num]="initiative()" />
+                        <app-box
+                        [desc]="'The Proficiency Bonus is used in D&D 5e to calculate many Skills, Ability throws and also attack.'"
+                        [title]="'PB'" [num]="proficiencyBonus()" />
                 </div>
             </div>
         </div>
@@ -68,12 +84,20 @@
             </div>
             <div class="d-block">
                 <div class="d-flex gap-2 mb-2">
-                    <app-box [title]="'AC'" [num]="armorClass()" />
-                    <app-box [title]="'Speed'" [num]="speed()" />
+                    <app-box
+                        [desc]="'Armor Class (AC) is the measure of how hard it is for an attacker to hit you when rolling to attack'"
+                        [title]="'AC'" [num]="armorClass()" />
+                    <app-box
+                        [desc]="'Every character and monster has a speed, which is the distance in feet that the character or monster can walk in 1 round'"
+                        [title]="'Speed'" [num]="speed()" />
                 </div>
                 <div class="d-flex gap-2">
-                    <app-box [title]="'Initiative'" [num]="initiative()" />
-                    <app-box [title]="'PB'" [num]="proficiencyBonus()" />
+                    <app-box
+                        [desc]="'Initiative is used to establish the order of turns during a fight. It uses your Dexterity modifier'"
+                        [title]="'Initiative'" [num]="initiative()" />
+                    <app-box
+                        [desc]="'The Proficiency Bonus is used in D&D 5e to calculate many Skills, Ability throws and also attack.'"
+                        [title]="'PB'" [num]="proficiencyBonus()" />
                 </div>
             </div>
         </div>

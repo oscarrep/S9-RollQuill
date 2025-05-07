@@ -1,5 +1,5 @@
 <div class="d-flex gap-2 justify-content-center">
     @for(score of localScores(); track score.name){
-    <app-box [title]="score.name" [proficiencyBonus]="proficiencyBonus()" [desc]="score.desc" [score]="score.value" [modifier]="score.modifier" [large]="true" [statBox]="true" [proficient]="checkProficiency(proficiencies()!, score.short)"/>
+    <app-box [title]="score.name" [proficiencyBonus]="proficiencyBonus()" [descStat]="score.desc" [score]="score.value" [modifier]="score.modifier" [large]="true" [statBox]="true" [proficient]="checkProficiency(proficiencies()!, score.short)"/>
     }
 </div>

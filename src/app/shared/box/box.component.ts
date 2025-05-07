@@ -25,7 +25,8 @@ export class BoxComponent {
   @Input() currentHp?: number | string;
   @Input() isHp: boolean = false;
   @Input() characterId!: string;
-  @Input() desc!: string[];
+  @Input() descStat!: string[];
+  @Input() desc!: string;
 
   @Output() open = new EventEmitter<string>();
 
