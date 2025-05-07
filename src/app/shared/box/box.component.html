@@ -30,14 +30,28 @@
         <app-tooltip [tooltipText]="desc[0]">
             <div class="title-stat"> {{title()}} </div>
         </app-tooltip>
-        <div class="num-big"> {{modifier()}} </div>
+
+        <app-tooltip
+            [tooltipText]="'Your modifier is calculated by taking your ability score, subtracting 10, and dividing by 2. Rounded down'">
+            <div class="num-big"> {{modifier()}} </div>
+        </app-tooltip>
+
         <div class="bottom-row flex-center">
-            <div class="num-small flex-center"> {{score()}} </div>
+            <app-tooltip
+                [tooltipText]="'This is your ability score, it determines your ability modifier. It can go up to 20'">
+                <div class="num-small flex-center"> {{score()}} </div>
+            </app-tooltip>
             @if(proficient()){
-            <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
-            }
-            @else{
+            <app-tooltip
+                [tooltipText]="'This is the saving throw for this ability in which you are proficient. It is calculated by adding your ability modifier and proficiency bonus'">
+                <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
+            </app-tooltip>
+        }
+        @else{
+            <app-tooltip
+            [tooltipText]="'This is the saving throw for this ability. It is the same as your ability modifier'">
             <div class="num-small flex-center"> {{modifier()}}</div>
+        </app-tooltip>
             }
         </div>
     </div>
