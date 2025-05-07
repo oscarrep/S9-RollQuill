@@ -1,27 +1,25 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Character } from '../../../../../interfaces/character';
-import { DndApiService } from '../../../../../services/dnd-api.service';
-import { ButtonComponent } from "../../../../../shared/button/button.component";
-import { NavigateService } from '../../../../../services/navigate.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
-import { FormValidationService } from '../../../../../services/form-validation.service';
+import { Component, Input, inject } from '@angular/core';
+import { Character } from '../../../../../interfaces/character';
+import { ApiService } from '../../../../../services/api.service';
 import { RaceFormComponent } from "./race-form/race-form.component";
 import { ClassFormComponent } from './class-form/class-form.component';
-import { SkillsFormComponent } from './skills-form/skills-form.component';
-import { InputComponent } from '../../../../../shared/input/input.component';
 import { DndJsonService } from '../../../../../services/dnd-json.service';
-import { TooltipComponent } from "../../../../../shared/tooltip/tooltip.component";
+import { SkillsFormComponent } from './skills-form/skills-form.component';
+import { NavigateService } from '../../../../../services/navigate.service';
+import { InputComponent } from '../../../../../shared/input/input.component';
+import { ButtonComponent } from "../../../../../shared/button/button.component";
+import { FormValidationService } from '../../../../../services/form-validation.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, InputComponent, CommonModule, RaceFormComponent, ClassFormComponent, SkillsFormComponent, TooltipComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, InputComponent, CommonModule, RaceFormComponent, ClassFormComponent, SkillsFormComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;
@@ -97,17 +95,17 @@ export class CharacterFormComponent {
       this.classData = data;
       this.classNames = data.map(item => item.name);
     });
-  
+
     this._dndJSONService.getRaces().subscribe(data => {
       this.raceData = data;
       this.raceNames = data.map(item => item.name);
     });
-  
+
     this._dndJSONService.getSkills().subscribe(data => {
       this.skillData = data;
       console.log(this.skillData);
     });
-  
+
     this.statValueListeners();
   }
 

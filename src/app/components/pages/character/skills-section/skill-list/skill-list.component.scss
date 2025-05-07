@@ -1,0 +1,70 @@
+.skill-container {
+    border: 3px solid #373327;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    display: flex;
+    width: 11.2rem;
+}
+
+p {
+    margin-top: 0.1rem;
+    margin-bottom: 0;
+    font-family: zain;
+}
+
+.name {}
+
+.stat {
+    font-weight: 300;
+}
+
+.modifier {
+    font-weight: bolder;
+}
+
+.checkbox-square,
+.checkbox-square:checked {
+    margin-top: 0.5rem;
+    outline: 2px solid #373327;
+}
+
+.checkbox-square {
+    border-radius: 20%;
+    width: 10px;
+    height: 10px;
+    appearance: none;
+    display: inline-block;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.checkbox-square:checked {
+    background-color: #373327;
+}
+
+@media (max-width: 375px) {
+    .hide-xs {
+        display: none;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 575px) {
+
+    .skill-container {
+        width: clamp(11rem, 50vw, 17.5rem);
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+
+    .skill-container {
+        width: clamp(17.5rem, 50vw, 21.8rem);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+
+    .skill-container {
+        width: clamp(21.8rem, 50vw, 28.25rem);
+    }
+}

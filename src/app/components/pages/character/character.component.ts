@@ -41,7 +41,7 @@ export class CharacterComponent implements OnInit {
   hitPoints: number = 0;
   currentHp: number = 0;
   @Input() id!: string;
-  skillData: { name: string, stat: string }[] | undefined;
+  skillData: { name: string, desc:string, stat: string }[] | undefined;
   modalType: string | null = null;
   characterId!: string;
   imageUrl: string = '';
@@ -152,8 +152,13 @@ export class CharacterComponent implements OnInit {
     return this.hitPoints = 0;
   }
 
-  levelUp(){
-
+  get skillsReady() {
+    return (
+      this.skillData &&
+      Object.keys(this.abilityModifiers).length > 0 &&
+      this.skillProficiencies.length > 0 &&
+      this.levelInfo?.prof_bonus !== undefined
+    );
   }
 
   onOpenModal(type: string) {

@@ -11,8 +11,10 @@
     <app-stats-section [proficiencies]="savingThrowProficiencies" [abilityScores]="abilityScores"
         [abilityModifiers]="abilityModifiers" [proficiencyBonus]="levelInfo?.prof_bonus" />
 
+    @if(skillsReady){
     <app-skills-section [proficiencies]="skillProficiencies" [abilityModifiers]="abilityModifiers"
         [proficiencyBonus]="levelInfo?.prof_bonus" [skillData]="skillData" />
+    }
 </div>
 <div class="footer-margin"></div>
 <app-character-footer />

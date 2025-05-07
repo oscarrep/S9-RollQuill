@@ -1,0 +1,18 @@
+<div class="flex-column">
+    @for(skill of skillDisplay(); track skill.name) {
+    <app-tooltip [tooltipText]="skill.desc">
+        <div class="skill-container gap-2 d-block mb-1">
+            <div class="d-flex gap-2 ms-2 me-3">
+                <input disabled type="checkbox" class="checkbox-square" [checked]="isProficient(skill.name)" />
+                <p class="name">{{ skill.name }}</p>
+                <div class="d-flex ms-auto gap-2">
+                    <p class="stat hide-xs">{{ skill.stat }}</p>
+                    <p class="modifier">
+                        {{ isProficient(skill.name) ? calculateProficiency(skill.modifier) : skill.modifier }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </app-tooltip>
+    }
+</div>

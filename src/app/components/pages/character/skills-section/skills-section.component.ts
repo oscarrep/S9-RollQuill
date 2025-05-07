@@ -1,15 +1,16 @@
 import { Component, computed, input } from '@angular/core';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 @Component({
   selector: 'app-skills-section',
   standalone:true,
-  imports: [],
+  imports: [SkillListComponent],
   templateUrl: './skills-section.component.html',
   styleUrl: './skills-section.component.scss'
 })
 export class SkillsSectionComponent {
   abilityModifiers = input<{ [key: string]: number }>();
-  skillData = input<{ name: string, stat: string }[] | undefined>();
+  skillData = input<{ name: string, desc: string, stat: string }[] | undefined>();
   proficiencyBonus = input<number>()
   proficiencies = input<string[]>()
 

@@ -47,7 +47,7 @@ export class DndJsonService {
     );
   }
 
-  getSkills(): Observable<{ name: string, stat: string }[]> {
+  getSkills(): Observable<{ name: string, desc:string, stat: string }[]> {
     return this._dndService.getFromJson('skills').pipe(
       map((data: any[]) =>
         data.map(item => ({

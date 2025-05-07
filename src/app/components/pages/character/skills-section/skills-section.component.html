@@ -1,38 +1,14 @@
 <div class="d-flex gap-2">
-    <div class="flex-column">
-        @for(skill of displaySkills().slice(0,9); track skill.name){
-        <div class="skill-container gap-2 d-block mb-1">
-            <div class="d-flex gap-2 ms-2 me-3">
-                <input disabled type="checkbox" class="checkbox-square"
-                    [checked]="proficiencies()?.includes(skill.name)" />
-                <p class="name" data-toggle="tooltip" title="description">{{skill.name}}</p>
-                <div class="d-flex ms-auto gap-2">
-                    <p class="stat hide-xs">{{skill.stat}}</p>
-                    @if(proficiencies()?.includes(skill.name)){
-                    <p class="modifier"> {{calculateProficiency(skill.modifier, proficiencyBonus()!)}} </p>}
-                    @else {
-                    <p class="modifier"> {{skill.modifier}} </p>}
-                </div>
-            </div>
-        </div>
-        }
-    </div>
-    <div class="flex-column">
-        @for(skill of displaySkills().slice(9,18); track skill.name){
-        <div class="skill-container gap-2 d-block mb-1">
-            <div class="d-flex gap-2 ms-2 me-3">
-                <input disabled type="checkbox" class="checkbox-square"
-                    [checked]="proficiencies()?.includes(skill.name)" />
-                <p class="name" data-toggle="tooltip" title="description">{{skill.name}}</p>
-                <div class="d-flex ms-auto gap-2">
-                    <p class="stat hide-xs">{{skill.stat}}</p>
-                    @if(proficiencies()?.includes(skill.name)){
-                    <p class="modifier"> {{calculateProficiency(skill.modifier, proficiencyBonus()!)}} </p>}
-                    @else {
-                    <p class="modifier"> {{skill.modifier}} </p>}
-                </div>
-            </div>
-        </div>
-        }
-    </div>
+    <app-skill-list
+      [skills]="displaySkills().slice(0,9)"
+      [proficiencies]="proficiencies()!"
+      [abilityModifiers]="abilityModifiers()!"
+      [proficiencyBonus]="proficiencyBonus()!"
+    />
+    <app-skill-list
+      [skills]="displaySkills().slice(9,18)"
+      [proficiencies]="proficiencies()!"
+      [abilityModifiers]="abilityModifiers()!"
+      [proficiencyBonus]="proficiencyBonus()!"
+    />
 </div>
