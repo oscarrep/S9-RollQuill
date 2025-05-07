@@ -67,7 +67,7 @@
     @if(isHp){
     <div class="column-center">
         <p class="num">{{currentHp}}</p>
-        <p class="max-hp">Max Hp: <b class="ms-1">{{num()}}</b> </p>
+        <app-tooltip [tooltipText]="'Your maximum Hit points. They are calculated by adding your class hit die and your Constitution modifier'"><p class="max-hp">Max Hp: <b class="ms-1">{{num()}}</b> </p></app-tooltip>
     </div>
     }
     @else{ <div class="num"> {{ num() }} </div> }
