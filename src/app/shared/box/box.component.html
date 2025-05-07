@@ -1,6 +1,9 @@
 @if (deathSaves() === true) {
 <div class="square-death column-center" [class.large-box]="large()">
-    <div class="title-death"> {{ title() }} </div>
+    <app-tooltip
+        [tooltipText]="'Whenever you start your turn with 0 hit points, you must make a special saving throw, called a death saving throw, to determine whether you creep closer to death or hang onto life.'">
+        <div class="title-death"> {{ title() }} </div>
+    </app-tooltip>
     <div class="bottom-row d-flex flex-column align-items-center">
         <div class="d-flex text-center">
             <div class="death-checks column-gap-5 row-gap-4">
@@ -46,12 +49,12 @@
                 [tooltipText]="'This is the saving throw for this ability in which you are proficient. It is calculated by adding your ability modifier and proficiency bonus'">
                 <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
             </app-tooltip>
-        }
-        @else{
+            }
+            @else{
             <app-tooltip
-            [tooltipText]="'This is the saving throw for this ability. It is the same as your ability modifier'">
-            <div class="num-small flex-center"> {{modifier()}}</div>
-        </app-tooltip>
+                [tooltipText]="'This is the saving throw for this ability. It is the same as your ability modifier'">
+                <div class="num-small flex-center"> {{modifier()}}</div>
+            </app-tooltip>
             }
         </div>
     </div>
