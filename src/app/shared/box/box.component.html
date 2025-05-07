@@ -27,7 +27,9 @@
 @else if(statBox() === true) {
 <div class="square-stat column-center" [class.large-box]="large()">
     <div class="column-center stat-gap">
-        <div class="title-stat"> {{title()}} </div>
+        <app-tooltip [tooltipText]="desc[0]">
+            <div class="title-stat"> {{title()}} </div>
+        </app-tooltip>
         <div class="num-big"> {{modifier()}} </div>
         <div class="bottom-row flex-center">
             <div class="num-small flex-center"> {{score()}} </div>
