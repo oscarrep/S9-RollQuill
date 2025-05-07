@@ -22,7 +22,7 @@ p {
 
 .checkbox-square,
 .checkbox-square:checked {
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
     outline: 2px solid #373327;
 }
 
@@ -43,6 +43,11 @@ p {
 @media (max-width: 375px) {
     .hide-xs {
         display: none;
+    }
+
+    .checkbox-square,
+    .checkbox-square:checked {
+        margin-top: 0.5rem;
     }
 }
 
