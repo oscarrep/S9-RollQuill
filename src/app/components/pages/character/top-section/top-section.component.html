@@ -78,7 +78,7 @@
             </div>
 
             <div class="d-flex flex-column gap-2">
-                <app-box [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true"
+                <app-box [title]="'Your player character health'" [title]="'Hit Points'" [num]="`${hp()}`" [currentHp]="currentHp()" [large]="true" [isHp]="true"
                     (open)="open.emit($event)" [characterId]="characterId" />
                 <app-box [title]="'Death Saves'" [deathSaves]="true" [long]="true" />
             </div>
