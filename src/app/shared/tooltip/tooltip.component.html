@@ -4,11 +4,12 @@
       matTooltipClass="mat-tooltip"
       matTooltipPosition="above"
       [matTooltipDisabled]="true"
-      (touchstart)="startPress(tooltipTarget)"
+      (touchstart)="startPress($event, tooltipTarget)"
       (touchend)="cancelPress(tooltipTarget)"
-      (mousedown)="startPress(tooltipTarget)"
+      (mousedown)="startPress($event, tooltipTarget)"
       (mouseup)="cancelPress(tooltipTarget)"
       (mouseleave)="cancelPress(tooltipTarget)"
+      (contextmenu)="disableContextMenu($event)"
     >
       <ng-content></ng-content>
     </span>

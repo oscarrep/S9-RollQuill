@@ -12,7 +12,8 @@ export class TooltipComponent {
   @Input() tooltipText = '';
   pressTimeout: any;
 
-  startPress(tooltip: MatTooltip) {
+  startPress(event: Event, tooltip: MatTooltip) {
+    event.preventDefault();
     this.pressTimeout = setTimeout(() => {
       tooltip.disabled = false;
       tooltip.show();
@@ -23,5 +24,9 @@ export class TooltipComponent {
     clearTimeout(this.pressTimeout);
     tooltip.hide();
     tooltip.disabled = true;
+  }
+
+  disableContextMenu(event: MouseEvent) {
+    event.preventDefault();
   }
 }
