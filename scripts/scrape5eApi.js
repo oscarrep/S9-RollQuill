@@ -10,6 +10,7 @@ const endpoints = {
     subraces: '/api/2014/subraces',
     skills: '/api/2014/skills',
     features: '/api/2014/features',
+    abilityScores: '/api/2014/ability-scores',
 }
 
 async function fetchData(endpoint) {
