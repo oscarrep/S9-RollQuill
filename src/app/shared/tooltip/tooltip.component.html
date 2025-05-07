@@ -1,0 +1,8 @@
+<span #tooltipTarget [matTooltip]="tooltipText" matTooltipClass="my-tooltip" matTooltipPosition="above"
+    [matTooltipDisabled]="true"
+    (touchstart)="startPress()"
+    (touchend)="cancelPress()"
+    (mousedown)="startPress()"
+    (mouseup)="cancelPress()"
+    >
+</span>
