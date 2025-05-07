@@ -14,13 +14,14 @@ import { ClassFormComponent } from './class-form/class-form.component';
 import { SkillsFormComponent } from './skills-form/skills-form.component';
 import { InputComponent } from '../../../../../shared/input/input.component';
 import { DndJsonService } from '../../../../../services/dnd-json.service';
+import { TooltipComponent } from "../../../../../shared/tooltip/tooltip.component";
 
 @Component({
   selector: 'app-character-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonComponent, InputComponent, CommonModule, RaceFormComponent, ClassFormComponent, SkillsFormComponent]
+  imports: [ReactiveFormsModule, ButtonComponent, InputComponent, CommonModule, RaceFormComponent, ClassFormComponent, SkillsFormComponent, TooltipComponent]
 })
 export class CharacterFormComponent {
   @Input() character: Character | null = null;

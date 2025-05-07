@@ -1,14 +1,13 @@
-import { Component, Input, AfterViewInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SkillCheckboxComponent } from '../../../../../../shared/skill-checkbox/skill-checkbox.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {  } from '@angular/core';
-import { Tooltip } from 'bootstrap';
+import { TooltipComponent } from '../../../../../../shared/tooltip/tooltip.component';
 
 @Component({
   selector: 'app-skills-form',
-  imports: [SkillCheckboxComponent, CommonModule, ReactiveFormsModule],
-  standalone:true,
+  imports: [SkillCheckboxComponent, CommonModule, ReactiveFormsModule, TooltipComponent],
+  standalone: true,
   templateUrl: './skills-form.component.html',
   styleUrl: './skills-form.component.scss'
 })
@@ -17,28 +16,33 @@ export class SkillsFormComponent {
   @Input() form!: FormGroup;
   @Input() isInvalid!: (controlName: string) => boolean;
 
-  ngAfterViewInit() {
-    const tooltipTriggerList = Array.from(document.querySelectorAll('.tips'));
-    tooltipTriggerList.forEach((el) => new Tooltip(el));
+  tooltipText: string = '';
+  pressTimeout: any;
+
+  startPress(skillDesc: string, tooltip: any) {
+    this.tooltipText = skillDesc;
+    this.pressTimeout = setTimeout(() => {
+      tooltip.disabled = false;
+      tooltip.show();
+    }, 400);
+  }
+
+  cancelPress(tooltip: any) {
+    clearTimeout(this.pressTimeout);
+    tooltip.hide();
+    tooltip.disabled = true;
   }
 
   toggleBackgroundSkill(skill: string, check: boolean) {
     const currentSkills = this.form.value.backgroundSkills as string[];
-
-    if (check && currentSkills.length < 2) this.form.patchValue({ backgroundSkills: [...currentSkills, skill] });
-    else if (!check) this.form.patchValue({ backgroundSkills: currentSkills.filter(s => s !== skill) });
-
+    if (check && currentSkills.length < 2) {
+      this.form.patchValue({ backgroundSkills: [...currentSkills, skill] });
+    } else if (!check) {
+      this.form.patchValue({ backgroundSkills: currentSkills.filter(s => s !== skill) });
+    }
   }
 
   isBackgroundSkillChecked(skill: string): boolean {
     return this.form.value.backgroundSkills.includes(skill);
-  }
-
-  isBackgroundSkillDisabled(skill: string): boolean {
-    const bs = this.form.value.backgroundSkills;
-    return (
-      (!bs.includes(skill) && bs.length >= 2) ||
-      this.form.value.classSkills.includes(skill)
-    );
   }
 }

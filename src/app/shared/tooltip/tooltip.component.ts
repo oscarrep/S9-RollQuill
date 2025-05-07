@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
@@ -9,18 +9,19 @@ import { MatTooltip } from '@angular/material/tooltip';
   styleUrl: './tooltip.component.scss'
 })
 export class TooltipComponent {
-  @ViewChild(MatTooltip) tooltip!: MatTooltip;
-  tooltipText = '';
+  @Input() tooltipText = '';
   pressTimeout: any;
 
-  startPress() {
+  startPress(tooltip: MatTooltip) {
     this.pressTimeout = setTimeout(() => {
-      this.tooltip.disabled = false;
-      this.tooltip.show();
+      tooltip.disabled = false;
+      tooltip.show();
     }, 300);
   }
 
-  cancelPress() {
+  cancelPress(tooltip: MatTooltip) {
     clearTimeout(this.pressTimeout);
+    tooltip.hide();
+    tooltip.disabled = true;
   }
 }

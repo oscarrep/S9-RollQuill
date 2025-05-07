@@ -1,8 +1,14 @@
-<span #tooltipTarget [matTooltip]="tooltipText" matTooltipClass="my-tooltip" matTooltipPosition="above"
-    [matTooltipDisabled]="true"
-    (touchstart)="startPress()"
-    (touchend)="cancelPress()"
-    (mousedown)="startPress()"
-    (mouseup)="cancelPress()"
+<span
+      #tooltipTarget="matTooltip"
+      [matTooltip]="tooltipText"
+      matTooltipClass="mat-tooltip"
+      matTooltipPosition="above"
+      [matTooltipDisabled]="true"
+      (touchstart)="startPress(tooltipTarget)"
+      (touchend)="cancelPress(tooltipTarget)"
+      (mousedown)="startPress(tooltipTarget)"
+      (mouseup)="cancelPress(tooltipTarget)"
+      (mouseleave)="cancelPress(tooltipTarget)"
     >
-</span>
+      <ng-content></ng-content>
+    </span>
