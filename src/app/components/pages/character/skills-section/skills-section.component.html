@@ -5,7 +5,7 @@
             <div class="d-flex gap-2 ms-2 me-3">
                 <input disabled type="checkbox" class="checkbox-square"
                     [checked]="proficiencies()?.includes(skill.name)" />
-                <p class="name">{{skill.name}}</p>
+                <p class="name" data-toggle="tooltip" title="description">{{skill.name}}</p>
                 <div class="d-flex ms-auto gap-2">
                     <p class="stat hide-xs">{{skill.stat}}</p>
                     @if(proficiencies()?.includes(skill.name)){
@@ -23,7 +23,7 @@
             <div class="d-flex gap-2 ms-2 me-3">
                 <input disabled type="checkbox" class="checkbox-square"
                     [checked]="proficiencies()?.includes(skill.name)" />
-                <p class="name">{{skill.name}}</p>
+                <p class="name" data-toggle="tooltip" title="description">{{skill.name}}</p>
                 <div class="d-flex ms-auto gap-2">
                     <p class="stat hide-xs">{{skill.stat}}</p>
                     @if(proficiencies()?.includes(skill.name)){

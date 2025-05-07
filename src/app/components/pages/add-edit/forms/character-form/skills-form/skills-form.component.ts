@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit} from '@angular/core';
 import { SkillCheckboxComponent } from '../../../../../../shared/skill-checkbox/skill-checkbox.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {  } from '@angular/core';
+import { Tooltip } from 'bootstrap';
 
 @Component({
   selector: 'app-skills-form',
@@ -15,6 +17,10 @@ export class SkillsFormComponent {
   @Input() form!: FormGroup;
   @Input() isInvalid!: (controlName: string) => boolean;
 
+  ngAfterViewInit() {
+    const tooltipTriggerList = Array.from(document.querySelectorAll('.tips'));
+    tooltipTriggerList.forEach((el) => new Tooltip(el));
+  }
 
   toggleBackgroundSkill(skill: string, check: boolean) {
     const currentSkills = this.form.value.backgroundSkills as string[];

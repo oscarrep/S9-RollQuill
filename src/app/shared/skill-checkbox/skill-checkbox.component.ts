@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './skill-checkbox.component.scss'
 })
 export class SkillCheckboxComponent {
-  @Input() skillObj?: { name: string; desc: string[]; ability_score: { name: string } } = { name: '', desc: [], ability_score: { name: '' } };
   @Input() skill!: string
   @Input() checked = false;
   @Input() disabled = false;

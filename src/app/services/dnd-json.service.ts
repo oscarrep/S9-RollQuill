@@ -52,6 +52,7 @@ export class DndJsonService {
       map((data: any[]) =>
         data.map(item => ({
           name: item.name,
+          desc: item.desc,
           stat: item.ability_score.name
         }))
       )

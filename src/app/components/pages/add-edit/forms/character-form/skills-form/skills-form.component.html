@@ -3,10 +3,12 @@
         <p>A character's background allows them 2 extra skill proficiencies:</p>
         <div class="checkbox-container">
             @for(skill of skillData; track skill){
-            <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill.name)"
-                [disabled]="!isBackgroundSkillChecked(skill.name) && form.value.backgroundSkills.length >= 2"
-                (skillToggled)="toggleBackgroundSkill(skill.name, $event.checked)">
-            </app-skill-checkbox>
+            <span class="tips" data-bs-toggle="tooltip" data-bs-placement="top" title="{{skill.desc}}">
+                <app-skill-checkbox [skill]="skill.name" [checked]="isBackgroundSkillChecked(skill.name)"
+                    [disabled]="!isBackgroundSkillChecked(skill.name) && form.value.backgroundSkills.length >= 2"
+                    (skillToggled)="toggleBackgroundSkill(skill.name, $event.checked)">
+                </app-skill-checkbox>
+            </span>
             }
         </div>
     </div>
