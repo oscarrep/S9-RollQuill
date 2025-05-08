@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NameFormComponent } from './name-form.component';
-import { InputComponent } from '../../../../shared/input/input.component';
+import { InputComponent } from '../../../../../../shared/input/input.component';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FormValidationService } from '../../../../services/form-validation.service';
+import { FormValidationService } from '../../../../../../services/form-validation.service';
 import { CommonModule } from '@angular/common';
 
 describe('NameFormComponent (Jest)', () => {
