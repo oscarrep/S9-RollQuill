@@ -31,6 +31,11 @@ export const environment = {
   dndFeatures: '${process.env['dndFeatures']}',
   dndLevels: '${process.env['dndLevels']}',
 
+  cloudinaryEndpoint:'${process.env['cloudinaryEndpoint']}',
+  cloudinaryWidget: '${process.env['cloudinaryWidget']}',
+  cloudinaryCloudName: '${process.env['cloudinaryCloudName']}',
+  cloudinaryPreset: '${process.env['cloudinaryPreset']}',
+
   firebaseConfig: {
     apiKey: "${process.env['NG_APP_FIREBASE_API_KEY']}",
     authDomain: "${process.env['NG_APP_FIREBASE_AUTH_DOMAIN']}",
