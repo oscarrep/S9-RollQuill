@@ -12,11 +12,12 @@ import { DndJsonService } from '../../../services/dnd-json.service';
 import { STAT_NAME_MAP } from '../../../shared/stat-map';
 import { ModalComponent } from '../../../shared/modal/modal.component';
 import { loadHpLocally } from '../../../services/hp.service';
+import { CharacterFooterComponent } from "../../sections/character-footer/character-footer.component";
 
 @Component({
   selector: 'app-character',
   standalone: true,
-  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent],
+  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent, CharacterFooterComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'
 })
@@ -149,6 +150,10 @@ export class CharacterComponent implements OnInit {
       return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne);
 
     return this.hitPoints = 0;
+  }
+
+  levelUp(){
+
   }
 
   onOpenModal(type: string) {

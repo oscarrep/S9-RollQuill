@@ -1,7 +1,7 @@
 <div class="header flex-space-between">
     <div class="logo" (click)="app.navigateTo('/dashboard')"></div>
     <h1 class="title">RollQuill</h1>
-    <div class="profile flex-center" (click)="app.navigateTo('/dashboard')">
+    <div class="profile flex-center" (click)="app.navigateTo('{{userId}}/dashboard')">
         <div class="profile-head"></div>
         <div class="profile-body"></div>
     </div>

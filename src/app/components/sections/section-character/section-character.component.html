@@ -3,7 +3,7 @@
         <h2>Your Characters</h2>
         <app-button [text]="'Create'" (buttonClick)="navCreate()"/>
     </div>
-    <div>
+    <div class="columns">
         @for(char of characters; track getCharId(char)){
         <div class="p-1"><app-card-character [character]="char"/></div>
         }
