@@ -2,23 +2,40 @@
 
     <div class="comp-container">
         <app-input name="name" type="text" placeholder="Character Name" formControlName="name"
-        [invalid]="isInvalid('name')" [form]="characterForm"/>
+            [invalid]="isInvalid('name')" [form]="characterForm" />
     </div>
 
-    <div class="d-flex gap-1">
-        @for (stat of statNames; track stat) {
-        <div class="stat-panel mb-2 column-center">
-            <p><b>{{ stat }}</b></p>
-            <select [formControlName]="stat" name="{{stat}}" required class="stat-input px-2 py-1"
-                [ngClass]='{"invalid": isInvalid(stat)}'>
-                @for (num of getAvailableNumbers(stat); track num) {
-                <option [value]="num">
-                    {{ num }}
-                </option>
-                }
-            </select>
+    <div class="d-flex column-center gap-1">
+        <div class="d-flex gap-1">
+            @for (stat of statNames.slice(0,3); track stat) {
+            <div class="stat-panel mb-2 column-center">
+                <p><b>{{ stat }}</b></p>
+                <select [formControlName]="stat" name="{{stat}}" required class="stat-input px-2 py-1"
+                    [ngClass]='{"invalid": isInvalid(stat)}'>
+                    @for (num of getAvailableNumbers(stat); track num) {
+                    <option [value]="num">
+                        {{ num }}
+                    </option>
+                    }
+                </select>
+            </div>
+            }
         </div>
-        }
+        <div class="d-flex gap-1">
+            @for (stat of statNames.slice(3,6); track stat) {
+            <div class="stat-panel mb-2 column-center">
+                <p><b>{{ stat }}</b></p>
+                <select [formControlName]="stat" name="{{stat}}" required class="stat-input px-2 py-1"
+                    [ngClass]='{"invalid": isInvalid(stat)}'>
+                    @for (num of getAvailableNumbers(stat); track num) {
+                    <option [value]="num">
+                        {{ num }}
+                    </option>
+                    }
+                </select>
+            </div>
+            }
+        </div>
     </div>
 
     <div class="comp-container">
