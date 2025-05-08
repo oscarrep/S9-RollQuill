@@ -4,11 +4,16 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); // translucent background
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+}
+
+.modal-bg{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -16,5 +21,6 @@
     background-color: #faeabd;
     padding: 2rem;
     border-radius: 10px;
-    min-width: 300px;
+    width: 70%;
+    height: wrap;
 }

@@ -4,6 +4,13 @@
 }
 
 .card {
+    background-color: none;
+    background-color: rgba(55, 51, 39, 0.5);
+    border-radius: 20px;
+    border: none;
+}
+
+.card-bg {
     border: none;
     height: 130px;
     width: 380px;
@@ -43,5 +50,20 @@
     .plus,
     .plus-90 {
         background-color: #373327;
+    }
+}
+
+@media (max-width:768px) {
+    .card {
+        width: clamp(20rem, 95vw, 45rem);
+    }
+
+    .card-bg {
+        height: 8rem;
+
+        .square {
+            width: 10rem;
+            height: 6rem;
+        }
     }
 }

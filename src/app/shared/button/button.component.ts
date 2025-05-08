@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 @Component({
   selector: 'app-button',
   imports: [],
+  standalone:true,
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
 })

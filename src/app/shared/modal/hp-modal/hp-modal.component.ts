@@ -11,7 +11,7 @@ import { saveHpLocally } from '../../../services/hp.service';
   standalone: true,
   imports: [CommonModule, FormsModule, ButtonComponent, InputComponent]
 })
-export class HpEditModalComponent {
+export class HpModalComponent {
   @Input() currentHp!: number;
   @Input() maxHp!: number;
   @Input() characterId!: string;

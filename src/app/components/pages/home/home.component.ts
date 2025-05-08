@@ -5,6 +5,7 @@ import { NavigateService } from '../../../services/navigate.service';
 @Component({
   selector: 'app-home',
   imports: [ButtonComponent],
+  standalone:true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

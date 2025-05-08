@@ -1,11 +1,13 @@
 import { Component, EventEmitter, inject, Input, input, Output, ViewChild } from '@angular/core';
 import { DeathCheckboxComponent } from '../death-checkbox/death-checkbox.component';
+import { TooltipComponent } from "../tooltip/tooltip.component";
 
 type DeathSaveType = 'fail' | 'success';
 
 @Component({
   selector: 'app-box',
-  imports: [DeathCheckboxComponent],
+  imports: [DeathCheckboxComponent, TooltipComponent],
+  standalone: true,
   templateUrl: './box.component.html',
   styleUrl: './box.component.scss'
 })
@@ -23,7 +25,9 @@ export class BoxComponent {
   @Input() currentHp?: number | string;
   @Input() isHp: boolean = false;
   @Input() characterId!: string;
-  
+  @Input() descStat!: string[];
+  @Input() desc!: string;
+
   @Output() open = new EventEmitter<string>();
 
   deathSavesArr: { type: DeathSaveType; checked: boolean }[] = [
@@ -34,7 +38,7 @@ export class BoxComponent {
     { type: 'success', checked: false },
     { type: 'success', checked: false }
   ];
-  
+
   openModal() { this.open.emit('hp'); }
 
   calculateProficiency(modifier: number, pb: number) { return modifier + pb; }

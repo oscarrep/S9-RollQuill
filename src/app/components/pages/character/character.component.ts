@@ -2,20 +2,22 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { Character } from '../../../interfaces/character';
 import { Router } from '@angular/router';
-import { NameSectionComponent } from '../../sections/name-section/name-section.component';
-import { TopSectionComponent } from '../../sections/top-section/top-section.component';
-import { StatsSectionComponent } from '../../sections/stats-section/stats-section.component';
+import { NameSectionComponent } from './name-section/name-section.component';
+import { TopSectionComponent } from './top-section/top-section.component';
+import { StatsSectionComponent } from './stats-section/stats-section.component';
 import { DndApiService } from '../../../services/dnd-api.service';
 import { forkJoin } from 'rxjs';
-import { SkillsSectionComponent } from "../../sections/skills-section/skills-section.component";
+import { SkillsSectionComponent } from "./skills-section/skills-section.component";
 import { DndJsonService } from '../../../services/dnd-json.service';
 import { STAT_NAME_MAP } from '../../../shared/stat-map';
 import { ModalComponent } from '../../../shared/modal/modal.component';
 import { loadHpLocally } from '../../../services/hp.service';
+import { CharacterFooterComponent } from "./character-footer/character-footer.component";
 
 @Component({
   selector: 'app-character',
-  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent],
+  standalone: true,
+  imports: [NameSectionComponent, TopSectionComponent, StatsSectionComponent, SkillsSectionComponent, ModalComponent, CharacterFooterComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss'
 })
@@ -39,9 +41,10 @@ export class CharacterComponent implements OnInit {
   hitPoints: number = 0;
   currentHp: number = 0;
   @Input() id!: string;
-  skillData: { name: string, stat: string }[] | undefined;
+  skillData: { name: string, desc:string, stat: string }[] | undefined;
   modalType: string | null = null;
   characterId!: string;
+  imageUrl: string = '';
 
 
   ngOnInit(): void {
@@ -63,6 +66,7 @@ export class CharacterComponent implements OnInit {
     this._apiService.getCharacter(this.id).subscribe((data: Character) => {
       this.character = data;
       this.characterId = data._id!;
+      this.imageUrl = data.image!;
       console.log(this.character);
 
 
@@ -146,6 +150,15 @@ export class CharacterComponent implements OnInit {
       return this.hitPoints = lvlOneFormula + ((average + conModifier) * levelsAfterOne);
 
     return this.hitPoints = 0;
+  }
+
+  get skillsReady() {
+    return (
+      this.skillData &&
+      Object.keys(this.abilityModifiers).length > 0 &&
+      this.skillProficiencies.length > 0 &&
+      this.levelInfo?.prof_bonus !== undefined
+    );
   }
 
   onOpenModal(type: string) {

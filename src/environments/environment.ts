@@ -20,6 +20,11 @@ export const environment = {
   dndFeaturesJson:'',
   dndSkillsJson:'',
 
+  cloudinaryEndpoint:'',
+  cloudinaryWidget: '',
+  cloudinaryCloudName: '',
+  cloudinaryPreset: '',
+
   firebaseConfig: {
     apiKey: "",
     authDomain: "",

@@ -1,0 +1,14 @@
+<div class="d-flex gap-2">
+    <app-skill-list
+      [skills]="displaySkills().slice(0,9)"
+      [proficiencies]="proficiencies()!"
+      [abilityModifiers]="abilityModifiers()!"
+      [proficiencyBonus]="proficiencyBonus()!"
+    />
+    <app-skill-list
+      [skills]="displaySkills().slice(9,18)"
+      [proficiencies]="proficiencies()!"
+      [abilityModifiers]="abilityModifiers()!"
+      [proficiencyBonus]="proficiencyBonus()!"
+    />
+</div>

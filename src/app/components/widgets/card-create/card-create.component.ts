@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-card-create',
   imports: [],
+  standalone:true,
   templateUrl: './card-create.component.html',
   styleUrl: './card-create.component.scss'
 })
