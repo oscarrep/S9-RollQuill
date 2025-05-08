@@ -1,19 +1,49 @@
 <div class="flex justify-center">
     <div class="signup-container">
-        <div class="text-container my-5">
-            <h1 class="my-5">Create an account</h1>
-            <form [formGroup]="signupForm" (ngSubmit)="signUp()">
-                <div class="mb-3">
-                    <app-input type="email" formControlName="email" placeholder="Email" name="email" [form]="signupForm"/>
-                </div>
-                <div>
-                    <app-input type="password" formControlName="password" placeholder="Password" name="password" [form]="signupForm"/>
-                </div>
-                <div class="flex-center gap-5 mt-5">
-                  <app-button [login]="true" (buttonClick)="signUp()" [text]="'Register'" />
-                  <app-button [login]="true" (buttonClick)="backBtn()" [text]="'Go back'" />
-                </div>
-              </form>
-        </div>
+      <div class="text-container my-5">
+        <h1 class="my-5">Create an account</h1>
+        <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+          <div class="mb-3">
+            <app-input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              name="email"
+              [form]="signupForm"
+            />
+            @if (_formValidation.isInvalid(signupForm, 'email', submitted)) {
+              <div class="text-danger text-sm mt-1">
+                @if (signupForm.get('email')?.errors?.['required']) {
+                  <div>Email is required.</div>
+                }
+                @if (signupForm.get('email')?.errors?.['email']) {
+                  <div>Invalid email format.</div>
+                }
+              </div>
+            }
+          </div>
+  
+          <div>
+            <app-input
+              type="password"
+              formControlName="password"
+              placeholder="Password"
+              name="password"
+              [form]="signupForm"
+            />
+            @if (_formValidation.isInvalid(signupForm, 'password', submitted)) {
+              <div class="text-danger text-sm mt-1">
+                <div>Password is required.</div>
+              </div>
+            }
+          </div>
+  
+          <div class="flex-center gap-5 mt-5">
+            <app-button [login]="true" (buttonClick)="signUp()" [text]="'Register'" />
+            <app-button [login]="true" (buttonClick)="backBtn()" [text]="'Go back'" />
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  

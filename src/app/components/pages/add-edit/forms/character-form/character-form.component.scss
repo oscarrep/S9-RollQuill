@@ -1,3 +1,15 @@
+.h-scroll{
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.h-scroll::-webkit-scrollbar { 
+    display: none;
+}
+
 .comp-container {
     width: 100%;
 }
@@ -12,7 +24,19 @@
     border: solid 3px #c4371f;
 }
 
-.stat-panel,
+.stat-panel {
+    width: 7rem;
+    height: 7rem;
+    padding-inline: 15px;
+    padding-block: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: solid 3px #373327;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
 .subclass-panel,
 .skill-prof {
     border: solid 3px #373327;
@@ -28,11 +52,6 @@
     margin-top: -3%;
 }
 
-.stat-panel {
-    width: 10px;
-    padding-inline: 15px;
-    padding-block: 10px;
-}
 
 .subclass-panel,
 .skill-prof {
@@ -40,7 +59,6 @@
     padding: 10px;
 }
 
-.stat-panel,
 .subclass-panel,
 .skill-prof {
     background-color: white;
