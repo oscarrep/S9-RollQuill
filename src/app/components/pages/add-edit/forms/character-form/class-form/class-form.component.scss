@@ -18,7 +18,7 @@
     font-size: x-large;
 }
 
-.subclass-panel{margin-top: -3%;}
+.subclass-panel{margin-top: -1rem;}
 
 .subclass-panel, .panel{
     border: solid 3px #373327;
@@ -35,4 +35,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
+}
+
+@media (max-width:575px) {
+    .checkbox-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
