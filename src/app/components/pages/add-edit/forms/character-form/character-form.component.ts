@@ -1,19 +1,18 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Character } from '../../../../../interfaces/character';
-import { DndApiService } from '../../../../../services/dnd-api.service';
-import { ButtonComponent } from "../../../../../shared/button/button.component";
-import { NavigateService } from '../../../../../services/navigate.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../../../../services/api.service';
 import { User } from '../../../../../interfaces/user';
-import { FormValidationService } from '../../../../../services/form-validation.service';
-import { RaceFormComponent } from "../../../../sections/character-form/race-form/race-form.component";
-import { ClassFormComponent } from "../../../../sections/character-form/class-form/class-form.component";
-import { SkillsFormComponent } from "../../../../sections/character-form/skills-form/skills-form.component";
-import { InputComponent } from '../../../../../shared/input/input.component';
+import { Component, Input, inject } from '@angular/core';
+import { Character } from '../../../../../interfaces/character';
+import { ApiService } from '../../../../../services/api.service';
+import { RaceFormComponent } from "./race-form/race-form.component";
+import { ClassFormComponent } from './class-form/class-form.component';
 import { DndJsonService } from '../../../../../services/dnd-json.service';
+import { SkillsFormComponent } from './skills-form/skills-form.component';
+import { NavigateService } from '../../../../../services/navigate.service';
+import { InputComponent } from '../../../../../shared/input/input.component';
+import { ButtonComponent } from "../../../../../shared/button/button.component";
+import { FormValidationService } from '../../../../../services/form-validation.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-character-form',
@@ -96,17 +95,17 @@ export class CharacterFormComponent {
       this.classData = data;
       this.classNames = data.map(item => item.name);
     });
-  
+
     this._dndJSONService.getRaces().subscribe(data => {
       this.raceData = data;
       this.raceNames = data.map(item => item.name);
     });
-  
+
     this._dndJSONService.getSkills().subscribe(data => {
       this.skillData = data;
       console.log(this.skillData);
     });
-  
+
     this.statValueListeners();
   }
 

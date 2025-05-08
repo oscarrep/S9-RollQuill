@@ -1,17 +1,24 @@
 <div class="card">
-    <div class="d-flex mt-2">
-        <div class="d-flex">
-            <div class="ms-2 foto-holder" (click)="showCharacter()"></div>
-            <div class="ms-2 name-level" (click)="showCharacter()">
-                <h2 class="hide-xs">{{character.name}}</h2>
-                <h2 class="hide-md">{{character.name.split(' ')[0]}}</h2>
-                <p>Level {{character.level}}</p>
-                <p>{{character.race}} - {{character.class}}</p>
+    <div class="card-bg">
+        <div class="d-flex mt-2">
+            <div class="d-flex" (click)="showCharacter()">
+                @if(character.image){
+                <img src="{{character.image}}" class="foto-holder ms-2">
+                }@else{
+                <img src="assets/swordsman-color.png" class="foto-holder ms-2">
+                }
+
+                <div class="ms-2 name-level">
+                    <h2 class="hide-xs">{{character.name}}</h2>
+                    <h2 class="hide-md">{{character.name.split(' ')[0]}}</h2>
+                    <p>Level {{character.level}}</p>
+                    <p>{{character.race}} - {{character.class}}</p>
+                </div>
             </div>
-        </div>
-        <div class="ms-auto buttons me-2">
-            <app-button [text]="'Edit'"/>
-            <app-button [text]="'Delete'" (buttonClick)="deleteChar()"/>
+            <div class="ms-auto buttons me-2">
+                <app-button [text]="'Edit'" />
+                <app-button [text]="'Delete'" (buttonClick)="deleteChar()" />
+            </div>
         </div>
     </div>
 </div>

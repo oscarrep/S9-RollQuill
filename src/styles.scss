@@ -71,7 +71,7 @@
 
 body {
     background-color: #FAEABD !important;
-    overflow-x: hidden!important;
+    overflow-x: hidden !important;
     /*
     background-color: #f0ebd9 !important;
     background: url('/assets/bg.webp') no-repeat fixed; 
@@ -82,19 +82,21 @@ body {
     */
 }
 
-.header-margin{
+.header-margin {
     height: 5rem;
 }
-.footer-margin{
+
+.footer-margin {
     height: 3.5rem;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden!important;
-  }
+    overflow-x: hidden !important;
+}
 
 
 h2,
@@ -129,8 +131,17 @@ h2 {
     flex-direction: column;
 }
 
-@media (max-width: 375px) {
+.mat-tooltip {
+    background-color: #373327;
+    color: white;
+    font-size: 1rem;
+    border-radius: 15px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-family: zain;
+}
 
+@media (max-width: 375px) {
 
     p,
     .add-button {

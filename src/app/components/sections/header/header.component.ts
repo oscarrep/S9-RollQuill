@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AppComponent } from '../../../app.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,14 +12,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HeaderComponent {
   app = inject(AppComponent);
-  route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  userId: string = ''
-  constructor() {
-    this.route.paramMap.subscribe(params => {
-      this.userId = params.get('uid')!;
+  userId: string = '';
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      let current = this.route.root;
+
+      while (current.firstChild) {
+        current = current.firstChild;
+        const uid = current.snapshot.paramMap.get('uid');
+        if (uid) {
+          this.userId = uid;
+        }
+      }
     });
   }
-
-  
 }

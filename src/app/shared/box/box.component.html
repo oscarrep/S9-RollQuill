@@ -1,6 +1,9 @@
 @if (deathSaves() === true) {
 <div class="square-death column-center" [class.large-box]="large()">
-    <div class="title-death"> {{ title() }} </div>
+    <app-tooltip
+        [tooltipText]="'Whenever you start your turn with 0 hit points, you must make a special saving throw, called a death saving throw, to determine whether you creep closer to death or hang onto life.'">
+        <div class="title-death"> {{ title() }} </div>
+    </app-tooltip>
     <div class="bottom-row d-flex flex-column align-items-center">
         <div class="d-flex text-center">
             <div class="death-checks column-gap-5 row-gap-4">
@@ -27,15 +30,31 @@
 @else if(statBox() === true) {
 <div class="square-stat column-center" [class.large-box]="large()">
     <div class="column-center stat-gap">
-        <div class="title-stat"> {{title()}} </div>
-        <div class="num-big"> {{modifier()}} </div>
+        <app-tooltip [tooltipText]="descStat[0]">
+            <div class="title-stat"> {{title()}} </div>
+        </app-tooltip>
+
+        <app-tooltip
+            [tooltipText]="'Your modifier is calculated by taking your ability score, subtracting 10, and dividing by 2. Rounded down'">
+            <div class="num-big"> {{modifier()}} </div>
+        </app-tooltip>
+
         <div class="bottom-row flex-center">
-            <div class="num-small flex-center"> {{score()}} </div>
+            <app-tooltip
+                [tooltipText]="'This is your ability score, it determines your ability modifier. It can go up to 20'">
+                <div class="num-small flex-center"> {{score()}} </div>
+            </app-tooltip>
             @if(proficient()){
-            <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
+            <app-tooltip
+                [tooltipText]="'This is the saving throw for this ability in which you are proficient. It is calculated by adding your ability modifier and proficiency bonus'">
+                <div class="num-save flex-center"> {{calculateProficiency(modifier()!, proficiencyBonus()!)}} </div>
+            </app-tooltip>
             }
             @else{
-            <div class="num-small flex-center"> {{modifier()}}</div>
+            <app-tooltip
+                [tooltipText]="'This is the saving throw for this ability. It is the same as your ability modifier'">
+                <div class="num-small flex-center"> {{modifier()}}</div>
+            </app-tooltip>
             }
         </div>
     </div>
@@ -44,11 +63,11 @@
 
 @else {
 <div class="square column-center" [class.large-box]="large()" [class.hp-box]="isHp" (click)="openModal()">
-    <div class="title"> {{ title() }} </div>
+    <app-tooltip [tooltipText]="desc"><div class="title"> {{ title() }} </div></app-tooltip>
     @if(isHp){
     <div class="column-center">
         <p class="num">{{currentHp}}</p>
-        <p class="max-hp">Max Hp: <b class="ms-1">{{num()}}</b> </p>
+        <app-tooltip [tooltipText]="'Your maximum Hit points. They are calculated by adding your class hit die and your Constitution modifier'"><p class="max-hp">Max Hp: <b class="ms-1">{{num()}}</b> </p></app-tooltip>
     </div>
     }
     @else{ <div class="num"> {{ num() }} </div> }
