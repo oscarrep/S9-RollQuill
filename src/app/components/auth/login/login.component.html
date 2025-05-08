@@ -1,22 +1,52 @@
 <div class="flex justify-center">
     <div class="login-container">
-        <div class="text-container my-5">
-            <h1 class="my-5">Log in to your account</h1>
-            <form [formGroup]="loginForm" (ngSubmit)="login()">
-                <div class="mb-3">
-                    <app-input type="email" formControlName="email" placeholder="Email" name="email" [form]="loginForm"/>
-                </div>
-                <div>
-                    <app-input type="password" formControlName="password" placeholder="Password" name="password" [form]="loginForm"/>
-                </div>
-                <div class="column-center mt-5">
-                    <div class="gap-3 mb-2 flex-center">
-                        <app-button [login]="true" (buttonClick)="login()" [text]="'Log in'" />
-                        <app-button [login]="true" (buttonClick)="navToSignup()" [text]="'Go to sign up'" />
-                    </div>
-                    <app-button [login]="true" (buttonClick)="backBtn()" [text]="'Go back'" />
-                </div>
-            </form>
-        </div>
+      <div class="text-container my-5">
+        <h1 class="my-5">Log in to your account</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="mb-3">
+            <app-input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              name="email"
+              [form]="loginForm"
+            />
+            @if (_formValidation.isInvalid(loginForm, 'email', submitted)) {
+              <div class="text-danger text-sm mt-1">
+                @if (loginForm.get('email')?.errors?.['required']) {
+                  <div>Email is required.</div>
+                }
+                @if (loginForm.get('email')?.errors?.['email']) {
+                  <div>Invalid email format.</div>
+                }
+              </div>
+            }
+          </div>
+  
+          <div>
+            <app-input
+              type="password"
+              formControlName="password"
+              placeholder="Password"
+              name="password"
+              [form]="loginForm"
+            />
+            @if (_formValidation.isInvalid(loginForm, 'password', submitted)) {
+              <div class="text-danger text-sm mt-1">
+                <div>Password is required.</div>
+              </div>
+            }
+          </div>
+  
+          <div class="column-center mt-5">
+            <div class="gap-3 mb-2 flex-center">
+              <app-button [login]="true" (buttonClick)="login()" [text]="'Log in'" />
+              <app-button [login]="true" (buttonClick)="navToSignup()" [text]="'Go to sign up'" />
+            </div>
+            <app-button [login]="true" (buttonClick)="backBtn()" [text]="'Go back'" />
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  
