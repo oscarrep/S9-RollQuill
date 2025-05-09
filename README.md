@@ -2,7 +2,7 @@
 
 RollQuill is a web application designed for Dungeons & Dragons players to create, manage, and customize their characters. The application provides an intuitive interface for building characters, selecting races, classes, and skills, and tracking stats. It also includes features for managing character images, viewing compendiums, and navigating through a dashboard.
 
-![RollQuill Logo](./src/assets/rollquill-black.png)
+![RollQuill Logo](public/assets/home.jpg)
 
 ## Project Overview
 
